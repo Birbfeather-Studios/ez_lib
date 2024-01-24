@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "ez_lib",
+	"version": "${version}",
+	"name": "Ez Lib",
+	"description": "A library for quickly building mods!",
+	"authors": [
+		"Kekie6",
+		"DistantDig"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "All Rights Reserve",
+	"icon": "assets/ez_lib/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "net.distantdig.EzLib"
+		],
+		"client": [
+          "net.distantdig.EzLibClient"
+		],
+		"fabric-datagen": [
+			"net.distantdig.EzLibDataGenerator"
+		]
+	},
+	"mixins": [
+		"ez_lib.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
