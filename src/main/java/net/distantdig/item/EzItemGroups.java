@@ -10,6 +10,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 public class EzItemGroups {
+
+    //Example Item Group that should be removed before release
     public static final CreativeModeTab EZ_EXAMPLE_GROUP = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
             new ResourceLocation(EzLib.MOD_ID, "ez_example_group"),
             FabricItemGroup.builder().title(Component.translatable("itemgroup.ez_example_group"))

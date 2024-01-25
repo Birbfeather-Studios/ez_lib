@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 
 public class EzItems {
 
+    // Most things in this class serve as examples that should be removed before release
     public static final Item EZ_EXAMPLE_ITEM = registerItem("ez_example_item", new Item(new FabricItemSettings()));
 
     private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
