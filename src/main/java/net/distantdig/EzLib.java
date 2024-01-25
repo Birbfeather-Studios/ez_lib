@@ -1,5 +1,7 @@
 package net.distantdig;
 
+import net.distantdig.item.EzItemGroups;
+import net.distantdig.item.EzItems;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -12,6 +14,9 @@ public class EzLib implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-		LOGGER.info("Hello Fabric world!");
+		EzItems.regigisterEzItems();
+		EzItemGroups.registerItemGroups();
+
+		LOGGER.info("Ez");
 	}
 }
