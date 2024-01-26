@@ -16,5 +16,9 @@ public class ExampleMod extends EzLib {
     @Override
     public void registerModItems() {
         EzItems.registerItem(MOD_ID, "ingot", Item::new, new FabricItemSettings());
+        EzItems.registerItem(MOD_ID, "ingot2", Item::new, new FabricItemSettings());
+        EzItems.registerItem(MOD_ID, "ingot3", Item::new, new FabricItemSettings());
+        EzItems.registerItem(MOD_ID, "ingot4", Item::new, new FabricItemSettings());
+        EzItems.registerItem(MOD_ID, "ingot5", Item::new, new FabricItemSettings());
     }
 }
