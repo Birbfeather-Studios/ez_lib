@@ -13,15 +13,15 @@ public class ExampleMod extends EzLib {
 
     @Override
     public void registerModItems() {
-        EzItems.registerItem("ingot", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot2", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot3", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot4", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot5", Item::new, new FabricItemSettings());
+        EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
+        EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
+        EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
+        EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
+        EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
     }
 
     @Override
     public void registerModGroup() {
-        EzItemGroups.registerItemGroup(EzItems.getItem("ingot"));
+        EzItemGroups.registerItemGroup(EzItems.getItem("ingot_one"));
     }
 }
