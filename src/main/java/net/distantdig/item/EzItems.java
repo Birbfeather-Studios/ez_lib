@@ -1,5 +1,6 @@
 package net.distantdig.item;
 
+import net.distantdig.EzLib;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -12,18 +13,20 @@ public class EzItems {
 
     public final static HashMap<String, Item> itemMap = new HashMap<>();
 
-    public static <T extends Item> void registerItem(String modId, String key, Function<Item.Properties, T> constructor, Item.Properties props) {
+    public static <T extends Item> void registerItem(String key, Function<Item.Properties, T> constructor, Item.Properties props) {
 
-        Item data = Registry.register(BuiltInRegistries.ITEM,
-                new ResourceLocation(modId, key),
+        Item item = Registry.register(BuiltInRegistries.ITEM,
+                new ResourceLocation(EzLib.getModId(), key),
                 constructor.apply(props));
 
-        itemMap.put(key, data);
+        itemMap.put(key, item);
 
-        // Add to Item Group goes here
+        EzItemGroups.ItemGroupList.add(item);
 
         // Register recipes
+    }
 
-        // Generate the models
+    public static Item getItem(String key) {
+        return itemMap.get(key);
     }
 }
