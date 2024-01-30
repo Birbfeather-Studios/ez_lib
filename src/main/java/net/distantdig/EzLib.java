@@ -13,10 +13,11 @@ public abstract class EzLib implements ModInitializer {
 	}
 
 	public static String getModId() {
-		return MOD_ID;
+			return MOD_ID;
 	}
 
 	public void registerModItems() {}
+	public void registerModBlocks() {}
 
 	public void registerModGroup() {}
 
@@ -27,6 +28,7 @@ public abstract class EzLib implements ModInitializer {
 		LOGGER.info("Ez Initialize");
 
 		registerModItems();
+		registerModBlocks();
 		registerModGroup();
 	}
 }
