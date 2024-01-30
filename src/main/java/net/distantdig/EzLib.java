@@ -1,22 +1,34 @@
 package net.distantdig;
 
-import net.distantdig.item.EzItemGroups;
-import net.distantdig.item.EzItems;
 import net.fabricmc.api.ModInitializer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EzLib implements ModInitializer {
-	public static final String MOD_ID = "ez_lib";
-    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+public abstract class EzLib implements ModInitializer {
+	protected static String MOD_ID;
+
+	public EzLib(String modId) {
+		MOD_ID = modId;
+	}
+
+	public static String getModId() {
+			return MOD_ID;
+	}
+
+	public void registerModItems() {}
+	public void registerModBlocks() {}
+
+	public void registerModGroup() {}
+
+    public final Logger LOGGER = LoggerFactory.getLogger("ez-lib");
 
 	@Override
 	public void onInitialize() {
+		LOGGER.info("Ez Initialize");
 
-		EzItems.regigisterEzItems();
-		EzItemGroups.registerItemGroups();
-
-		LOGGER.info("Ez");
+		registerModItems();
+		registerModBlocks();
+		registerModGroup();
 	}
 }

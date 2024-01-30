@@ -1,31 +1,32 @@
 package net.distantdig.item;
 
 import net.distantdig.EzLib;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+
+import java.util.HashMap;
+import java.util.function.Function;
 
 public class EzItems {
 
-    // Most things in this class serve as examples that should be removed before release
-    public static final Item EZ_EXAMPLE_ITEM = registerItem("ez_example_item", new Item(new FabricItemSettings()));
+    public final static HashMap<String, Item> itemMap = new HashMap<>();
 
-    private static void addItemsToIngredientTabItemGroup(FabricItemGroupEntries entries) {
-        entries.accept(EZ_EXAMPLE_ITEM);
+    public static <T extends Item> void registerItem(String key, Function<Item.Properties, T> constructor, Item.Properties props) {
+
+        Item item = Registry.register(BuiltInRegistries.ITEM,
+                new ResourceLocation(EzLib.getModId(), key),
+                constructor.apply(props));
+
+        itemMap.put(key, item);
+
+        EzItemGroups.ItemGroupList.add(item);
+
+        // Register recipes
     }
 
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.MOD_ID, name), item);
-    }
-
-    public static void regigisterEzItems() {
-        EzLib.LOGGER.info("Registering Ez Items");
-
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(EzItems::addItemsToIngredientTabItemGroup);
+    public static Item getItem(String key) {
+        return itemMap.get(key);
     }
 }

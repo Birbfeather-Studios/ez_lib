@@ -1,6 +1,5 @@
 package net.distantdig.block;
 
-import net.distantdig.EzLib;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Registry;
@@ -179,6 +178,6 @@ public class EzBlocks {
     public static <T extends Block> T getBlock(String key){ return (T)blockMap.get(key).block;}
 
     public static void registerBlocks() {
-        EzLib.LOGGER.info("Registering Ez Blocks and BlockItems");
+//        EzLib.LOGGER.info("Registering Ez Blocks and BlockItems");
     }
 }
