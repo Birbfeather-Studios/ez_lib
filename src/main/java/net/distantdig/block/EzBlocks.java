@@ -22,7 +22,19 @@ public class EzBlocks {
     public static class BlockData {
         public Block block;
         public BlockItem blockItem;
-        public String blockType;
+    }
+
+    public static class BlockStoneFamily {
+        public BlockData block;
+        public BlockData slab;
+        public BlockData stair;
+        public BlockData wall;
+        public BlockData pillar;
+        public BlockData button;
+        public BlockData pressurePlate;
+    }
+
+    public static class BlockWoodFamily {
     }
 
     public final static HashMap<String, BlockData> blockMap = new HashMap<>();
@@ -88,7 +100,6 @@ public class EzBlocks {
 
     public static <T extends Block> void registerCustomButton(String key, Block properties, BlockSetType blockSetType, Integer numberOfTicksPressed, Boolean pressedByArrows) {
         BlockData data = new BlockData();
-        data.blockType = "button";
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_button"), new ButtonBlock(FabricBlockSettings.copyOf(properties), blockSetType, numberOfTicksPressed, pressedByArrows));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_button"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key + "_button", data);

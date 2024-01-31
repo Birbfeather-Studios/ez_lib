@@ -1,6 +1,7 @@
 package net.distantdig.item;
 
 import net.distantdig.EzLib;
+import net.distantdig.block.EzBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,6 +17,9 @@ public class EzItemGroups {
 
     public static ArrayList<ItemLike> ItemGroupList = new ArrayList<>();
     public static ArrayList<ItemLike> BlockGroupList = new ArrayList<>();
+    public static ArrayList<EzBlocks.BlockStoneFamily> BlockStoneFamilyGroupList = new ArrayList<>();
+
+    public static ArrayList<EzBlocks.BlockStoneFamily> BlockWoodFamilyGroupList = new ArrayList<>();
 
     public static void registerItemGroup(Item icon) {
 

@@ -1,5 +1,6 @@
 package net.distantdig.datagen;
 
+import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
@@ -14,6 +15,12 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
+        EzItemGroups.BlockStoneFamilyGroupList.forEach((family) -> {
+            BlockModelGenerators.BlockFamilyProvider familyPool = blockStateModelGenerator.family(family.block.block);
+
+            familyPool.stairs(family.stair.block);
+            familyPool.slab(family.slab.block);
+        });
 //        blockStateModelGenerator.createGenericCube(Blocks.DEEPSLATE);
     }
 
