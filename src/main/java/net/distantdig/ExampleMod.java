@@ -25,19 +25,19 @@ public class ExampleMod extends EzLib {
     @Override
     public void registerModBlocks() {
         //woodset
-        EzBlocks.registerWoodSet(EzLib.getModId(), "mahogany", Blocks.OAK_PLANKS, false);
+        EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        EzBlocks.registerButton(EzLib.getModId(), "rocky", Blocks.STONE, 2);
-        EzBlocks.registerPressurePlate(EzLib.getModId(), "rocky", Blocks.STONE, 2);
+        EzBlocks.registerButton( "rocky", Blocks.STONE, 2);
+        EzBlocks.registerPressurePlate( "rocky", Blocks.STONE, 2);
 
         //metalset
-         EzBlocks.registerButton(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK, 3);
-         EzBlocks.registerPressurePlate(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK, 3);
+         EzBlocks.registerButton("tritanium", Blocks.NETHERITE_BLOCK, 3);
+         EzBlocks.registerPressurePlate("tritanium", Blocks.NETHERITE_BLOCK, 3);
 
         //woolset
-        EzBlocks.registerBlock(EzLib.getModId(), "turqoise", Blocks.WHITE_WOOL);
-        EzBlocks.registerCarpet(EzLib.getModId(), "turqoise", Blocks.WHITE_WOOL);
+        EzBlocks.registerBlock( "turqoise", Blocks.WHITE_WOOL);
+        EzBlocks.registerCarpet( "turqoise", Blocks.WHITE_WOOL);
     }
 
     @Override
