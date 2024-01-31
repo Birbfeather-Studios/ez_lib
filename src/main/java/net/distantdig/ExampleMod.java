@@ -28,12 +28,12 @@ public class ExampleMod extends EzLib {
         EzBlocks.registerWoodSet(EzLib.getModId(), "mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        EzBlocks.registerStoneButton(EzLib.getModId(), "rocky", Blocks.STONE);
-        EzBlocks.registerStonePressureplate(EzLib.getModId(), "rocky", Blocks.STONE);
+        EzBlocks.registerButton(EzLib.getModId(), "rocky", Blocks.STONE, 2);
+        EzBlocks.registerPressurePlate(EzLib.getModId(), "rocky", Blocks.STONE, 2);
 
         //metalset
-        EzBlocks.registerMetalButton(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK);
-        EzBlocks.registerMetalPressureplate(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK);
+         EzBlocks.registerButton(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK, 3);
+         EzBlocks.registerPressurePlate(EzLib.getModId(), "tritanium", Blocks.NETHERITE_BLOCK, 3);
 
         //woolset
         EzBlocks.registerBlock(EzLib.getModId(), "turqoise", Blocks.WHITE_WOOL);
