@@ -22,6 +22,7 @@ public class EzBlocks {
     public static class BlockData {
         public Block block;
         public BlockItem blockItem;
+        public String blockType;
     }
 
     public final static HashMap<String, BlockData> blockMap = new HashMap<>();
@@ -87,9 +88,10 @@ public class EzBlocks {
 
     public static <T extends Block> void registerCustomButton(String key, Block properties, BlockSetType blockSetType, Integer numberOfTicksPressed, Boolean pressedByArrows) {
         BlockData data = new BlockData();
+        data.blockType = "button";
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_button"), new ButtonBlock(FabricBlockSettings.copyOf(properties), blockSetType, numberOfTicksPressed, pressedByArrows));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_button"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key, data);
+        blockMap.put(key + "_button", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
@@ -107,7 +109,7 @@ public class EzBlocks {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_pressureplate"), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(properties), blockSetType));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_pressureplate"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key, data);
+        blockMap.put(key + "_pressureplate", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
@@ -115,7 +117,7 @@ public class EzBlocks {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new FenceGateBlock(FabricBlockSettings.copyOf(properties), WoodType.OAK));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key, data);
+        blockMap.put(key + "_fence_gate", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
@@ -123,7 +125,7 @@ public class EzBlocks {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_stair"), new StairBlock(getBlock(block).defaultBlockState(), FabricBlockSettings.copyOf(properties)));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_stair"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key, data);
+        blockMap.put(key + "_stair", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
@@ -134,8 +136,8 @@ public class EzBlocks {
         registerPillar("stripped_" + materialName + "_log", Blocks.OAK_LOG);
         registerPillar(materialName + "_wood", Blocks.OAK_LOG);
         registerPillar("stripped_" + materialName + "_wood", Blocks.OAK_LOG);
-        registerBlock(materialName + "planks", copiedProperties);
-        registerStair(materialName, materialName + "planks", copiedProperties);
+        registerBlock(materialName + "_planks", copiedProperties);
+        registerStair(materialName, materialName + "_planks", copiedProperties);
         registerSlab(materialName, copiedProperties);
         registerFence(materialName, copiedProperties);
         registerFenceGate(materialName, copiedProperties);
@@ -164,16 +166,16 @@ public class EzBlocks {
         registerBlock(materialName + "_brick", copiedProperties);
         registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
         registerSlab(materialName + "_brick", copiedProperties);
-        registerWall(materialName + "_wall", copiedProperties);
+        registerWall(materialName + "_brick", copiedProperties);
         registerBlock(materialName + "_tiles", copiedProperties);
         registerBlock(materialName + "_pillar", copiedProperties);
         registerPressurePlate(materialName, copiedProperties, 2);
         registerButton(materialName, copiedProperties, 2);
         if (mossy == true) {
-            registerBlock("mossy" + materialName, copiedProperties);
-            registerStair("mossy" + materialName, "mossy" + materialName, copiedProperties);
-            registerSlab("mossy" + materialName, copiedProperties);
-            registerWall("mossy" + materialName, copiedProperties);
+            registerBlock("mossy_" + materialName, copiedProperties);
+            registerStair("mossy_" + materialName, "mossy_" + materialName, copiedProperties);
+            registerSlab("mossy_" + materialName, copiedProperties);
+            registerWall("mossy_" + materialName, copiedProperties);
         }
         if (mossyBrick == true) {
             registerBlock(materialName + "_mossy_bricks", copiedProperties);
