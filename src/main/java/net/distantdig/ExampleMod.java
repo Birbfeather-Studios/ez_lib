@@ -28,6 +28,7 @@ public class ExampleMod extends EzLib {
         EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
+        EzBlocks.registerStoneSet("rocky", Blocks.STONE, true, true, true);
         EzBlocks.registerButton( "rocky", Blocks.STONE, 2);
         EzBlocks.registerPressurePlate( "rocky", Blocks.STONE, 2);
 
@@ -36,7 +37,7 @@ public class ExampleMod extends EzLib {
          EzBlocks.registerPressurePlate("tritanium", Blocks.NETHERITE_BLOCK, 3);
 
         //woolset
-        EzBlocks.registerBlock( "turqoise", Blocks.WHITE_WOOL);
+        EzBlocks.registerBlock( "turqoise_wool", Blocks.WHITE_WOOL);
         EzBlocks.registerCarpet( "turqoise", Blocks.WHITE_WOOL);
     }
 

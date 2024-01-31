@@ -150,6 +150,38 @@ public class EzBlocks {
         }
     }
 
+    public static <T extends Block> void registerStoneSet(String materialName, Block copiedProperties, Boolean crackedBrick, Boolean mossyBrick, Boolean mossy) {
+        registerBlock(materialName, copiedProperties);
+        registerStair(materialName, materialName, copiedProperties);
+        registerSlab(materialName, copiedProperties);
+        registerWall(materialName, copiedProperties);
+        registerBlock("cut_" + materialName, copiedProperties);
+        registerBlock("polished_" + materialName, copiedProperties);
+        registerStair("polished_" + materialName, "polished_" + materialName, copiedProperties);
+        registerSlab("polished_" + materialName, copiedProperties);
+        registerWall("polished_" + materialName, copiedProperties);
+        registerBlock("chiseled_" + materialName, copiedProperties);
+        registerBlock(materialName + "_brick", copiedProperties);
+        registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
+        registerSlab(materialName + "_brick", copiedProperties);
+        registerWall(materialName + "_wall", copiedProperties);
+        registerBlock(materialName + "_tiles", copiedProperties);
+        registerBlock(materialName + "_pillar", copiedProperties);
+        if (mossy == true) {
+            registerBlock("mossy" + materialName, copiedProperties);
+            registerStair("mossy" + materialName, "mossy" + materialName, copiedProperties);
+            registerSlab("mossy" + materialName, copiedProperties);
+            registerWall("mossy" + materialName, copiedProperties);
+        }
+        if (mossyBrick == true) {
+            registerBlock(materialName + "_mossy_bricks", copiedProperties);
+        }
+        if (crackedBrick == true) {
+            registerBlock(materialName + "_cracked_bricks", copiedProperties);
+            registerBlock(materialName + "_cracked_tiles", copiedProperties);
+        }
+    }
+
     //Methods for storing the blockmaps
     public static <T extends Block> T getBlock(String key) {
         return (T) blockMap.get(key).block;
