@@ -167,6 +167,8 @@ public class EzBlocks {
         registerWall(materialName + "_wall", copiedProperties);
         registerBlock(materialName + "_tiles", copiedProperties);
         registerBlock(materialName + "_pillar", copiedProperties);
+        registerPressurePlate(materialName, copiedProperties, 2);
+        registerButton(materialName, copiedProperties, 2);
         if (mossy == true) {
             registerBlock("mossy" + materialName, copiedProperties);
             registerStair("mossy" + materialName, "mossy" + materialName, copiedProperties);
