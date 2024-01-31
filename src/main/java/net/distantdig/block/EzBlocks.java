@@ -89,6 +89,7 @@ public class EzBlocks {
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(modName, key + "_button"), new ButtonBlock(FabricBlockSettings.copyOf(properties), blockSetType, numberOfTicksPressed, pressedByArrows));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(modName, key + "_button"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
     public static <T extends Block> void registerPressurePlate(String modName, String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
@@ -106,6 +107,7 @@ public class EzBlocks {
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(modName, key + "_pressureplate"), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(properties), blockSetType));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(modName, key + "_pressureplate"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
     public static <T extends Block> void registerFenceGate(String modName, String key, Block properties) {
@@ -113,6 +115,7 @@ public class EzBlocks {
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(modName, key + "_fence_gate"), new FenceGateBlock(FabricBlockSettings.copyOf(properties), WoodType.OAK));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(modName, key + "_fence_gate"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
     public static <T extends Block> void registerStair(String modName, String key, String block, Block properties) {
@@ -120,6 +123,7 @@ public class EzBlocks {
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(modName, key + "_stair"), new StairBlock(getBlock(block).defaultBlockState(), FabricBlockSettings.copyOf(properties)));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(modName, key + "_stair"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
     }
 
     //Blockset Registry methods
