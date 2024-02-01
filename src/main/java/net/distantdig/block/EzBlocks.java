@@ -38,6 +38,21 @@ public class EzBlocks {
     }
 
     public static class BlockWoodFamily {
+        public BlockData block;
+        public BlockData slab;
+        public BlockData stair;
+        public BlockData fence;
+        public BlockData fenceGate;
+        public BlockData log;
+        public BlockData strippedLog;
+        public BlockData wood;
+        public BlockData strippedWood;
+        public BlockData button;
+        public BlockData pressurePlate;
+        public BlockData door;
+        public BlockData trapdoor;
+        public BlockData leaves;
+        public BlockData sapling;
     }
 
     public final static HashMap<String, BlockData> blockMap = new HashMap<>();
@@ -59,12 +74,12 @@ public class EzBlocks {
         registerMain(key + "_carpet", CarpetBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerFence(String key, Block properties) {
-        registerMain(key + "_fence", FenceBlock::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerFence(String key, Block properties) {
+        return registerMain(key + "_fence", FenceBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerPillar(String key, Block properties) {
-        registerMain(key, RotatedPillarBlock::new, FabricBlockSettings.copyOf(properties)); //no additional key identification because we want to use this method for both logs and pillars right?
+    public static <T extends Block> BlockData registerPillar(String key, Block properties) {
+        return registerMain(key, RotatedPillarBlock::new, FabricBlockSettings.copyOf(properties)); //no additional key identification because we want to use this method for both logs and pillars right?
     }
 
     public static <T extends Block> BlockData registerMain(String key, Function<BlockBehaviour.Properties, T> ctor, BlockBehaviour.Properties props) {
@@ -77,20 +92,22 @@ public class EzBlocks {
         return data;
     }
 
-    public static <T extends Block> void registerDoor(String key, Block properties) {
-        registerWithMaterial(key + "_door", DoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
+    public static <T extends Block> BlockData registerDoor(String key, Block properties) {
+        return registerWithMaterial(key + "_door", DoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
     }
 
-    public static <T extends Block> void registerTrapdoor(String key, Block properties) {
-        registerWithMaterial(key + "_trap_door", TrapDoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
+    public static <T extends Block> BlockData registerTrapdoor(String key, Block properties) {
+        return registerWithMaterial(key + "_trap_door", TrapDoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
     }
 
-    public static <T extends Block> void registerWithMaterial(String key, BiFunction<BlockBehaviour.Properties, BlockSetType, T> ctor, BlockBehaviour.Properties properties, BlockSetType blockSetType) {
+    public static <T extends Block> BlockData registerWithMaterial(String key, BiFunction<BlockBehaviour.Properties, BlockSetType, T> ctor, BlockBehaviour.Properties properties, BlockSetType blockSetType) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key), ctor.apply(properties, blockSetType));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
     public static <T extends Block> BlockData registerButton(String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
@@ -135,12 +152,14 @@ public class EzBlocks {
         return data;
     }
 
-    public static <T extends Block> void registerFenceGate(String key, Block properties) {
+    public static <T extends Block> BlockData registerFenceGate(String key, Block properties) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new FenceGateBlock(FabricBlockSettings.copyOf(properties), WoodType.OAK));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key + "_fence_gate", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
     public static <T extends Block> BlockData registerStair(String key, String block, Block properties) {
@@ -156,24 +175,29 @@ public class EzBlocks {
     //Blockset Registry methods
 
     public static <T extends Block> void registerWoodSet(String materialName, Block copiedProperties, Boolean includeTree) {
-        registerPillar(materialName + "_log", Blocks.OAK_LOG);
-        registerPillar("stripped_" + materialName + "_log", Blocks.OAK_LOG);
-        registerPillar(materialName + "_wood", Blocks.OAK_LOG);
-        registerPillar("stripped_" + materialName + "_wood", Blocks.OAK_LOG);
-        registerBlock(materialName + "_planks", copiedProperties);
-        registerStair(materialName, materialName + "_planks", copiedProperties);
-        registerSlab(materialName, copiedProperties);
-        registerFence(materialName, copiedProperties);
-        registerFenceGate(materialName, copiedProperties);
-        registerDoor(materialName, copiedProperties);
-        registerTrapdoor(materialName, copiedProperties);
-        registerButton(materialName, copiedProperties, 1);
-        registerPressurePlate(materialName, copiedProperties, 1);
+        // Main Set
+        BlockWoodFamily family = new BlockWoodFamily();
+
+        family.block = registerBlock(materialName + "_planks", copiedProperties);
+        family.stair = registerStair(materialName, materialName + "_planks", copiedProperties);
+        family.slab = registerSlab(materialName, copiedProperties);
+        family.fence = registerFence(materialName, copiedProperties);
+        family.fenceGate = registerFenceGate(materialName, copiedProperties);
+        family.log = registerPillar(materialName + "_log", Blocks.OAK_LOG);
+        family.strippedLog = registerPillar("stripped_" + materialName + "_log", Blocks.OAK_LOG);
+        family.wood = registerPillar(materialName + "_wood", Blocks.OAK_LOG);
+        family.strippedWood = registerPillar("stripped_" + materialName + "_wood", Blocks.OAK_LOG);
+        family.pressurePlate = registerPressurePlate(materialName, copiedProperties, 1);
+        family.button = registerButton(materialName, copiedProperties, 1);
+        family.door = registerDoor(materialName, copiedProperties);
+        family.trapdoor = registerTrapdoor(materialName, copiedProperties);
 
         if (includeTree) {
-            registerBlock(materialName + "_leaves", Blocks.OAK_LEAVES);
-            registerBlock(materialName + "_sapling", Blocks.OAK_SAPLING);
+            family.leaves = registerBlock(materialName + "_leaves", Blocks.OAK_LEAVES);
+            family.sapling = registerBlock(materialName + "_sapling", Blocks.OAK_SAPLING);
         }
+
+        EzItemGroups.BlockWoodFamilyGroupList.add(family);
     }
 
     public static <T extends Block> void registerStoneSet(String materialName, Block copiedProperties, Boolean crackedBrick, Boolean mossyBrick, Boolean mossy) {
