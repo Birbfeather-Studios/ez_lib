@@ -29,172 +29,250 @@ public class EzBlocks {
         public BlockData slab;
         public BlockData stair;
         public BlockData wall;
-        public BlockData pillar;
+        public BlockData cutBlock;
+        public BlockData chiseledBlock;
+        public BlockData tileBlock;
+        public BlockData pillarBlock;
         public BlockData button;
         public BlockData pressurePlate;
     }
 
     public static class BlockWoodFamily {
+        public BlockData block;
+        public BlockData slab;
+        public BlockData stair;
+        public BlockData fence;
+        public BlockData fenceGate;
+        public BlockData log;
+        public BlockData strippedLog;
+        public BlockData wood;
+        public BlockData strippedWood;
+        public BlockData button;
+        public BlockData pressurePlate;
+        public BlockData door;
+        public BlockData trapdoor;
+        public BlockData leaves;
+        public BlockData sapling;
     }
 
     public final static HashMap<String, BlockData> blockMap = new HashMap<>();
 
     // Block Registration methods
-    public static <T extends Block> void registerBlock(String key, Block properties) {
-        registerMain(key, Block::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerBlock(String key, Block properties) {
+        return registerMain(key, Block::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerSlab(String key, Block properties) {
-        registerMain(key + "_slab", SlabBlock::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerSlab(String key, Block properties) {
+        return registerMain(key + "_slab", SlabBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerWall(String key, Block properties) {
-        registerMain(key + "_wall", WallBlock::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerWall(String key, Block properties) {
+        return registerMain(key + "_wall", WallBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
     public static <T extends Block> void registerCarpet(String key, Block properties) {
         registerMain(key + "_carpet", CarpetBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerFence(String key, Block properties) {
-        registerMain(key + "_fence", FenceBlock::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerFence(String key, Block properties) {
+        return registerMain(key + "_fence", FenceBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerPillar(String key, Block properties) {
-        registerMain(key, RotatedPillarBlock::new, FabricBlockSettings.copyOf(properties)); //no additional key identification because we want to use this method for both logs and pillars right?
+    public static <T extends Block> BlockData registerPillar(String key, Block properties) {
+        return registerMain(key, RotatedPillarBlock::new, FabricBlockSettings.copyOf(properties)); //no additional key identification because we want to use this method for both logs and pillars right?
     }
 
-    public static <T extends Block> void registerMain(String key, Function<BlockBehaviour.Properties, T> ctor, BlockBehaviour.Properties props) {
+    public static <T extends Block> BlockData registerMain(String key, Function<BlockBehaviour.Properties, T> ctor, BlockBehaviour.Properties props) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key), ctor.apply(props));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
-    public static <T extends Block> void registerDoor(String key, Block properties) {
-        registerWithMaterial(key + "_door", DoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
+    public static <T extends Block> BlockData registerDoor(String key, Block properties) {
+        return registerWithMaterial(key + "_door", DoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
     }
 
-    public static <T extends Block> void registerTrapdoor(String key, Block properties) {
-        registerWithMaterial(key + "_trapdoor", TrapDoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
+    public static <T extends Block> BlockData registerTrapdoor(String key, Block properties) {
+        return registerWithMaterial(key + "_trap_door", TrapDoorBlock::new, FabricBlockSettings.copyOf(properties), BlockSetType.OAK);
     }
 
-    public static <T extends Block> void registerWithMaterial(String key, BiFunction<BlockBehaviour.Properties, BlockSetType, T> ctor, BlockBehaviour.Properties properties, BlockSetType blockSetType) {
+    public static <T extends Block> BlockData registerWithMaterial(String key, BiFunction<BlockBehaviour.Properties, BlockSetType, T> ctor, BlockBehaviour.Properties properties, BlockSetType blockSetType) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key), ctor.apply(properties, blockSetType));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key, data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
-    public static <T extends Block> void registerButton(String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
+    public static <T extends Block> BlockData registerButton(String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
         if (oneIsWoodTwoIsStoneThreeIsMetal == 1) {
-            registerCustomButton(key, properties, BlockSetType.OAK, 30, true);
+            return registerCustomButton(key, properties, BlockSetType.OAK, 30, true);
         } else if (oneIsWoodTwoIsStoneThreeIsMetal == 2) {
-            registerCustomButton(key, properties, BlockSetType.STONE, 20, false);
+            return registerCustomButton(key, properties, BlockSetType.STONE, 20, false);
         } else if (oneIsWoodTwoIsStoneThreeIsMetal == 3) {
-            registerCustomButton(key, properties, BlockSetType.GOLD, 50, false);
+            return registerCustomButton(key, properties, BlockSetType.GOLD, 50, false);
         }
+        return null;
     }
 
-    public static <T extends Block> void registerCustomButton(String key, Block properties, BlockSetType blockSetType, Integer numberOfTicksPressed, Boolean pressedByArrows) {
+    public static <T extends Block> BlockData registerCustomButton(String key, Block properties, BlockSetType blockSetType, Integer numberOfTicksPressed, Boolean pressedByArrows) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_button"), new ButtonBlock(FabricBlockSettings.copyOf(properties), blockSetType, numberOfTicksPressed, pressedByArrows));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_button"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key + "_button", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
-    public static <T extends Block> void registerPressurePlate(String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
+    public static <T extends Block> BlockData registerPressurePlate(String key, Block properties, Integer oneIsWoodTwoIsStoneThreeIsMetal) {
         if (oneIsWoodTwoIsStoneThreeIsMetal == 1) {
-            registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.EVERYTHING, BlockSetType.OAK);
+            return registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.EVERYTHING, BlockSetType.OAK);
         } else if (oneIsWoodTwoIsStoneThreeIsMetal == 2) {
-            registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.MOBS, BlockSetType.STONE);
+            return registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.MOBS, BlockSetType.STONE);
         } else if (oneIsWoodTwoIsStoneThreeIsMetal == 3) {
-            registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.MOBS, BlockSetType.GOLD);
+            return registerCustomPressurePlate(key, properties, PressurePlateBlock.Sensitivity.MOBS, BlockSetType.GOLD);
         }
+        return null;
     }
 
-    public static <T extends Block> void registerCustomPressurePlate(String key, Block properties, PressurePlateBlock.Sensitivity sensitivity, BlockSetType blockSetType) {
+    public static <T extends Block> BlockData registerCustomPressurePlate(String key, Block properties, PressurePlateBlock.Sensitivity sensitivity, BlockSetType blockSetType) {
         BlockData data = new BlockData();
-        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_pressureplate"), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(properties), blockSetType));
-        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_pressureplate"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key + "_pressureplate", data);
+        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_pressure_plate"), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(properties), blockSetType));
+        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_pressure_plate"), new BlockItem(data.block, new FabricItemSettings()));
+        blockMap.put(key + "_pressure_plate", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
-    public static <T extends Block> void registerFenceGate(String key, Block properties) {
+    public static <T extends Block> BlockData registerFenceGate(String key, Block properties) {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new FenceGateBlock(FabricBlockSettings.copyOf(properties), WoodType.OAK));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_fence_gate"), new BlockItem(data.block, new FabricItemSettings()));
         blockMap.put(key + "_fence_gate", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
-    public static <T extends Block> void registerStair(String key, String block, Block properties) {
+    public static <T extends Block> BlockData registerStair(String key, String block, Block properties) {
         BlockData data = new BlockData();
-        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_stair"), new StairBlock(getBlock(block).defaultBlockState(), FabricBlockSettings.copyOf(properties)));
-        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_stair"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key + "_stair", data);
+        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_stairs"), new StairBlock(getBlock(block).defaultBlockState(), FabricBlockSettings.copyOf(properties)));
+        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_stairs"), new BlockItem(data.block, new FabricItemSettings()));
+        blockMap.put(key + "_stairs", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
     }
 
     //Blockset Registry methods
 
     public static <T extends Block> void registerWoodSet(String materialName, Block copiedProperties, Boolean includeTree) {
-        registerPillar(materialName + "_log", Blocks.OAK_LOG);
-        registerPillar("stripped_" + materialName + "_log", Blocks.OAK_LOG);
-        registerPillar(materialName + "_wood", Blocks.OAK_LOG);
-        registerPillar("stripped_" + materialName + "_wood", Blocks.OAK_LOG);
-        registerBlock(materialName + "_planks", copiedProperties);
-        registerStair(materialName, materialName + "_planks", copiedProperties);
-        registerSlab(materialName, copiedProperties);
-        registerFence(materialName, copiedProperties);
-        registerFenceGate(materialName, copiedProperties);
-        registerDoor(materialName, copiedProperties);
-        registerTrapdoor(materialName, copiedProperties);
-        registerButton(materialName, copiedProperties, 1);
-        registerPressurePlate(materialName, copiedProperties, 1);
+        // Main Set
+        BlockWoodFamily family = new BlockWoodFamily();
+
+        family.block = registerBlock(materialName + "_planks", copiedProperties);
+        family.stair = registerStair(materialName, materialName + "_planks", copiedProperties);
+        family.slab = registerSlab(materialName, copiedProperties);
+        family.fence = registerFence(materialName, copiedProperties);
+        family.fenceGate = registerFenceGate(materialName, copiedProperties);
+        family.log = registerPillar(materialName + "_log", Blocks.OAK_LOG);
+        family.strippedLog = registerPillar("stripped_" + materialName + "_log", Blocks.OAK_LOG);
+        family.wood = registerPillar(materialName + "_wood", Blocks.OAK_LOG);
+        family.strippedWood = registerPillar("stripped_" + materialName + "_wood", Blocks.OAK_LOG);
+        family.pressurePlate = registerPressurePlate(materialName, copiedProperties, 1);
+        family.button = registerButton(materialName, copiedProperties, 1);
+        family.door = registerDoor(materialName, copiedProperties);
+        family.trapdoor = registerTrapdoor(materialName, copiedProperties);
 
         if (includeTree) {
-            registerBlock(materialName + "_leaves", Blocks.OAK_LEAVES);
-            registerBlock(materialName + "_sapling", Blocks.OAK_SAPLING);
+            family.leaves = registerBlock(materialName + "_leaves", Blocks.OAK_LEAVES);
+            family.sapling = registerBlock(materialName + "_sapling", Blocks.OAK_SAPLING);
         }
+
+        EzItemGroups.BlockWoodFamilyGroupList.add(family);
     }
 
     public static <T extends Block> void registerStoneSet(String materialName, Block copiedProperties, Boolean crackedBrick, Boolean mossyBrick, Boolean mossy) {
-        registerBlock(materialName, copiedProperties);
-        registerStair(materialName, materialName, copiedProperties);
-        registerSlab(materialName, copiedProperties);
-        registerWall(materialName, copiedProperties);
-        registerBlock("cut_" + materialName, copiedProperties);
-        registerBlock("polished_" + materialName, copiedProperties);
-        registerStair("polished_" + materialName, "polished_" + materialName, copiedProperties);
-        registerSlab("polished_" + materialName, copiedProperties);
-        registerWall("polished_" + materialName, copiedProperties);
-        registerBlock("chiseled_" + materialName, copiedProperties);
-        registerBlock(materialName + "_brick", copiedProperties);
-        registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
-        registerSlab(materialName + "_brick", copiedProperties);
-        registerWall(materialName + "_brick", copiedProperties);
-        registerBlock(materialName + "_tiles", copiedProperties);
-        registerBlock(materialName + "_pillar", copiedProperties);
-        registerPressurePlate(materialName, copiedProperties, 2);
-        registerButton(materialName, copiedProperties, 2);
-        if (mossy == true) {
-            registerBlock("mossy_" + materialName, copiedProperties);
-            registerStair("mossy_" + materialName, "mossy_" + materialName, copiedProperties);
-            registerSlab("mossy_" + materialName, copiedProperties);
-            registerWall("mossy_" + materialName, copiedProperties);
+        // Main Set
+        BlockStoneFamily family = new BlockStoneFamily();
+
+        family.block = registerBlock(materialName, copiedProperties);
+        family.stair = registerStair(materialName, materialName, copiedProperties);
+        family.slab = registerSlab(materialName, copiedProperties);
+        family.wall = registerWall(materialName, copiedProperties);
+        family.cutBlock = registerBlock("cut_" + materialName, copiedProperties);
+        family.chiseledBlock = registerBlock("chiseled_" + materialName, copiedProperties);
+        family.tileBlock = registerBlock(materialName + "_tiles", copiedProperties);
+        family.pillarBlock = registerBlock(materialName + "_pillar", copiedProperties);
+        family.pressurePlate = registerPressurePlate(materialName, copiedProperties, 2);
+        family.button = registerButton(materialName, copiedProperties, 2);
+
+        EzItemGroups.BlockStoneFamilyGroupList.add(family);
+
+        // Polished Set
+        BlockStoneFamily polishedFamily = new BlockStoneFamily();
+
+        polishedFamily.block = registerBlock("polished_" + materialName, copiedProperties);
+        polishedFamily.stair = registerStair("polished_" + materialName, "polished_" + materialName, copiedProperties);
+        polishedFamily.slab = registerSlab("polished_" + materialName, copiedProperties);
+        polishedFamily.wall = registerWall("polished_" + materialName, copiedProperties);
+
+        EzItemGroups.BlockStoneFamilyGroupList.add(polishedFamily);
+
+        // Brick Set
+        BlockStoneFamily brickFamily = new BlockStoneFamily();
+
+        brickFamily.block = registerBlock(materialName + "_brick", copiedProperties);
+        brickFamily.stair = registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
+        brickFamily.slab = registerSlab(materialName + "_brick", copiedProperties);
+        brickFamily.wall = registerWall(materialName + "_brick", copiedProperties);
+
+        EzItemGroups.BlockStoneFamilyGroupList.add(brickFamily);
+
+
+        // Mossy Set
+        if (mossy) {
+            BlockStoneFamily mossyFamily = new BlockStoneFamily();
+
+            mossyFamily.block = registerBlock("mossy_" + materialName, copiedProperties);
+            mossyFamily.stair = registerStair("mossy_" + materialName, "mossy_" + materialName, copiedProperties);
+            mossyFamily.slab = registerSlab("mossy_" + materialName, copiedProperties);
+            mossyFamily.wall = registerWall("mossy_" + materialName, copiedProperties);
+
+            EzItemGroups.BlockStoneFamilyGroupList.add(mossyFamily);
         }
-        if (mossyBrick == true) {
-            registerBlock(materialName + "_mossy_bricks", copiedProperties);
+
+        // Mossy Brick Set
+        if (mossyBrick) {
+            BlockStoneFamily mossyBrickFamily = new BlockStoneFamily();
+
+            mossyBrickFamily.block = registerBlock("mossy_" + materialName + "_bricks", copiedProperties);
+            mossyBrickFamily.stair = registerStair("mossy_" + materialName + "_brick", "mossy_" + materialName + "_bricks", copiedProperties);
+            mossyBrickFamily.slab = registerSlab("mossy_" + materialName + "_brick", copiedProperties);
+            mossyBrickFamily.wall = registerWall("mossy_" + materialName + "_brick", copiedProperties);
+
+            EzItemGroups.BlockStoneFamilyGroupList.add(mossyBrickFamily);
         }
-        if (crackedBrick == true) {
-            registerBlock(materialName + "_cracked_bricks", copiedProperties);
-            registerBlock(materialName + "_cracked_tiles", copiedProperties);
+
+        // Cracked Brick Set
+        if (crackedBrick) {
+            BlockStoneFamily crackedBrickFamily = new BlockStoneFamily();
+
+            crackedBrickFamily.block = registerBlock(materialName + "_cracked_bricks", copiedProperties);
+            crackedBrickFamily.tileBlock = registerBlock(materialName + "_cracked_tiles", copiedProperties);
+
+            EzItemGroups.BlockStoneFamilyGroupList.add(crackedBrickFamily);
         }
+
+
     }
 
     //Methods for storing the blockmaps

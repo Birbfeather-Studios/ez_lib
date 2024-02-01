@@ -19,7 +19,7 @@ public class EzItemGroups {
     public static ArrayList<ItemLike> BlockGroupList = new ArrayList<>();
     public static ArrayList<EzBlocks.BlockStoneFamily> BlockStoneFamilyGroupList = new ArrayList<>();
 
-    public static ArrayList<EzBlocks.BlockStoneFamily> BlockWoodFamilyGroupList = new ArrayList<>();
+    public static ArrayList<EzBlocks.BlockWoodFamily> BlockWoodFamilyGroupList = new ArrayList<>();
 
     public static void registerItemGroup(Item icon) {
 
