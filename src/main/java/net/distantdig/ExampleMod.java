@@ -4,7 +4,7 @@ import net.distantdig.block.EzBlocks;
 import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 
 public class ExampleMod extends EzLib {
@@ -20,6 +20,8 @@ public class ExampleMod extends EzLib {
         EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
         EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
         EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
+
+        EzItems.registerToolSet("iron2", Tiers.IRON, 10, 3f, new FabricItemSettings());
     }
 
     @Override
