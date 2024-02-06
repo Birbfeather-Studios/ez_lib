@@ -3,6 +3,7 @@ package net.distantdig;
 import net.distantdig.block.EzBlocks;
 import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
+import net.distantdig.item.EzMaterials;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
@@ -15,13 +16,15 @@ public class ExampleMod extends EzLib {
 
     @Override
     public void registerModItems() {
-        EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
-        EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
+        Item INGOT_ONE = EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
+        Item INGOT_TWO = EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
+        Item INGOT_THREE = EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
+        Item INGOT_FOUR = EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
+        Item INGOT_FIVE = EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
 
-        EzItems.registerToolSet("iron2", Tiers.IRON, 10, 3f, new FabricItemSettings());
+        EzItems.ToolSet IRON_2 = EzItems.registerToolSet("iron2", EzMaterials.TEST_MATERIAL1, 3, 1.6f, new FabricItemSettings());
+        EzItems.ToolSet IRON_3 = EzItems.registerToolSet("iron3", EzMaterials.TEST_MATERIAL2, 3, 1.6f, new FabricItemSettings(), IRON_2);
+        EzItems.ToolSet IRON_4 = EzItems.registerToolSet("iron4", EzMaterials.TEST_MATERIAL3, 3, 1.6f, new FabricItemSettings(), IRON_3);
     }
 
     @Override
