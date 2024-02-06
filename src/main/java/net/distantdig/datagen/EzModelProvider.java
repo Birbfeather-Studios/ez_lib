@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.world.item.*;
 
 public class EzModelProvider extends FabricModelProvider {
     public EzModelProvider(FabricDataOutput output) {
@@ -89,6 +90,16 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-        EzItems.itemMap.forEach((k, i) -> itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM));
+        EzItems.itemMap.forEach((k, i) -> {
+            if (i instanceof SwordItem ||
+                    i instanceof PickaxeItem ||
+                    i instanceof AxeItem ||
+                    i instanceof ShovelItem ||
+                    i instanceof HoeItem) {
+                itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_HANDHELD_ITEM);
+            } else {
+                itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM);
+            }
+        });
     }
 }
