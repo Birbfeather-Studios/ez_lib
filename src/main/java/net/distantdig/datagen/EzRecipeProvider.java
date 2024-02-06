@@ -23,6 +23,12 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     public static ArrayList<EzItems.ToolData<AxeItem>> axeRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<ShovelItem>> shovelRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<HoeItem>> hoeRecipeList = new ArrayList<>();
+
+    public static ArrayList<EzItems.ArmorData> helmetRecipeList = new ArrayList<>();
+    public static ArrayList<EzItems.ArmorData> chestplateRecipeList = new ArrayList<>();
+    public static ArrayList<EzItems.ArmorData> leggingsRecipeList = new ArrayList<>();
+    public static ArrayList<EzItems.ArmorData> bootsRecipeList = new ArrayList<>();
+
     public static ArrayList<EzItems.ToolData> smithingRecipeList = new ArrayList<>();
 
     public EzRecipeProvider(FabricDataOutput output) {

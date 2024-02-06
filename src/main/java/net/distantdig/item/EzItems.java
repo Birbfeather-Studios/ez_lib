@@ -29,6 +29,19 @@ public class EzItems {
         public HoeItem hoe;
     }
 
+    public static class ArmorData {
+        public ArmorItem armorItem;
+        public Item repairItem;
+        public ArmorItem previousArmor;
+    }
+
+    public static class ArmorSet {
+        public ArmorItem helmet;
+        public ArmorItem chestplate;
+        public ArmorItem leggings;
+        public ArmorItem boots;
+    }
+
     // Base Register
     public static <T extends Item> T registerItem(String key, Function<Item.Properties, T> constructor, Item.Properties props) {
 
@@ -164,6 +177,109 @@ public class EzItems {
         set.axe = registerAxe(key + "_axe", material, damage + 2, attackSpeed + 0.4f, props, previousSet.axe);
         set.shovel = registerShovel(key + "_shovel", material, damage - 2, attackSpeed - 0.6f, props, previousSet.shovel);
         set.hoe = registerHoe(key + "_hoe", material, 1, attackSpeed * 2, props, previousSet.hoe);
+
+        return set;
+    }
+
+    // Individual Armors
+    public static ArmorItem registerHelmet(String key, ArmorMaterial material, Item.Properties props) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.HELMET, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+    public static ArmorItem registerHelmet(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.HELMET, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+        data.previousArmor = previousArmor;
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+
+    public static ArmorItem registerChestplate(String key, ArmorMaterial material, Item.Properties props) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.CHESTPLATE, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+    public static ArmorItem registerChestplate(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.CHESTPLATE, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+        data.previousArmor = previousArmor;
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+
+    public static ArmorItem registerLeggings(String key, ArmorMaterial material, Item.Properties props) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.LEGGINGS, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+    public static ArmorItem registerLeggings(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.LEGGINGS, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+        data.previousArmor = previousArmor;
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+
+    public static ArmorItem registerBoots(String key, ArmorMaterial material, Item.Properties props) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.BOOTS, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+    public static ArmorItem registerBoots(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
+        ArmorData data = new ArmorData();
+
+        data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.BOOTS, new Item.Properties()), props);
+        data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
+        data.previousArmor = previousArmor;
+
+        EzRecipeProvider.helmetRecipeList.add(data);
+        return data.armorItem;
+    }
+
+    // Armor Sets
+    public static ArmorSet registerArmorSet(String key, ArmorMaterial material, Item.Properties props) {
+        ArmorSet set = new ArmorSet();
+
+        set.helmet = registerHelmet(key + "_helmet", material, props);
+        set.chestplate = registerChestplate(key + "_chestplate", material, props);
+        set.leggings = registerLeggings(key + "_leggings", material, props);
+        set.boots = registerBoots(key + "_boots", material, props);
+
+        return set;
+    }
+    public static ArmorSet registerArmorSet(String key, ArmorMaterial material, Item.Properties props, ArmorSet previousSet) {
+        ArmorSet set = new ArmorSet();
+
+        set.helmet = registerHelmet(key + "_helmet", material, props, previousSet.helmet);
+        set.chestplate = registerChestplate(key + "_chestplate", material, props, previousSet.chestplate);
+        set.leggings = registerLeggings(key + "_leggings", material, props, previousSet.leggings);
+        set.boots = registerBoots(key + "_boots", material, props, previousSet.boots);
 
         return set;
     }

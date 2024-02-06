@@ -1,11 +1,12 @@
-package net.distantdig.item;
+package net.distantdig.enums;
 
+import net.distantdig.item.EzItems;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum EzMaterials implements Tier {
+public enum EzToolsMaterials implements Tier {
     TEST_MATERIAL1(4, 1000, 4.5f, 2, 25, () -> Ingredient.of(EzItems.getItem("ingot_one"))),
     TEST_MATERIAL2(4, 1000, 4.5f, 2, 25, () -> Ingredient.of(EzItems.getItem("ingot_one"))),
     TEST_MATERIAL3(4, 1000, 4.5f, 2, 25, () -> Ingredient.of(EzItems.getItem("ingot_one")));
@@ -17,7 +18,7 @@ public enum EzMaterials implements Tier {
     final int enchantability;
     final Supplier<Ingredient> repairIngredient;
 
-    EzMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    EzToolsMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
