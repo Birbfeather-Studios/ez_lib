@@ -1,6 +1,7 @@
 package net.distantdig.item;
 
 import net.distantdig.EzLib;
+import net.distantdig.datagen.EzItemTagProvider;
 import net.distantdig.datagen.EzRecipeProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -271,6 +272,7 @@ public class EzItems {
         set.leggings = registerLeggings(key + "_leggings", material, props);
         set.boots = registerBoots(key + "_boots", material, props);
 
+        EzItemTagProvider.trimmableArmor.add(set);
         return set;
     }
     public static ArmorSet registerArmorSet(String key, ArmorMaterial material, Item.Properties props, ArmorSet previousSet) {
@@ -281,6 +283,7 @@ public class EzItems {
         set.leggings = registerLeggings(key + "_leggings", material, props, previousSet.leggings);
         set.boots = registerBoots(key + "_boots", material, props, previousSet.boots);
 
+        EzItemTagProvider.trimmableArmor.add(set);
         return set;
     }
 
