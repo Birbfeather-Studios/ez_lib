@@ -38,6 +38,9 @@ public class ExampleMod extends EzLib {
         // Food Items
         Item NOT_STEAK1 = EzItems.registerFoodItem("not_steak1", new FoodProperties.Builder().nutrition(8).build(), new FabricItemSettings());
         Item NOT_STEAK2 = EzItems.registerFoodItem("not_steak2", 8, 2, new FabricItemSettings());
+
+        // Fuel Items
+        Item NOT_COAL = EzItems.registerFuelItem("not_coal", 200, new FabricItemSettings());
     }
 
     @Override

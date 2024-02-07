@@ -4,6 +4,7 @@ import net.distantdig.EzLib;
 import net.distantdig.datagen.EzItemTagProvider;
 import net.distantdig.datagen.EzModelProvider;
 import net.distantdig.datagen.EzRecipeProvider;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -82,6 +83,15 @@ public class EzItems {
         FoodProperties food = new FoodProperties.Builder().nutrition(hunger).saturationMod(saturationModifier).build();
 
         return registerItem(key, Item::new, props.food(food));
+    }
+
+    // Fuel Items
+    public static Item registerFuelItem(String key, int burnTime, Item.Properties props) {
+        Item item = registerItem(key, Item::new, props);
+
+        FuelRegistry.INSTANCE.add(item, burnTime);
+
+        return item;
     }
 
     // Individual Tools
