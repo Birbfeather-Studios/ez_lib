@@ -9,7 +9,11 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.world.item.*;
 
+import java.util.ArrayList;
+
 public class EzModelProvider extends FabricModelProvider {
+
+    public static ArrayList<EzItems.ArmorData> ArmorModelList = new ArrayList<>();
     public EzModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -101,5 +105,7 @@ public class EzModelProvider extends FabricModelProvider {
                 itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM);
             }
         });
+
+        ArmorModelList.forEach((armorData -> itemModelGenerator.generateArmorTrims(armorData.armorItem)));
     }
 }
