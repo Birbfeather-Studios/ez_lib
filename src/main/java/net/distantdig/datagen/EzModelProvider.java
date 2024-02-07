@@ -13,7 +13,10 @@ import java.util.ArrayList;
 
 public class EzModelProvider extends FabricModelProvider {
 
+    public static ArrayList<Item> FlatModelList = new ArrayList<>();
+    public static ArrayList<Item> HandheldModelList = new ArrayList<>();
     public static ArrayList<EzItems.ArmorData> ArmorModelList = new ArrayList<>();
+
     public EzModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -94,18 +97,10 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-        EzItems.itemMap.forEach((k, i) -> {
-            if (i instanceof SwordItem ||
-                    i instanceof PickaxeItem ||
-                    i instanceof AxeItem ||
-                    i instanceof ShovelItem ||
-                    i instanceof HoeItem) {
-                itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_HANDHELD_ITEM);
-            } else {
-                itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM);
-            }
-        });
+//        EzItems.itemMap.forEach((k, i) -> itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM));
 
+        FlatModelList.forEach((item -> itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)));
+        HandheldModelList.forEach((item -> itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM)));
         ArmorModelList.forEach((armorData -> itemModelGenerator.generateArmorTrims(armorData.armorItem)));
     }
 }

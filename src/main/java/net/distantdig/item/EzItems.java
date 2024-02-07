@@ -2,6 +2,7 @@ package net.distantdig.item;
 
 import net.distantdig.EzLib;
 import net.distantdig.datagen.EzItemTagProvider;
+import net.distantdig.datagen.EzModelProvider;
 import net.distantdig.datagen.EzRecipeProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,8 +44,22 @@ public class EzItems {
         public ArmorItem boots;
     }
 
-    // Base Register
+    // Base Registers
     public static <T extends Item> T registerItem(String key, Function<Item.Properties, T> constructor, Item.Properties props) {
+
+        T item = Registry.register(BuiltInRegistries.ITEM,
+                new ResourceLocation(EzLib.getModId(), key),
+                constructor.apply(props));
+        itemMap.put(key, item);
+        EzItemGroups.ItemGroupList.add(item);
+
+        EzModelProvider.FlatModelList.add(item);
+
+        // Register recipes
+
+        return item;
+    }
+    private static <T extends Item> T registerItemWithoutModel(String key, Function<Item.Properties, T> constructor, Item.Properties props) {
 
         T item = Registry.register(BuiltInRegistries.ITEM,
                 new ResourceLocation(EzLib.getModId(), key),
@@ -61,19 +76,22 @@ public class EzItems {
     public static SwordItem registerSword(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props) {
         ToolData<SwordItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new SwordItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new SwordItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.swordRecipeList.add(data);
+
         return data.toolItem;
     }
     public static SwordItem registerSword(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props, SwordItem previousTool) {
         ToolData<SwordItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new SwordItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new SwordItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
@@ -81,19 +99,21 @@ public class EzItems {
     public static PickaxeItem registerPickaxe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props) {
         ToolData<PickaxeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new PickaxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new PickaxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.pickaxeRecipeList.add(data);
         return data.toolItem;
     }
     public static PickaxeItem registerPickaxe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props, PickaxeItem previousTool) {
         ToolData<PickaxeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new PickaxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new PickaxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
@@ -101,19 +121,21 @@ public class EzItems {
     public static AxeItem registerAxe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props) {
         ToolData<AxeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new AxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new AxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.axeRecipeList.add(data);
         return data.toolItem;
     }
     public static AxeItem registerAxe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props, AxeItem previousTool) {
         ToolData<AxeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new AxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new AxeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
@@ -121,19 +143,21 @@ public class EzItems {
     public static ShovelItem registerShovel(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props) {
         ToolData<ShovelItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new ShovelItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new ShovelItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.shovelRecipeList.add(data);
         return data.toolItem;
     }
     public static ShovelItem registerShovel(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props, ShovelItem previousTool) {
         ToolData<ShovelItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new ShovelItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new ShovelItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
@@ -141,19 +165,21 @@ public class EzItems {
     public static HoeItem registerHoe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props) {
         ToolData<HoeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new HoeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new HoeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.hoeRecipeList.add(data);
         return data.toolItem;
     }
     public static HoeItem registerHoe(String key, Tier material, Integer damage, Float attackSpeed, Item.Properties props, HoeItem previousTool) {
         ToolData<HoeItem> data = new ToolData<>();
 
-        data.toolItem = registerItem(key, properties -> new HoeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
+        data.toolItem = registerItemWithoutModel(key, properties -> new HoeItem(material, damage, attackSpeed - 4.0f, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
+        EzModelProvider.HandheldModelList.add(data.toolItem);
         EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
