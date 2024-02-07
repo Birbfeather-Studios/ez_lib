@@ -7,6 +7,7 @@ import net.distantdig.datagen.EzRecipeProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 
 import java.util.HashMap;
@@ -70,6 +71,17 @@ public class EzItems {
         // Register recipes
 
         return item;
+    }
+
+    // Food Items
+    public static Item registerFoodItem(String key, FoodProperties foodProps, Item.Properties props) {
+
+        return registerItem(key, Item::new, props.food(foodProps));
+    }
+    public static Item registerFoodItem(String key, int hunger, int saturationModifier, Item.Properties props) {
+        FoodProperties food = new FoodProperties.Builder().nutrition(hunger).saturationMod(saturationModifier).build();
+
+        return registerItem(key, Item::new, props.food(food));
     }
 
     // Individual Tools
