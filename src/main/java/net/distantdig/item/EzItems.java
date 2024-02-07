@@ -73,7 +73,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
-        EzRecipeProvider.smithingRecipeList.add(data);
+        EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
 
@@ -93,7 +93,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
-        EzRecipeProvider.smithingRecipeList.add(data);
+        EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
 
@@ -113,7 +113,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
-        EzRecipeProvider.smithingRecipeList.add(data);
+        EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
 
@@ -133,7 +133,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
-        EzRecipeProvider.smithingRecipeList.add(data);
+        EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
 
@@ -153,7 +153,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousTool = previousTool;
 
-        EzRecipeProvider.smithingRecipeList.add(data);
+        EzRecipeProvider.smithingToolRecipeList.add(data);
         return data.toolItem;
     }
 
@@ -198,7 +198,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousArmor = previousArmor;
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.smithingArmorRecipeList.add(data);
         return data.armorItem;
     }
 
@@ -208,7 +208,7 @@ public class EzItems {
         data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.CHESTPLATE, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.chestplateRecipeList.add(data);
         return data.armorItem;
     }
     public static ArmorItem registerChestplate(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
@@ -218,7 +218,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousArmor = previousArmor;
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.smithingArmorRecipeList.add(data);
         return data.armorItem;
     }
 
@@ -228,7 +228,7 @@ public class EzItems {
         data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.LEGGINGS, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.leggingsRecipeList.add(data);
         return data.armorItem;
     }
     public static ArmorItem registerLeggings(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
@@ -238,7 +238,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousArmor = previousArmor;
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.smithingArmorRecipeList.add(data);
         return data.armorItem;
     }
 
@@ -248,7 +248,7 @@ public class EzItems {
         data.armorItem = registerItem(key, properties -> new ArmorItem(material, ArmorItem.Type.BOOTS, new Item.Properties()), props);
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.bootsRecipeList.add(data);
         return data.armorItem;
     }
     public static ArmorItem registerBoots(String key, ArmorMaterial material, Item.Properties props, ArmorItem previousArmor) {
@@ -258,7 +258,7 @@ public class EzItems {
         data.repairItem = material.getRepairIngredient().getItems()[0].getItem();
         data.previousArmor = previousArmor;
 
-        EzRecipeProvider.helmetRecipeList.add(data);
+        EzRecipeProvider.smithingArmorRecipeList.add(data);
         return data.armorItem;
     }
 

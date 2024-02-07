@@ -29,7 +29,8 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     public static ArrayList<EzItems.ArmorData> leggingsRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ArmorData> bootsRecipeList = new ArrayList<>();
 
-    public static ArrayList<EzItems.ToolData> smithingRecipeList = new ArrayList<>();
+    public static ArrayList<EzItems.ToolData> smithingToolRecipeList = new ArrayList<>();
+    public static ArrayList<EzItems.ArmorData> smithingArmorRecipeList = new ArrayList<>();
 
     public EzRecipeProvider(FabricDataOutput output) {
         super(output);
@@ -91,14 +92,52 @@ public class EzRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
                 .save(exporter, new ResourceLocation(getSimpleRecipeName(data.toolItem) + "_from_" + getSimpleRecipeName(data.repairItem))));
 
-        // Tool Smithing Recipes
-        smithingRecipeList.forEach((data -> SmithingTransformRecipeBuilder.smithing(
+        // Armor Crafting Recipes
+        helmetRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, data.armorItem, 1)
+                .pattern("RRR")
+                .pattern("R R")
+                .define('R', data.repairItem)
+                .unlockedBy(getHasName(data.repairItem), has(data.repairItem))
+                .save(exporter, new ResourceLocation(getSimpleRecipeName(data.armorItem) + "_from_" + getSimpleRecipeName(data.repairItem))));
+
+        chestplateRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, data.armorItem, 1)
+                .pattern("R R")
+                .pattern("RRR")
+                .pattern("RRR")
+                .define('R', data.repairItem)
+                .unlockedBy(getHasName(data.repairItem), has(data.repairItem))
+                .save(exporter, new ResourceLocation(getSimpleRecipeName(data.armorItem) + "_from_" + getSimpleRecipeName(data.repairItem))));
+
+        leggingsRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, data.armorItem, 1)
+                .pattern("RRR")
+                .pattern("R R")
+                .pattern("R R")
+                .define('R', data.repairItem)
+                .unlockedBy(getHasName(data.repairItem), has(data.repairItem))
+                .save(exporter, new ResourceLocation(getSimpleRecipeName(data.armorItem) + "_from_" + getSimpleRecipeName(data.repairItem))));
+
+        bootsRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, data.armorItem, 1)
+                .pattern("R R")
+                .pattern("R R")
+                .define('R', data.repairItem)
+                .unlockedBy(getHasName(data.repairItem), has(data.repairItem))
+                .save(exporter, new ResourceLocation(getSimpleRecipeName(data.armorItem) + "_from_" + getSimpleRecipeName(data.repairItem))));
+
+        // Smithing Recipes
+        smithingToolRecipeList.forEach((data -> SmithingTransformRecipeBuilder.smithing(
                 Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
                 Ingredient.of(data.previousTool),
                 Ingredient.of(data.repairItem),
                 RecipeCategory.TOOLS, data.toolItem)
                 .unlocks(getHasName(data.repairItem), has(data.repairItem))
-                .save(exporter, getItemName(data.toolItem) + "_smithing")
-    ));
+                .save(exporter, getItemName(data.toolItem) + "_smithing")));
+
+        smithingArmorRecipeList.forEach((data -> SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.of(data.previousArmor),
+                        Ingredient.of(data.repairItem),
+                        RecipeCategory.TOOLS, data.armorItem)
+                .unlocks(getHasName(data.repairItem), has(data.repairItem))
+                .save(exporter, getItemName(data.armorItem) + "_smithing")));
     }
 }
