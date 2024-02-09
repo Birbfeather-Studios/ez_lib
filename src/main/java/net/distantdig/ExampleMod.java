@@ -28,14 +28,13 @@ public class ExampleMod extends EzLib {
         EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        EzBlocks.registerStoneSet("rocky", Blocks.STONE, true, true, true);
+        EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
 
         //metalset
-        EzBlocks.registerButton("tritanium", Blocks.NETHERITE_BLOCK, 3);
-        EzBlocks.registerPressurePlate("tritanium", Blocks.NETHERITE_BLOCK, 3);
 
         //woolset
-        EzBlocks.registerBlock("turqoise_wool", Blocks.WHITE_WOOL);
+        EzBlocks.registerSimpleBlock("titanium_block", Blocks.GOLD_BLOCK);
+        EzBlocks.registerSimplePillar("ornate_chalk_pillar", Blocks.QUARTZ_PILLAR);
         EzBlocks.registerCarpet("turqoise", Blocks.WHITE_WOOL);
     }
 

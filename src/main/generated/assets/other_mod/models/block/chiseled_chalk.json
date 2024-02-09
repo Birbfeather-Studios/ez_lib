@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "other_mod:block/chiseled_chalk_down",
+    "east": "other_mod:block/chiseled_chalk_east",
+    "north": "other_mod:block/chiseled_chalk_north",
+    "particle": "other_mod:block/chiseled_chalk_particle",
+    "south": "other_mod:block/chiseled_chalk_south",
+    "up": "other_mod:block/chiseled_chalk_up",
+    "west": "other_mod:block/chiseled_chalk_west"
+  }
+}

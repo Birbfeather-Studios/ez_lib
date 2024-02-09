@@ -1,5 +1,6 @@
 package net.distantdig.block;
 
+import net.distantdig.datagen.EzModelProvider;
 import net.distantdig.item.EzItemGroups;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -55,7 +56,31 @@ public class EzBlocks {
         public BlockData sapling;
     }
 
-    public final static HashMap<String, BlockData> blockMap = new HashMap<>();
+    public static <T extends Block> BlockData registerSimpleBlock(String key, Block props) {
+        BlockData data = new BlockData();
+        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key), new Block(FabricBlockSettings.copyOf(props)));
+        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key), new BlockItem(data.block, new FabricItemSettings()));
+        blockMap.put(key, data);
+        EzItemGroups.simpleBlockMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
+    }
+
+    public static <T extends Block> BlockData registerSimplePillar(String key, Block props) {
+        BlockData data = new BlockData();
+        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key), new RotatedPillarBlock(FabricBlockSettings.copyOf(props)));
+        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key), new BlockItem(data.block, new FabricItemSettings()));
+        blockMap.put(key, data);
+        EzItemGroups.simplePillarMap.put(key, data);
+        EzItemGroups.BlockGroupList.add(data.blockItem);
+
+        return data;
+    }
+
+
+
+    public final static HashMap< String, BlockData> blockMap = new HashMap<>();
 
     // Block Registration methods
     public static <T extends Block> BlockData registerBlock(String key, Block properties) {
@@ -166,7 +191,7 @@ public class EzBlocks {
         BlockData data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), key + "_stairs"), new StairBlock(getBlock(block).defaultBlockState(), FabricBlockSettings.copyOf(properties)));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), key + "_stairs"), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(key + "_stairs", data);
+        blockMap.put(key + "_stair", data);
         EzItemGroups.BlockGroupList.add(data.blockItem);
 
         return data;

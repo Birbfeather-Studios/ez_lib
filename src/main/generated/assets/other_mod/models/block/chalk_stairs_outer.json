@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "other_mod:block/chalk",
+    "side": "other_mod:block/chalk",
+    "top": "other_mod:block/chalk"
+  }
+}
