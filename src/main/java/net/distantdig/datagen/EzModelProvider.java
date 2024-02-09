@@ -2,6 +2,7 @@ package net.distantdig.datagen;
 
 import com.google.gson.*;
 import net.distantdig.EzLib;
+import net.distantdig.block.EzBlocks;
 import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -78,6 +79,8 @@ public class EzModelProvider extends FabricModelProvider {
 
         EzItemGroups.BlockStoneFamilyGroupList.forEach((family) -> {
             BlockModelGenerators.BlockFamilyProvider familyPool = blockStateModelGenerator.family(family.block.block);
+            if (family.key.contains("_cracked")) {itemModelGenerator(family.key + "_bricks");} else {
+                itemModelGenerator( family.key);}
 
             if (family.stair != null) {
                 familyPool.stairs(family.stair.block);
@@ -91,18 +94,24 @@ public class EzModelProvider extends FabricModelProvider {
 
             if (family.cutBlock != null) {
                 blockStateModelGenerator.createGenericCube(family.cutBlock.block);
+                itemModelGenerator("cut_" + family.key);
             }
             if (family.chiseledBlock != null) {
                 blockStateModelGenerator.createGenericCube(family.chiseledBlock.block);
+                itemModelGenerator("chiseled_" + family.key);
             }
             if (family.tileBlock != null) {
                 blockStateModelGenerator.createGenericCube(family.tileBlock.block);
+                if (family.key.contains("_cracked")) {itemModelGenerator(family.key + "_tiles");} else {
+                itemModelGenerator(family.key + "_tiles");}
             }
             if (family.pillarBlock != null) {
                 blockStateModelGenerator.createGenericCube(family.pillarBlock.block);
+                itemModelGenerator(family.key + "_pillar");
             }
             if (family.pressurePlate != null) {
                 familyPool.pressurePlate(family.pressurePlate.block);
+                itemModelGenerator(family.key + "_pressure_plate");
             }
             if (family.button != null) {
                 familyPool.button(family.button.block);
@@ -114,6 +123,7 @@ public class EzModelProvider extends FabricModelProvider {
 
         {
             BlockModelGenerators.BlockFamilyProvider familyPool = blockStateModelGenerator.family(family.block.block);
+            itemModelGenerator(family.key + "_planks");
 
             if (family.stair != null) {
                 familyPool.stairs(family.stair.block);
@@ -126,15 +136,21 @@ public class EzModelProvider extends FabricModelProvider {
             }
             if (family.fenceGate != null) {
                 familyPool.fenceGate(family.fenceGate.block);
+                itemModelGenerator(family.key + "_fence_gate");
             }
             if (family.log != null && family.wood != null) {
                 blockStateModelGenerator.woodProvider(family.log.block).log(family.log.block).wood(family.wood.block);
+                itemModelGenerator(family.key + "_log");
+                itemModelGenerator(family.key + "_wood");
             }
             if (family.strippedLog != null) {
                 blockStateModelGenerator.woodProvider(family.strippedLog.block).log(family.strippedLog.block).wood(family.strippedWood.block);
+                itemModelGenerator("stripped_" + family.key + "_log");
+                itemModelGenerator("stripped_" + family.key + "_wood");
             }
             if (family.pressurePlate != null) {
                 familyPool.pressurePlate(family.pressurePlate.block);
+                itemModelGenerator(family.key + "_pressure_plate");
             }
             if (family.button != null) {
                 familyPool.button(family.button.block);
@@ -147,6 +163,7 @@ public class EzModelProvider extends FabricModelProvider {
             }
             if (family.leaves != null) {
                 blockStateModelGenerator.createGenericCube(family.leaves.block);
+                itemModelGenerator(family.key + "_leaves");
             }
         });
     }

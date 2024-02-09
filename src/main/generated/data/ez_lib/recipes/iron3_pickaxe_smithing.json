@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "other_mod:ingot_one"
+  },
+  "base": {
+    "item": "other_mod:iron2_pickaxe"
+  },
+  "result": {
+    "item": "other_mod:iron3_pickaxe"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

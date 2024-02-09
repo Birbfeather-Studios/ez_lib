@@ -26,6 +26,7 @@ public class EzBlocks {
     }
 
     public static class BlockStoneFamily {
+        public String key;
         public BlockData block;
         public BlockData slab;
         public BlockData stair;
@@ -39,6 +40,7 @@ public class EzBlocks {
     }
 
     public static class BlockWoodFamily {
+        public String key;
         public BlockData block;
         public BlockData slab;
         public BlockData stair;
@@ -202,7 +204,7 @@ public class EzBlocks {
     public static <T extends Block> void registerWoodSet(String materialName, Block copiedProperties, Boolean includeTree) {
         // Main Set
         BlockWoodFamily family = new BlockWoodFamily();
-
+        family.key = materialName;
         family.block = registerBlock(materialName + "_planks", copiedProperties);
         family.stair = registerStair(materialName, materialName + "_planks", copiedProperties);
         family.slab = registerSlab(materialName, copiedProperties);
@@ -228,7 +230,7 @@ public class EzBlocks {
     public static <T extends Block> void registerStoneSet(String materialName, Block copiedProperties, Boolean crackedBrick, Boolean mossyBrick, Boolean mossy) {
         // Main Set
         BlockStoneFamily family = new BlockStoneFamily();
-
+        family.key = materialName;
         family.block = registerBlock(materialName, copiedProperties);
         family.stair = registerStair(materialName, materialName, copiedProperties);
         family.slab = registerSlab(materialName, copiedProperties);
@@ -244,7 +246,7 @@ public class EzBlocks {
 
         // Polished Set
         BlockStoneFamily polishedFamily = new BlockStoneFamily();
-
+        polishedFamily.key = "polished_" + materialName;
         polishedFamily.block = registerBlock("polished_" + materialName, copiedProperties);
         polishedFamily.stair = registerStair("polished_" + materialName, "polished_" + materialName, copiedProperties);
         polishedFamily.slab = registerSlab("polished_" + materialName, copiedProperties);
@@ -254,7 +256,7 @@ public class EzBlocks {
 
         // Brick Set
         BlockStoneFamily brickFamily = new BlockStoneFamily();
-
+        brickFamily.key = materialName  + "_brick";
         brickFamily.block = registerBlock(materialName + "_brick", copiedProperties);
         brickFamily.stair = registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
         brickFamily.slab = registerSlab(materialName + "_brick", copiedProperties);
@@ -266,7 +268,7 @@ public class EzBlocks {
         // Mossy Set
         if (mossy) {
             BlockStoneFamily mossyFamily = new BlockStoneFamily();
-
+            mossyFamily.key = "mossy_" + materialName;
             mossyFamily.block = registerBlock("mossy_" + materialName, copiedProperties);
             mossyFamily.stair = registerStair("mossy_" + materialName, "mossy_" + materialName, copiedProperties);
             mossyFamily.slab = registerSlab("mossy_" + materialName, copiedProperties);
@@ -278,7 +280,7 @@ public class EzBlocks {
         // Mossy Brick Set
         if (mossyBrick) {
             BlockStoneFamily mossyBrickFamily = new BlockStoneFamily();
-
+            mossyBrickFamily.key = "mossy_" + materialName + "_bricks";
             mossyBrickFamily.block = registerBlock("mossy_" + materialName + "_bricks", copiedProperties);
             mossyBrickFamily.stair = registerStair("mossy_" + materialName + "_brick", "mossy_" + materialName + "_bricks", copiedProperties);
             mossyBrickFamily.slab = registerSlab("mossy_" + materialName + "_brick", copiedProperties);
@@ -290,7 +292,7 @@ public class EzBlocks {
         // Cracked Brick Set
         if (crackedBrick) {
             BlockStoneFamily crackedBrickFamily = new BlockStoneFamily();
-
+            crackedBrickFamily.key = materialName + "_cracked";
             crackedBrickFamily.block = registerBlock(materialName + "_cracked_bricks", copiedProperties);
             crackedBrickFamily.tileBlock = registerBlock(materialName + "_cracked_tiles", copiedProperties);
 
