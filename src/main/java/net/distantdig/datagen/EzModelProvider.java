@@ -17,6 +17,7 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
+
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +44,16 @@ import java.util.stream.Collectors;
 import static net.minecraft.data.models.BlockModelGenerators.createRotatedPillar;
 import static net.minecraft.data.models.model.TexturedModel.createDefault;
 
+import net.minecraft.world.item.*;
+
+import java.util.ArrayList;
+
 public class EzModelProvider extends FabricModelProvider {
+
+    public static ArrayList<Item> FlatModelList = new ArrayList<>();
+    public static ArrayList<Item> HandheldModelList = new ArrayList<>();
+    public static ArrayList<EzItems.ArmorData> ArmorModelList = new ArrayList<>();
+
     public EzModelProvider(FabricDataOutput output) {
         super(output);
     }
@@ -169,6 +179,10 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators itemModelGenerator) {
-        EzItems.itemMap.forEach((k, i) -> itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM));
+//        EzItems.itemMap.forEach((k, i) -> itemModelGenerator.generateFlatItem(i, ModelTemplates.FLAT_ITEM));
+
+        FlatModelList.forEach((item -> itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_ITEM)));
+        HandheldModelList.forEach((item -> itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM)));
+        ArmorModelList.forEach((armorData -> itemModelGenerator.generateArmorTrims(armorData.armorItem)));
     }
 }
