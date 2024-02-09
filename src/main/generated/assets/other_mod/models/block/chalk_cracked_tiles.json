@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "other_mod:block/chalk_cracked_tiles_down",
+    "east": "other_mod:block/chalk_cracked_tiles_east",
+    "north": "other_mod:block/chalk_cracked_tiles_north",
+    "particle": "other_mod:block/chalk_cracked_tiles_particle",
+    "south": "other_mod:block/chalk_cracked_tiles_south",
+    "up": "other_mod:block/chalk_cracked_tiles_up",
+    "west": "other_mod:block/chalk_cracked_tiles_west"
+  }
+}

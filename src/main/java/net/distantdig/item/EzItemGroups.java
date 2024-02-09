@@ -12,13 +12,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EzItemGroups {
 
     public static ArrayList<ItemLike> ItemGroupList = new ArrayList<>();
     public static ArrayList<ItemLike> BlockGroupList = new ArrayList<>();
-    public static ArrayList<EzBlocks.BlockStoneFamily> BlockStoneFamilyGroupList = new ArrayList<>();
 
+    public final static HashMap< String, EzBlocks.BlockData> simpleBlockMap = new HashMap<>();
+    public final static HashMap< String, EzBlocks.BlockData> simplePillarMap = new HashMap<>();
+
+    public static ArrayList<EzBlocks.BlockStoneFamily> BlockStoneFamilyGroupList = new ArrayList<>();
     public static ArrayList<EzBlocks.BlockWoodFamily> BlockWoodFamilyGroupList = new ArrayList<>();
 
     public static void registerItemGroup(Item icon) {
