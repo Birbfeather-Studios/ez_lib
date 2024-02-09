@@ -1,12 +1,7 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "down": "other_mod:block/chalk_pillar_down",
-    "east": "other_mod:block/chalk_pillar_east",
-    "north": "other_mod:block/chalk_pillar_north",
-    "particle": "other_mod:block/chalk_pillar_particle",
-    "south": "other_mod:block/chalk_pillar_south",
-    "up": "other_mod:block/chalk_pillar_up",
-    "west": "other_mod:block/chalk_pillar_west"
+    "end": "other_mod:block/chalk_pillar_top",
+    "side": "other_mod:block/chalk_pillar"
   }
 }

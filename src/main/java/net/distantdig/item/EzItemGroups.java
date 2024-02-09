@@ -24,6 +24,7 @@ public class EzItemGroups {
 
     public static ArrayList<EzBlocks.BlockStoneFamily> BlockStoneFamilyGroupList = new ArrayList<>();
     public static ArrayList<EzBlocks.BlockWoodFamily> BlockWoodFamilyGroupList = new ArrayList<>();
+    public static ArrayList<EzBlocks.WoolFamily> BlockWoolFamilyGroupList = new ArrayList<>();
 
     public static void registerItemGroup(Item icon) {
 

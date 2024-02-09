@@ -25,6 +25,12 @@ public class EzBlocks {
         public BlockItem blockItem;
     }
 
+    public static class WoolFamily {
+        public String key;
+        public BlockData block;
+        public BlockData carpet;
+    }
+
     public static class BlockStoneFamily {
         public String key;
         public BlockData block;
@@ -81,8 +87,7 @@ public class EzBlocks {
     }
 
 
-
-    public final static HashMap< String, BlockData> blockMap = new HashMap<>();
+    public final static HashMap<String, BlockData> blockMap = new HashMap<>();
 
     // Block Registration methods
     public static <T extends Block> BlockData registerBlock(String key, Block properties) {
@@ -97,8 +102,8 @@ public class EzBlocks {
         return registerMain(key + "_wall", WallBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
-    public static <T extends Block> void registerCarpet(String key, Block properties) {
-        registerMain(key + "_carpet", CarpetBlock::new, FabricBlockSettings.copyOf(properties));
+    public static <T extends Block> BlockData registerCarpet(String key, Block properties) {
+        return registerMain(key + "_carpet", CarpetBlock::new, FabricBlockSettings.copyOf(properties));
     }
 
     public static <T extends Block> BlockData registerFence(String key, Block properties) {
@@ -238,7 +243,7 @@ public class EzBlocks {
         family.cutBlock = registerBlock("cut_" + materialName, copiedProperties);
         family.chiseledBlock = registerBlock("chiseled_" + materialName, copiedProperties);
         family.tileBlock = registerBlock(materialName + "_tiles", copiedProperties);
-        family.pillarBlock = registerBlock(materialName + "_pillar", copiedProperties);
+        family.pillarBlock = registerPillar(materialName + "_pillar", copiedProperties);
         family.pressurePlate = registerPressurePlate(materialName, copiedProperties, 2);
         family.button = registerButton(materialName, copiedProperties, 2);
 
@@ -256,7 +261,7 @@ public class EzBlocks {
 
         // Brick Set
         BlockStoneFamily brickFamily = new BlockStoneFamily();
-        brickFamily.key = materialName  + "_brick";
+        brickFamily.key = materialName + "_brick";
         brickFamily.block = registerBlock(materialName + "_brick", copiedProperties);
         brickFamily.stair = registerStair(materialName + "_brick", materialName + "_brick", copiedProperties);
         brickFamily.slab = registerSlab(materialName + "_brick", copiedProperties);
@@ -300,6 +305,14 @@ public class EzBlocks {
         }
 
 
+    }
+
+    public static <T extends Block> void registerWoolSet(String materialName) {
+        WoolFamily woolFamily = new WoolFamily();
+        woolFamily.key = materialName;
+        woolFamily.block = registerBlock(materialName + "_wool", Blocks.WHITE_WOOL);
+        woolFamily.carpet = registerCarpet(materialName, Blocks.WHITE_WOOL);
+        EzItemGroups.BlockWoolFamilyGroupList.add(woolFamily);
     }
 
     //Methods for storing the blockmaps

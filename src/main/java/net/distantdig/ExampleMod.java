@@ -56,7 +56,7 @@ public class ExampleMod extends EzLib {
         //woolset
         EzBlocks.registerSimpleBlock("titanium_block", Blocks.GOLD_BLOCK);
         EzBlocks.registerSimplePillar("ornate_chalk_pillar", Blocks.QUARTZ_PILLAR);
-        EzBlocks.registerCarpet("turqoise", Blocks.WHITE_WOOL);
+        EzBlocks.registerWoolSet("turqoise");
     }
 
     @Override

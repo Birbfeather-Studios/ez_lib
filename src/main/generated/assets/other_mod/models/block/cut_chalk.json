@@ -1,12 +1,6 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "down": "other_mod:block/cut_chalk_down",
-    "east": "other_mod:block/cut_chalk_east",
-    "north": "other_mod:block/cut_chalk_north",
-    "particle": "other_mod:block/cut_chalk_particle",
-    "south": "other_mod:block/cut_chalk_south",
-    "up": "other_mod:block/cut_chalk_up",
-    "west": "other_mod:block/cut_chalk_west"
+    "all": "other_mod:block/cut_chalk"
   }
 }
