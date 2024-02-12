@@ -50,6 +50,7 @@ public class ExampleMod extends EzLib {
 
         //rockset
         EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
+        EzBlocks.registerStoneSet("granite", Blocks.STONE,false, false, false);
 
         //metalset
 

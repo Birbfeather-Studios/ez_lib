@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "other_mod:block/polished_granite",
+    "side": "other_mod:block/polished_granite",
+    "top": "other_mod:block/polished_granite"
+  }
+}
