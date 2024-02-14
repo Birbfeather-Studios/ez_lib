@@ -1,11 +1,17 @@
 package net.distantdig;
 
 import net.distantdig.block.EzBlocks;
+import net.distantdig.effect.EzEffect;
+import net.distantdig.effect.EzEffects;
 import net.distantdig.enums.EzArmorMaterials;
 import net.distantdig.enums.EzToolsMaterials;
 import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
@@ -58,6 +64,31 @@ public class ExampleMod extends EzLib {
         //woolset
         EzBlocks.registerBlock("turqoise_wool", Blocks.WHITE_WOOL);
         EzBlocks.registerCarpet("turqoise", Blocks.WHITE_WOOL);
+    }
+
+    @Override
+    public void registerModEffects() {
+        MobEffect NOT_SLOWNESS = EzEffects.registerEffect("not_slowness",
+                new EzEffect.NormalEffect(MobEffectCategory.HARMFUL, 9154528)
+                        .addAttributeModifier(Attributes.MOVEMENT_SPEED,"7107DE5E-7CE8-4030-940E-514C1F160891",-0.15000000596046448, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        MobEffect BETTER_STRENGTH = EzEffects.registerEffect("better_strength",
+                new EzEffect.AttackDamageEffect(MobEffectCategory.BENEFICIAL, 16762624, 1.1)
+                        .addAttributeModifier(Attributes.ATTACK_DAMAGE,"648D7064-6A60-4F59-8ABE-C2C23A6DD7A9",0.0, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        MobEffect WORSE_HEAL = EzEffects.registerEffect("worse_heal",
+                new EzEffect.InstantEffect(MobEffectCategory.BENEFICIAL, 16262179)
+                        .heal(1));
+        MobEffect WORSE_HARM = EzEffects.registerEffect("worse_harm",
+                new EzEffect.InstantEffect(MobEffectCategory.HARMFUL, 11101546)
+                        .harm(1));
+        MobEffect BETTER_POISON = EzEffects.registerEffect("better_poison",
+                new EzEffect.NormalEffect(MobEffectCategory.HARMFUL, 8889187)
+                        .poison(2));
+        MobEffect BETTER_WITHER = EzEffects.registerEffect("better_wither",
+                new EzEffect.NormalEffect(MobEffectCategory.HARMFUL, 7561558)
+                        .wither(2));
+        MobEffect BETTER_REGENERATION = EzEffects.registerEffect("better_regeneration",
+                new EzEffect.NormalEffect(MobEffectCategory.BENEFICIAL, 13458603)
+                        .regeneration(2));
     }
 
     @Override

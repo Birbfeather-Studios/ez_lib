@@ -20,6 +20,7 @@ public abstract class EzLib implements ModInitializer {
 	public void registerModBlocks() {}
 
 	public void registerModGroup() {}
+	public void registerModEffects() {}
 
     public final Logger LOGGER = LoggerFactory.getLogger("ez-lib");
 
@@ -30,5 +31,6 @@ public abstract class EzLib implements ModInitializer {
 		registerModItems();
 		registerModBlocks();
 		registerModGroup();
+		registerModEffects();
 	}
 }
