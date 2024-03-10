@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "other_mod:block/chalk_pressure_plate"
+    },
+    "powered=true": {
+      "model": "other_mod:block/chalk_pressure_plate_down"
+    }
+  }
+}

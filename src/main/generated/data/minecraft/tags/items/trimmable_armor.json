@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "other_mod:iron2_helmet",
+    "other_mod:iron2_chestplate",
+    "other_mod:iron2_leggings",
+    "other_mod:iron2_boots",
+    "other_mod:iron3_helmet",
+    "other_mod:iron3_chestplate",
+    "other_mod:iron3_leggings",
+    "other_mod:iron3_boots",
+    "other_mod:iron4_helmet",
+    "other_mod:iron4_chestplate",
+    "other_mod:iron4_leggings",
+    "other_mod:iron4_boots"
+  ]
+}

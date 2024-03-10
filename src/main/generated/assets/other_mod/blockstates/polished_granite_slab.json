@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "other_mod:block/polished_granite_slab"
+    },
+    "type=double": {
+      "model": "other_mod:block/polished_granite"
+    },
+    "type=top": {
+      "model": "other_mod:block/polished_granite_slab_top"
+    }
+  }
+}

@@ -3,6 +3,7 @@ package net.distantdig;
 import net.distantdig.block.EzBlocks;
 import net.distantdig.effect.EzEffect;
 import net.distantdig.effect.EzEffects;
+import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.enums.EzArmorMaterials;
 import net.distantdig.enums.EzToolsMaterials;
 import net.distantdig.item.EzItemGroups;
@@ -14,7 +15,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class ExampleMod extends EzLib {
 
@@ -51,19 +55,40 @@ public class ExampleMod extends EzLib {
 
     @Override
     public void registerModBlocks() {
+
+        new EzBlocksBuilder("unobtainable", Blocks.STONE)
+                .stair()
+                .slab()
+                .verticalSlab()
+                .extraBlock("cut","",null)
+                .extraBlock("chiseled_","",null)
+                .pillar("ornate_", "_pillar", null)
+                .pillar("broad_","_pillar", null)
+                .button(BlockSetType.OAK, 30, true)
+                .pressurePlate(BlockSetType.OAK,PressurePlateBlock.Sensitivity.MOBS)
+                .trapdoor(BlockSetType.OAK)
+                .door(BlockSetType.OAK)
+                .fence()
+                .fenceGate()
+                .wall();
+        //slab,stair, door, trapdoor, button, pressureplate, fence, fencegate, wall, pillar, logsAndWoods
+        //needs to be able to make additional blocks, like leaves
+        //needs to be able to have different minables, such as axes for wood, pickaxes for stone, and shears for wool
+
+        //need seperate builder for plants, such as two block plants, plants like sugarcane or bamboo and growable samplings or just simple grass/mushrooms etc.
+
         //woodset
         EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        EzBlocks.registerStoneSet("rocky", Blocks.STONE, true, true, true);
+        EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
 
         //metalset
-        EzBlocks.registerButton("tritanium", Blocks.NETHERITE_BLOCK, 3);
-        EzBlocks.registerPressurePlate("tritanium", Blocks.NETHERITE_BLOCK, 3);
 
         //woolset
-        EzBlocks.registerBlock("turqoise_wool", Blocks.WHITE_WOOL);
-        EzBlocks.registerCarpet("turqoise", Blocks.WHITE_WOOL);
+        EzBlocks.registerSimpleBlock("titanium_block", Blocks.GOLD_BLOCK);
+        EzBlocks.registerSimplePillar("ornate_chalk_pillar", Blocks.QUARTZ_PILLAR);
+        EzBlocks.registerWoolSet("turqoise");
     }
 
     @Override
