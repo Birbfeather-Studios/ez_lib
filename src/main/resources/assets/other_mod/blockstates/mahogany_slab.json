@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "other_mod:block/mahogany_slab"
+    },
+    "type=double": {
+      "model": "other_mod:block/mahogany_planks"
+    },
+    "type=top": {
+      "model": "other_mod:block/mahogany_slab_top"
+    }
+  }
+}

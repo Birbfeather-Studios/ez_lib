@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -13,90 +14,71 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
 
 
-public class EzVerticalSlabBlock extends Block {
-    public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
+public class EzVerticalSlabBlock extends HorizontalDirectionalBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private final Block base;
-    private final BlockState baseState;
-    //d = Xmin, e = Ymin, f = Zmin, G = Xmax, H = Ymax, I = Zmax, negative Z = North, Negative X = West, Positive Y = up and Negative Y = down etc.
-    private final VoxelShape NORTH = box(0, 0, 0, 16, 16, 8);
-    private final VoxelShape WEST = box(0, 0, 0, 8, 16, 16);
-    private final VoxelShape SOUTH = box(0, 8, 0, 16, 16, 16);
-    private final VoxelShape EAST = box(8, 0, 0, 16, 16, 16);
+    public static final BooleanProperty SINGLE = BooleanProperty.create("single");
 
-
-    public EzVerticalSlabBlock(BlockState blockState, Properties properties) {
+    public EzVerticalSlabBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
-        this.base = blockState.getBlock();
-        this.baseState = blockState;
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SINGLE, true).setValue(WATERLOGGED, false));
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState blockState) {
-        return true;
-    }
-
-    @Override
-    public void attack(BlockState blockState, Level level, BlockPos blockPos, Player player) {
-        this.baseState.attack(level, blockPos, player);
-    }
-
-    @Override
-    public void destroy(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
-        this.base.destroy(levelAccessor, blockPos, blockState);
-    }
-
-    @Override
-    public void stepOn(Level level, BlockPos blockPos, BlockState blockState, Entity entity) {
-        this.base.stepOn(level, blockPos, blockState, entity);
-    }
-
-    @Override
-    public float getExplosionResistance() {
-        return this.base.getExplosionResistance();
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, SINGLE, WATERLOGGED);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         BlockPos blockPos = blockPlaceContext.getClickedPos();
+        BlockState blockState = blockPlaceContext.getLevel().getBlockState(blockPos);
+        if(blockState.is(this)) {return blockState.setValue(SINGLE, false).setValue(WATERLOGGED, false);}
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPos);
         return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-
-
     }
 
     @Override
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
+    public boolean useShapeForLightOcclusion(BlockState blockState) {
+        return blockState.getValue(SINGLE);
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        switch (blockState.getValue(FACING)) {
-            case NORTH -> {return NORTH;}
-            case WEST -> {return WEST;}
-            case SOUTH -> {return SOUTH;}
-            case EAST -> {return EAST;}
-            default -> {return Shapes.block();}
+    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext blockPlaceContext) {
+        ItemStack itemStack = blockPlaceContext.getItemInHand();
+        Boolean single = blockState.getValue(SINGLE);
+        Direction placeDirection = blockPlaceContext.getClickedFace();
+        Direction blockdirection = blockState.getValue(FACING);
+        return single && itemStack.is(this.asItem()) && placeDirection==blockdirection;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        Direction facing = blockState.getValue(FACING);
+        Boolean single = blockState.getValue(SINGLE);
+        if (single) {
+            switch (facing) {
+                case NORTH:
+                    return Shapes.create(0.0f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f);
+                case WEST:
+                    return Shapes.create(0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+                case SOUTH:
+                    return Shapes.create(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.5f);
+                case EAST:
+                    return Shapes.create(0.0f, 0.0f, 0.0f, 0.5f, 1.0f, 1.0f);
+            }
         }
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED);
+        return Shapes.box(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
     }
 }

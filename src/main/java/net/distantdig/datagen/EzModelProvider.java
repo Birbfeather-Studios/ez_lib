@@ -2,7 +2,7 @@ package net.distantdig.datagen;
 
 import com.google.gson.*;
 import net.distantdig.EzLib;
-import net.distantdig.block.EzBlocks;
+import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.item.EzItemGroups;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -33,151 +33,22 @@ public class EzModelProvider extends FabricModelProvider {
         super(output);
     }
 
-    public static class ColumFamily {
-        public Block block;
-    }
-
-    //I was so done with the way minecraft generates their blocks and blockmodels, that I decided to just hard-code my own generator for the creation of blockitem models.
-    public static void itemModelGenerator(String key) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("parent", EzLib.getModId() + ":block/" + key);
-        String jsondata = gson.toJson(jsonObject);
-        Path projectPath = Paths.get(System.getProperty("user.dir")).getParent().getParent();
-        Path extraPath = Paths.get("src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator + EzLib.getModId() + File.separator + "models" + File.separator + "item" + File.separator + key + ".json");
-        Path path = projectPath.resolve(extraPath);
-        try {
-            Files.createDirectories(path.getParent());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            FileWriter writer = new FileWriter(path.toFile());
-            writer.write(jsondata);
-            writer.close();
-            System.out.println("Custom Model File created in: " + path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-
-
-        EzItemGroups.simpleBlockMap.forEach((key, data) -> {
-            blockStateModelGenerator.createTrivialCube(data.block);
-            itemModelGenerator(key);
-        });
-        EzItemGroups.simplePillarMap.forEach((key, data) -> {
-            ColumFamily family = new ColumFamily();
-            family.block = data.block;
-            blockStateModelGenerator.woodProvider(family.block).log(family.block);
-            itemModelGenerator(key);
-        });
-
-        EzItemGroups.BlockStoneFamilyGroupList.forEach((family) -> {
-            BlockModelGenerators.BlockFamilyProvider familyPool = blockStateModelGenerator.family(family.block.block);
-            if (family.key.contains("_cracked")) {
-                itemModelGenerator(family.key + "_bricks");
-            } else {
-                itemModelGenerator(family.key);
-            }
-
-            if (family.stair != null) {
-                familyPool.stairs(family.stair.block);
-            }
-            if (family.slab != null) {
-                familyPool.slab(family.slab.block);
-            }
-            if (family.wall != null) {
-                familyPool.wall(family.wall.block);
-            }
-
-            if (family.cutBlock != null) {
-                blockStateModelGenerator.createTrivialCube(family.cutBlock.block);
-                itemModelGenerator("cut_" + family.key);
-            }
-            if (family.chiseledBlock != null) {
-                blockStateModelGenerator.createTrivialCube(family.chiseledBlock.block);
-                itemModelGenerator("chiseled_" + family.key);
-            }
-            if (family.tileBlock != null) {
-                blockStateModelGenerator.createTrivialCube(family.tileBlock.block);
-                if (family.key.contains("_cracked")) {
-                    itemModelGenerator(family.key + "_tiles");
-                } else {
-                    itemModelGenerator(family.key + "_tiles");
-                }
-            }
-            if (family.pillarBlock != null) {
-                blockStateModelGenerator.woodProvider(family.pillarBlock.block).log(family.pillarBlock.block);
-                itemModelGenerator(family.key + "_pillar");
-            }
-            if (family.pressurePlate != null) {
-                familyPool.pressurePlate(family.pressurePlate.block);
-                itemModelGenerator(family.key + "_pressure_plate");
-            }
-            if (family.button != null) {
-                familyPool.button(family.button.block);
-            }
-        });
-
-
-        EzItemGroups.BlockWoodFamilyGroupList.forEach((family) ->
-
-        {
-            BlockModelGenerators.BlockFamilyProvider familyPool = blockStateModelGenerator.family(family.block.block);
-            itemModelGenerator(family.key + "_planks");
-
-            if (family.stair != null) {
-                familyPool.stairs(family.stair.block);
-            }
-            if (family.slab != null) {
-                familyPool.slab(family.slab.block);
-            }
-            if (family.fence != null) {
-                familyPool.fence(family.fence.block);
-            }
-            if (family.fenceGate != null) {
-                familyPool.fenceGate(family.fenceGate.block);
-                itemModelGenerator(family.key + "_fence_gate");
-            }
-            if (family.log != null && family.wood != null) {
-                blockStateModelGenerator.woodProvider(family.log.block).log(family.log.block).wood(family.wood.block);
-                itemModelGenerator(family.key + "_log");
-                itemModelGenerator(family.key + "_wood");
-            }
-            if (family.strippedLog != null) {
-                blockStateModelGenerator.woodProvider(family.strippedLog.block).log(family.strippedLog.block).wood(family.strippedWood.block);
-                itemModelGenerator("stripped_" + family.key + "_log");
-                itemModelGenerator("stripped_" + family.key + "_wood");
-            }
-            if (family.pressurePlate != null) {
-                familyPool.pressurePlate(family.pressurePlate.block);
-                itemModelGenerator(family.key + "_pressure_plate");
-            }
-            if (family.button != null) {
-                familyPool.button(family.button.block);
-            }
-            if (family.door != null) {
-                blockStateModelGenerator.createDoor(family.door.block);
-            }
-            if (family.trapdoor != null) {
-                blockStateModelGenerator.createTrapdoor(family.trapdoor.block);
-            }
-            if (family.leaves != null) {
-                blockStateModelGenerator.createTrivialCube(family.leaves.block);
-                itemModelGenerator(family.key + "_leaves");
-            }
-        });
-
-        EzItemGroups.BlockWoolFamilyGroupList.forEach((family) -> {
-            blockStateModelGenerator.createFullAndCarpetBlocks(family.block.block, family.carpet.block);
-            itemModelGenerator(family.key + "_wool");
-            itemModelGenerator(family.key + "_carpet");
-        });
+        EzBlocksBuilder.blockMap.forEach((name, block) -> {JsonGenerators.createEzBlock(name);});
+        EzBlocksBuilder.stairMap.forEach((name, block) -> {JsonGenerators.createEzStair(name);});
+        EzBlocksBuilder.slabMap.forEach((strings, block) -> {JsonGenerators.createEzSlab(strings);});
+        EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
+        EzBlocksBuilder.leavesMap.forEach((name, block) -> {JsonGenerators.createEzBlock(name);});
+        EzBlocksBuilder.rotatedPillarMap.forEach((name, block) -> {JsonGenerators.createEzColumn(name);});
+        EzBlocksBuilder.doorMap.forEach((name, block) -> {JsonGenerators.createEzDoor(name);});
+        EzBlocksBuilder.trapDoorMap.forEach((name, block) -> {JsonGenerators.createEzTrapDoor(name);});
+        EzBlocksBuilder.buttonMap.forEach((strings, block) -> {JsonGenerators.createEzButton(strings);});
+        EzBlocksBuilder.fenceMap.forEach((name, block) -> {JsonGenerators.createEzFence(name);});
+        EzBlocksBuilder.fenceGateMap.forEach((name, block) -> {JsonGenerators.createEzFenceGate(name);});
+        EzBlocksBuilder.wallMap.forEach((name, block) -> {JsonGenerators.createEzWall(name);});
+        EzBlocksBuilder.pressurePlateMap.forEach((name, block) -> {JsonGenerators.createEzPressurePlate(name);});
+        EzBlocksBuilder.carpetMap.forEach((name, block) -> {JsonGenerators.createEzCarpet(name);});
     }
 
     @Override

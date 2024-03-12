@@ -1,6 +1,6 @@
 package net.distantdig;
 
-import net.distantdig.block.EzBlocks;
+import net.distantdig.block.EzBlockSets;
 import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.enums.EzArmorMaterials;
 import net.distantdig.enums.EzToolsMaterials;
@@ -9,7 +9,6 @@ import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -50,11 +49,11 @@ public class ExampleMod extends EzLib {
     @Override
     public void registerModBlocks() {
 
-        new EzBlocksBuilder("unobtainable", Blocks.STONE)
+        new EzBlocksBuilder("unobtainable", Blocks.STONE, null)
                 .stair()
                 .slab()
                 .verticalSlab()
-                .extraBlock("cut","",null)
+                .extraBlock("cut_","",null)
                 .extraBlock("chiseled_","",null)
                 .pillar("ornate_", "_pillar", null)
                 .pillar("broad_","_pillar", null)
@@ -72,17 +71,18 @@ public class ExampleMod extends EzLib {
         //need seperate builder for plants, such as two block plants, plants like sugarcane or bamboo and growable samplings or just simple grass/mushrooms etc.
 
         //woodset
-        EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
+        new EzBlockSets().woodSet("mahogany", true);
+        //EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
+        new EzBlockSets().stoneSet("chalk", true,true);
+        //EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
 
         //metalset
 
         //woolset
-        EzBlocks.registerSimpleBlock("titanium_block", Blocks.GOLD_BLOCK);
-        EzBlocks.registerSimplePillar("ornate_chalk_pillar", Blocks.QUARTZ_PILLAR);
-        EzBlocks.registerWoolSet("turqoise");
+        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool").carpet();
+        //EzBlocks.registerWoolSet("turqoise");
     }
 
     @Override

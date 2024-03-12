@@ -1,4 +1,4 @@
-package net.distantdig.block;
+/*package net.distantdig.block;
 
 import net.distantdig.datagen.EzModelProvider;
 import net.distantdig.item.EzItemGroups;
@@ -323,4 +323,4 @@ public class EzBlocks {
     public static void registerBlocks() {
 //        EzLib.LOGGER.info("Registering Ez Blocks and BlockItems");
     }
-}
+}*/

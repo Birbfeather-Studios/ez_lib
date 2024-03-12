@@ -1,7 +1,7 @@
 package net.distantdig.datagen;
 
 import net.distantdig.EzLib;
-import net.distantdig.block.EzBlocks;
+import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -20,8 +20,8 @@ public class EzLangProvider extends FabricLanguageProvider {
 
             translationBuilder.add(item, string);
         });
-        EzBlocks.blockMap.forEach((key, data) -> {
-            BlockItem blockItem = data.blockItem;
+        EzBlocksBuilder.inventoryMap.forEach((key, data) -> {
+            BlockItem blockItem = data;
             String string = WordUtils.capitalizeFully(key.replace("_", " "));
 
             translationBuilder.add(blockItem, string);

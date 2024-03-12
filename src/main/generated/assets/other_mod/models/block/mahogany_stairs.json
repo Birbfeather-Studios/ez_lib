@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "other_mod:block/mahogany_planks",
-    "side": "other_mod:block/mahogany_planks",
-    "top": "other_mod:block/mahogany_planks"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "other_mod:block/polished_chalk",
-    "side": "other_mod:block/polished_chalk",
-    "top": "other_mod:block/polished_chalk"
-  }
-}
