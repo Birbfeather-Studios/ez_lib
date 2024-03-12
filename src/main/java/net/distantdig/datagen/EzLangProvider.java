@@ -2,6 +2,7 @@ package net.distantdig.datagen;
 
 import net.distantdig.EzLib;
 import net.distantdig.block.EzBlocksBuilder;
+import net.distantdig.effect.EzEffects;
 import net.distantdig.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -25,6 +26,12 @@ public class EzLangProvider extends FabricLanguageProvider {
             String string = WordUtils.capitalizeFully(key.replace("_", " "));
 
             translationBuilder.add(blockItem, string);
+        });
+
+        EzEffects.effectMap.forEach((key, effect) -> {
+            String string = WordUtils.capitalizeFully(key.replace("_", " "));
+
+            translationBuilder.add(effect, string);
         });
 
         String string = WordUtils.capitalizeFully(EzLib.getModId().replace("_", " "));
