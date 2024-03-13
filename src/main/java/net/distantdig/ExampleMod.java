@@ -65,8 +65,8 @@ public class ExampleMod extends EzLib {
                 .pillar("broad_","_pillar", null)
                 .button(BlockSetType.OAK, 30, true)
                 .pressurePlate(BlockSetType.OAK,PressurePlateBlock.Sensitivity.MOBS)
-                .trapdoor(BlockSetType.OAK)
-                .door(BlockSetType.OAK)
+                .trapdoor(BlockSetType.OAK, Blocks.OAK_TRAPDOOR)
+                .door(BlockSetType.OAK, Blocks.OAK_DOOR)
                 .fence()
                 .fenceGate()
                 .wall();
@@ -81,7 +81,7 @@ public class ExampleMod extends EzLib {
         //EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
-        new EzBlockSets().stoneSet("chalk", true,true);
+        new EzBlockSets().advancedStoneSet("chalk");
         //EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
 
         //metalset

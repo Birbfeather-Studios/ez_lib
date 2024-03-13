@@ -41,6 +41,7 @@ public class EzModelProvider extends FabricModelProvider {
         EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
         EzBlocksBuilder.leavesMap.forEach((name, block) -> {JsonGenerators.createEzBlock(name);});
         EzBlocksBuilder.rotatedPillarMap.forEach((name, block) -> {JsonGenerators.createEzColumn(name);});
+        EzBlocksBuilder.woodMap.forEach((strings, rotatedPillarBlock) -> JsonGenerators.createEzWood(strings));
         EzBlocksBuilder.doorMap.forEach((name, block) -> {JsonGenerators.createEzDoor(name);});
         EzBlocksBuilder.trapDoorMap.forEach((name, block) -> {JsonGenerators.createEzTrapDoor(name);});
         EzBlocksBuilder.buttonMap.forEach((strings, block) -> {JsonGenerators.createEzButton(strings);});

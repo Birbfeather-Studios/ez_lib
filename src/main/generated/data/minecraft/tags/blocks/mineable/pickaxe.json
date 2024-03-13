@@ -1,4 +1,12 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "other_mod:chalk",
+    "other_mod:chalk_slab",
+    "other_mod:chalk_stair",
+    "other_mod:vertical_chalk_slab",
+    "other_mod:chalk_button",
+    "other_mod:chalk_wall",
+    "other_mod:chalk_pressure_plate"
+  ]
 }

@@ -1,7 +1,7 @@
-// 1.20.1	2024-03-12T13:04:12.2217954	Ez Lib/Tags for minecraft:block
+// 1.20.1	2024-03-13T15:47:32.7533352	Ez Lib/Tags for minecraft:block
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\needs_stone_tool.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\needs_iron_tool.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\mineable\pickaxe.json
+b8b1f7135790da6fcb20224e140372e146a3a8cc data\minecraft\tags\blocks\mineable\pickaxe.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\mineable\shovel.json
-8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\mineable\axe.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\needs_diamond_tool.json
+e973cf260cd4c75ed6e1742af4e79b010c1ffe17 data\minecraft\tags\blocks\mineable\axe.json

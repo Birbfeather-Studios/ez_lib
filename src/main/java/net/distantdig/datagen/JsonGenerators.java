@@ -44,8 +44,17 @@ public class JsonGenerators {
 
     public static void createEzColumn(String key) {
         EzColumnStateGenerator(key);
-        EzColumnModelGenerator(key);
+        EzColumnModelGenerator(key, key, true);
         EzItemModelGenerator(key, "");
+    }
+
+    public static void createEzWood(Strings strings) {
+        EzColumnStateGenerator(strings.one);
+        EzColumnStateGenerator(strings.two);
+        EzColumnModelGenerator(strings.one, strings.three, false);
+        EzColumnModelGenerator(strings.two, strings.four, false);
+        EzItemModelGenerator(strings.one, "");
+        EzItemModelGenerator(strings.two, "");
     }
 
     public static void createEzDoor(String key) {
@@ -1464,7 +1473,7 @@ public class JsonGenerators {
         baseModelJsonGenWithFullTexture(key + "_west", fullName, facingWest);
     }
 
-    public static void EzColumnModelGenerator(String key) {
+    public static void EzColumnModelGenerator(String key, String key2, Boolean toptexture) {
         String column = """
                 {
                   "parent": "minecraft:block/cube_column",
@@ -1484,9 +1493,13 @@ public class JsonGenerators {
                   }
                 }
                 """;
-
-        baseModelJsonGenWithCustomTexture(key, key, column);
-        baseModelJsonGenWithCustomTexture(key + "_horizontal", key, horizontalColumn);
+        if (!toptexture) {
+            baseModelJsonGenWithCustomTexture(key, key2, column.replace("_top", ""));
+            baseModelJsonGenWithCustomTexture(key + "_horizontal", key2, horizontalColumn.replace("_top", ""));
+        } else {
+            baseModelJsonGenWithCustomTexture(key, key2, column);
+            baseModelJsonGenWithCustomTexture(key + "_horizontal", key2, horizontalColumn);
+        }
     }
 
     public static void EzDoorModelGenerator(String key) {
@@ -1565,8 +1578,8 @@ public class JsonGenerators {
         baseModelJsonGenWithCustomTexture(key + "_bottom_left_open", key, door_bottom_left_open);
         baseModelJsonGenWithCustomTexture(key + "_top_left_open", key, door_top_left_open);
         baseModelJsonGenWithCustomTexture(key + "_top_right_open", key, door_top_right_open);
-        baseModelJsonGenWithCustomTexture(key + "", key, door_bottom_right_open);
-        baseModelJsonGenWithCustomTexture(key + "_bottom_right_open", key, door_bottom_left);
+        baseModelJsonGenWithCustomTexture(key + "_bottom_right_open", key, door_bottom_right_open);
+        baseModelJsonGenWithCustomTexture(key + "_bottom_left", key, door_bottom_left);
         baseModelJsonGenWithCustomTexture(key + "_bottom_right", key, door_bottom_right);
         baseModelJsonGenWithCustomTexture(key + "_top_left", key, door_top_left);
         baseModelJsonGenWithCustomTexture(key + "_top_right", key, door_top_right);
@@ -1806,6 +1819,7 @@ public class JsonGenerators {
                     "parent": "minecraft:item/generated",
                         "textures": {
                     "layer0": "$modid:item/$name"
+                  }
                 }
                 """.replace("$modid", EzLib.getModId()).replace("$name", key);
         try {

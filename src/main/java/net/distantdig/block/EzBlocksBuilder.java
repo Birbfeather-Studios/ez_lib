@@ -14,7 +14,10 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.function.Function;
 
 public class EzBlocksBuilder {
@@ -51,13 +54,18 @@ public class EzBlocksBuilder {
         public BlockItem buttonItem;
         public CarpetBlock carpetBlock;
         public BlockItem carpetItem;
+        public LeavesBlock leavesBlock;
+        public BlockItem leavesItem;
         public String MaterialType;
     }
 
     public class Strings {
         public String one;
         public String two;
+        public String three;
+        public String four;
     }
+
 
     public final static HashMap<String, BlockItem> inventoryMap = new HashMap<>();
     public final static HashMap<String, Block> blockMap = new HashMap<>();
@@ -74,6 +82,10 @@ public class EzBlocksBuilder {
     public final static HashMap<Strings, CarpetBlock> carpetMap = new HashMap<>();
     public final static HashMap<String, RotatedPillarBlock> rotatedPillarMap = new HashMap<>();
     public final static HashMap<String, LeavesBlock> leavesMap = new HashMap<>();
+    public final static ArrayList<Block> pickaxable = new ArrayList<>();
+    public final static ArrayList<Block> axable = new ArrayList<>();
+    public final static ArrayList<Block> shovolable = new ArrayList<>();
+    public final static HashMap<Strings, RotatedPillarBlock> woodMap = new HashMap<>();
 
     public EzBlocksBuilder(String name, Block blockProperties, @Nullable String suffix) {
 
@@ -83,7 +95,7 @@ public class EzBlocksBuilder {
         this.data = new BlockData();
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
-        blockMap.put(name1 ,data.block);
+        blockMap.put(name1, data.block);
         inventoryMap.put(name1, data.blockItem);
     }
 
@@ -98,6 +110,7 @@ public class EzBlocksBuilder {
         stairMap.put(strings, data.stairBlock);
         return this;
     }
+
     public EzBlocksBuilder slab() {
         String slabName = name + "_slab";
         Strings strings = new Strings();
@@ -109,6 +122,7 @@ public class EzBlocksBuilder {
         slabMap.put(strings, data.slabBlock);
         return this;
     }
+
     public EzBlocksBuilder verticalSlab() {
         String verticalSlabName = "vertical_" + name + "_slab";
         Strings strings = new Strings();
@@ -120,6 +134,7 @@ public class EzBlocksBuilder {
         verticalSlabMap.put(strings, data.verticalSlabBlock);
         return this;
     }
+
     public EzBlocksBuilder extraBlock(String prefix, String suffix, @Nullable Block extraBlockProperties) {
         Block extraProperies = extraBlockProperties;
         String extraBlockName = prefix + name + suffix;
@@ -133,12 +148,13 @@ public class EzBlocksBuilder {
         blockMap.put(extraBlockName, extraBlock);
         return this;
     }
+
     public EzBlocksBuilder leaves(@Nullable String prefix, @Nullable String suffix) {
         String leavesName = prefix + this.name + suffix + "_leaves";
-        LeavesBlock leavesBlock = register(leavesName, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
-        BlockItem leavesItem = registerItem(leavesName, leavesBlock);
-        inventoryMap.put(leavesName, leavesItem);
-        leavesMap.put(leavesName, leavesBlock);
+        this.data.leavesBlock = register(leavesName, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
+        this.data.leavesItem = registerItem(leavesName, data.leavesBlock);
+        inventoryMap.put(leavesName, data.leavesItem);
+        leavesMap.put(leavesName, data.leavesBlock);
         return this;
     }
 
@@ -155,7 +171,25 @@ public class EzBlocksBuilder {
         rotatedPillarMap.put(extraPillarName, pillar);
         return this;
     }
-    public EzBlocksBuilder door(BlockSetType blockSetType) {
+
+    public EzBlocksBuilder wood(String pillarname, String strippedName) {
+        Strings strings = new Strings();
+        strings.one = name + "_wood";
+        strings.two = "stripped_" + name + "_wood";
+        strings.three = pillarname;
+        strings.four = strippedName;
+        RotatedPillarBlock woodBlock = register(strings.one, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_WOOD));
+        RotatedPillarBlock strippedwoodBlock = register(strings.two, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD));
+        BlockItem woodItem = registerItem(strings.one, woodBlock);
+        BlockItem strippedwoodItem = registerItem(strings.two, strippedwoodBlock);
+        inventoryMap.put(strings.one, woodItem);
+        inventoryMap.put(strings.two, strippedwoodItem);
+        woodMap.put(strings, woodBlock);
+        woodMap.put(strings, strippedwoodBlock);
+        return this;
+    }
+
+    public EzBlocksBuilder door(BlockSetType blockSetType, Block blockProperties) {
         String doorName = name + "_door";
         this.data.doorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), doorName), new DoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), doorName), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
@@ -163,7 +197,8 @@ public class EzBlocksBuilder {
         doorMap.put(doorName, data.doorBlock);
         return this;
     }
-    public EzBlocksBuilder trapdoor(BlockSetType blockSetType) {
+
+    public EzBlocksBuilder trapdoor(BlockSetType blockSetType, Block blockProperties) {
         String trapdoorName = name + "_trapdoor";
         this.data.trapdoorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), trapdoorName), new TrapDoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), trapdoorName), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
@@ -171,6 +206,7 @@ public class EzBlocksBuilder {
         trapDoorMap.put(trapdoorName, data.trapdoorBlock);
         return this;
     }
+
     public EzBlocksBuilder button(BlockSetType blockSetType, Integer ticksPressed, Boolean arrowHits) {
         String buttonName = name + "_button";
         Strings strings = new Strings();
@@ -182,6 +218,7 @@ public class EzBlocksBuilder {
         buttonMap.put(strings, data.buttonBlock);
         return this;
     }
+
     public EzBlocksBuilder fence() {
         String fenceName = name + "_fence";
         Strings strings = new Strings();
@@ -193,6 +230,7 @@ public class EzBlocksBuilder {
         fenceMap.put(strings, data.fenceBlock);
         return this;
     }
+
     public EzBlocksBuilder fenceGate() {
         String fenceGateName = name + "_fence_gate";
         Strings strings = new Strings();
@@ -204,6 +242,7 @@ public class EzBlocksBuilder {
         fenceGateMap.put(strings, data.fenceGateBlock);
         return this;
     }
+
     public EzBlocksBuilder wall() {
         String wallName = name + "_wall";
         Strings strings = new Strings();
@@ -215,6 +254,7 @@ public class EzBlocksBuilder {
         wallMap.put(strings, data.wallBlock);
         return this;
     }
+
     public EzBlocksBuilder pressurePlate(BlockSetType type, PressurePlateBlock.Sensitivity sensitivity) {
         String pressurePlateName = name + "_pressure_plate";
         Strings strings = new Strings();
@@ -226,6 +266,7 @@ public class EzBlocksBuilder {
         pressurePlateMap.put(strings, data.pressurePlateBlock);
         return this;
     }
+
     public EzBlocksBuilder carpet() {
         String carpetName = name + "_carpet";
         Strings strings = new Strings();
@@ -235,6 +276,63 @@ public class EzBlocksBuilder {
         this.data.carpetItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), carpetName), new BlockItem(this.data.carpetBlock, new FabricItemSettings()));
         inventoryMap.put(carpetName, data.carpetItem);
         carpetMap.put(strings, data.carpetBlock);
+        return this;
+    }
+
+    public EzBlocksBuilder pickaxe() {
+        Optional.ofNullable(data.block).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.slabBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.stairBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.verticalSlabBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.doorBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.trapdoorBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.leavesBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.buttonBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.fenceBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.fenceGateBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.wallBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.pressurePlateBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.carpetBlock).ifPresent(pickaxable::add);
+        Optional.ofNullable(data.extraBlocks).ifPresent(blocks -> blocks.forEach((block, blockItem) -> Optional.ofNullable(block).ifPresent(pickaxable::add)));
+        Optional.ofNullable(data.extraColumns).ifPresent(columns -> columns.forEach((rotatedPillarBlock, blockItem) -> Optional.ofNullable(rotatedPillarBlock).ifPresent(pickaxable::add)));
+        return this;
+    }
+
+    public EzBlocksBuilder axe() {
+        Optional.ofNullable(data.block).ifPresent(axable::add);
+        Optional.ofNullable(data.slabBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.stairBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.verticalSlabBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.doorBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.trapdoorBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.leavesBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.buttonBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.fenceBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.fenceGateBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.wallBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.pressurePlateBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.carpetBlock).ifPresent(axable::add);
+        Optional.ofNullable(data.extraBlocks).ifPresent(blocks -> blocks.forEach((block, blockItem) -> Optional.ofNullable(block).ifPresent(axable::add)));
+        Optional.ofNullable(data.extraColumns).ifPresent(columns -> columns.forEach((rotatedPillarBlock, blockItem) -> Optional.ofNullable(rotatedPillarBlock).ifPresent(axable::add)));
+        return this;
+    }
+
+    public EzBlocksBuilder shovel() {
+        Optional.ofNullable(data.block).ifPresent(shovolable::add);
+        Optional.ofNullable(data.slabBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.stairBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.verticalSlabBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.doorBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.trapdoorBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.leavesBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.buttonBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.fenceBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.fenceGateBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.wallBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.pressurePlateBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.carpetBlock).ifPresent(shovolable::add);
+        Optional.ofNullable(data.extraBlocks).ifPresent(blocks -> blocks.forEach((block, blockItem) -> Optional.ofNullable(block).ifPresent(shovolable::add)));
+        Optional.ofNullable(data.extraColumns).ifPresent(columns -> columns.forEach((rotatedPillarBlock, blockItem) -> Optional.ofNullable(rotatedPillarBlock).ifPresent(shovolable::add)));
         return this;
     }
 

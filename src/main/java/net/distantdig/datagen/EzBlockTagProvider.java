@@ -1,9 +1,11 @@
 package net.distantdig.datagen;
 
+import net.distantdig.block.EzBlocksBuilder;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,17 +18,12 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void addTags(HolderLookup.Provider arg) {
 
         // Tool tags
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
-            // Add blocks here
-        ;
-
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
-            // Add blocks here
-        ;
-
-        getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
-            // Add blocks here
-        ;
+        FabricTagProvider<Block>.FabricTagBuilder pickaxe = getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE);
+        FabricTagProvider<Block>.FabricTagBuilder axe = getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE);
+        FabricTagProvider<Block>.FabricTagBuilder shovel = getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_SHOVEL);
+        EzBlocksBuilder.pickaxable.forEach(pickaxe::add);
+        EzBlocksBuilder.axable.forEach(axe::add);
+        EzBlocksBuilder.shovolable.forEach(shovel::add);
 
         // Material requirement tags
         getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
