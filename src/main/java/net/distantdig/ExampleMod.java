@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -55,7 +56,7 @@ public class ExampleMod extends EzLib {
     @Override
     public void registerModBlocks() {
 
-        new EzBlocksBuilder("unobtainable", Blocks.STONE, null)
+        new EzBlocksBuilder("unobtainable", Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)
                 .stair()
                 .slab()
                 .verticalSlab()
@@ -85,10 +86,19 @@ public class ExampleMod extends EzLib {
         //EzBlocks.registerStoneSet("chalk", Blocks.STONE, true, true, true);
 
         //metalset
+        new EzBlocksBuilder("ketal", Blocks.IRON_BLOCK, "", EzBlocksBuilder.EzMaterial.metal).pickaxe().stoneTool();
 
         //woolset
-        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool").carpet();
-        //EzBlocks.registerWoolSet("turqoise");
+        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool", EzBlocksBuilder.EzMaterial.wool).carpet();
+
+        //iceset
+        new EzBlocksBuilder("mice", Blocks.ICE, "", EzBlocksBuilder.EzMaterial.ice).pickaxe();
+
+        //sandset
+        new EzBlocksBuilder("zand", Blocks.SAND, "", EzBlocksBuilder.EzMaterial.sand).shovel();
+
+        //dirtset
+        new EzBlocksBuilder("birt", Blocks.DIRT, "", EzBlocksBuilder.EzMaterial.dirt).shovel();
     }
 
     @Override

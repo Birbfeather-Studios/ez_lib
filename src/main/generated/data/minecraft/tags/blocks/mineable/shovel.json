@@ -1,4 +1,7 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "other_mod:zand",
+    "other_mod:birt"
+  ]
 }

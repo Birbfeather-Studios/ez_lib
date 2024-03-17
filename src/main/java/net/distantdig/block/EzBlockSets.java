@@ -11,12 +11,12 @@ public class EzBlockSets {
         Block log = Blocks.OAK_LOG;
         BlockSetType wood = BlockSetType.OAK;
         PressurePlateBlock.Sensitivity all = PressurePlateBlock.Sensitivity.EVERYTHING;
-        EzBlocksBuilder woodBuilder = new  EzBlocksBuilder(material, Blocks.OAK_PLANKS, "_planks")     //planks
+        EzBlocksBuilder woodBuilder = new  EzBlocksBuilder(material, Blocks.OAK_PLANKS, "_planks", EzBlocksBuilder.EzMaterial.wood)     //planks
                 .stair()                                                      //stair
                 .slab()                                                       //slab
                 .pillar("", "_log", log)                         //log
                 .pillar("stripped_", "_log", log)                //stripped log
-                .wood(material + "_log", "stripped_" + material + "_log")
+                .wood(material + "_log", "stripped_" + material + "_log", true)
                 .door(wood, Blocks.OAK_DOOR)                                  //door
                 .trapdoor(wood, Blocks.OAK_TRAPDOOR)                          //trapdoor
                 .fenceGate()                                                  //fence gate
@@ -30,7 +30,7 @@ public class EzBlockSets {
     }
 
     public void simpleStoneSet (String material) {
-        EzBlocksBuilder stoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null)
+        EzBlocksBuilder stoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)
                 .stair()
                 .slab()
                 .wall()
@@ -40,7 +40,7 @@ public class EzBlockSets {
     public void advancedStoneSet (String material) {
         BlockSetType stone = BlockSetType.STONE;
         PressurePlateBlock.Sensitivity mobs = PressurePlateBlock.Sensitivity.MOBS;
-        EzBlocksBuilder advancedStoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null)
+        EzBlocksBuilder advancedStoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)
                 .stair()
                 .slab()
                 .wall()
