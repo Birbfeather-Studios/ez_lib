@@ -1,5 +1,6 @@
 package net.distantdig.datagen;
 
+import net.distantdig.block.EzBlockTags;
 import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.block.EzBlocksBuilder.EzMaterial;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -7,7 +8,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 

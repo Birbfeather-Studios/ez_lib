@@ -4,6 +4,7 @@ package net.distantdig.block;
 import net.distantdig.EzLib;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -193,6 +194,33 @@ public class EzBlocksBuilder {
         return this;
     }
 
+    public EzBlocksBuilder logs(String prefix, String suffix, @Nullable Block extraBlockProperties, boolean burnable) {
+        Block extraProperties = extraBlockProperties;
+        Strings strings1 = new Strings();
+        Strings strings2 = new Strings();
+        strings1.blockname = prefix + name + suffix;
+        strings1.ezMaterial = ezMaterial;
+        strings2.blockname = "stripped_" + prefix + name + suffix;
+        strings2.ezMaterial = ezMaterial;
+        strings1.burnable = burnable;
+        strings2.burnable = burnable;
+        if (extraBlockProperties == null) {
+            extraProperties = this.blockProperties;
+        }
+        RotatedPillarBlock log = register(strings1.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
+        RotatedPillarBlock strippedlog = register(strings2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
+        BlockItem logItem = registerItem(strings1.blockname, log);
+        BlockItem strippedlogItem = registerItem(strings2.blockname, strippedlog);
+        this.data.extraColumns.put(log, logItem);
+        this.data.extraColumns.put(strippedlog, strippedlogItem);
+        StrippableBlockRegistry.register(log, strippedlog);
+        inventoryMap.put(strings1.blockname, logItem);
+        inventoryMap.put(strings2.blockname, strippedlogItem);
+        rotatedPillarMap.put(strings1, log);
+        rotatedPillarMap.put(strings2, strippedlog);
+        return this;
+    }
+
     public EzBlocksBuilder wood(String pillarname, String strippedName, Boolean burnable) {
         Strings strings1 = new Strings();
         Strings strings2 = new Strings();
@@ -208,6 +236,7 @@ public class EzBlocksBuilder {
         RotatedPillarBlock strippedwoodBlock = register(strings2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD));
         BlockItem woodItem = registerItem(strings1.blockname, woodBlock);
         BlockItem strippedwoodItem = registerItem(strings2.blockname, strippedwoodBlock);
+        StrippableBlockRegistry.register(woodBlock, strippedwoodBlock);
         inventoryMap.put(strings1.blockname, woodItem);
         inventoryMap.put(strings2.blockname, strippedwoodItem);
         woodMap.put(strings1, woodBlock);

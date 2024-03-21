@@ -1,4 +1,4 @@
-package net.distantdig.datagen;
+package net.distantdig.block;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
