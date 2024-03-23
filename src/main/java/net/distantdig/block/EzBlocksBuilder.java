@@ -64,6 +64,7 @@ public class EzBlocksBuilder {
         public String blockname;
         public String fullblockname;
         public EzMaterial ezMaterial;
+        public Block saplingBlock;
         public boolean burnable;
     }
 
@@ -167,14 +168,16 @@ public class EzBlocksBuilder {
         return this;
     }
 
-    public EzBlocksBuilder leaves(@Nullable String prefix, @Nullable String suffix) {
+    public EzBlocksBuilder leaves(@Nullable String prefix, @Nullable String suffix, Block saplingBlock) {
         Strings strings = new Strings();
         strings.blockname = prefix + this.name + suffix + "_leaves";
         strings.ezMaterial = ezMaterial;
+        strings.saplingBlock = saplingBlock;
         this.data.leavesBlock = register(strings.blockname, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
         this.data.leavesItem = registerItem(strings.blockname, data.leavesBlock);
         inventoryMap.put(strings.blockname, data.leavesItem);
         leavesMap.put(strings, data.leavesBlock);
+        hoeable.add(data.leavesBlock);
         return this;
     }
 

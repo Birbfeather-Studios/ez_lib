@@ -3,11 +3,12 @@ package net.distantdig.block;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class EzBlockSets {
 
-    public void woodSet(String material, Boolean verticalSlab) {
+    public void woodSet(String material, Boolean verticalSlab, Block saplingBlock) {
         Block log = Blocks.OAK_LOG;
         BlockSetType wood = BlockSetType.OAK;
         PressurePlateBlock.Sensitivity all = PressurePlateBlock.Sensitivity.EVERYTHING;
@@ -24,7 +25,7 @@ public class EzBlockSets {
                 .button(wood, 30, true)                  //button
                 .verticalSlab()                                               //vertical slab
                 .axe();
-        woodBuilder.leaves("", "");    //leaves
+        woodBuilder.leaves("", "", saplingBlock);    //leaves
     }
 
     public void simpleStoneSet(String material) {

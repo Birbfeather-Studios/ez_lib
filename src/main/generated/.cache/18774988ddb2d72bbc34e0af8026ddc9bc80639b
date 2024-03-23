@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-21T11:24:34.431538	Ez Lib/Recipes
+// 1.20.1	2024-03-22T12:58:03.595524	Ez Lib/Recipes
 2f8bb72405db0afe9b49bbcfdb4391555db8173f data\ez_lib\advancements\recipes\combat\iron2_boots_from_ingot_one.json
 bebd6871f217f1f076670f8178ff56efab5909ed data\ez_lib\advancements\recipes\tools\iron3_axe_smithing.json
 b301dc61339c85d921ab5093687bbdc64f33111b data\ez_lib\advancements\recipes\combat\iron2_leggings_from_ingot_one.json
@@ -27,8 +27,8 @@ d729003208e8bab48c4a70003fa8192a1f4137de data\ez_lib\advancements\recipes\tools\
 b85f9e9b5c4bc333335d410296371e4e038159b5 data\ez_lib\advancements\recipes\tools\iron4_hoe_smithing.json
 c4ada44cd89d07f60dcb2508bfa91601b216db08 data\ez_lib\advancements\recipes\tools\iron4_helmet_smithing.json
 26f68efea8491d54ea50bc16c2ac820cf9030004 data\ez_lib\advancements\recipes\tools\iron4_leggings_smithing.json
-5021f690fc8fa78a7849aaed6e04afddad653d21 data\ez_lib\advancements\recipes\tools\iron3_sword_smithing.json
 5dabcf6dd0efe66f5e0610122828ba1d2e6e9773 data\ez_lib\recipes\iron2_axe_from_ingot_one.json
+5021f690fc8fa78a7849aaed6e04afddad653d21 data\ez_lib\advancements\recipes\tools\iron3_sword_smithing.json
 76f1fce4a73655dbce00e8d7ae1032d65edea0b4 data\ez_lib\recipes\iron4_hoe_smithing.json
 0df234b749d0be626e745e40146807690e009037 data\ez_lib\recipes\iron4_sword_smithing.json
 50bfe9dd9482ecc0e37e112fab73fa8cd53ba0e7 data\ez_lib\advancements\recipes\tools\iron2_pickaxe_from_ingot_one.json
