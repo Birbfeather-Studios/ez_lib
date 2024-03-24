@@ -1,9 +1,9 @@
 package net.distantdig;
 
 import net.distantdig.block.EzBlockSets;
+import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.effect.EzEffect;
 import net.distantdig.effect.EzEffects;
-import net.distantdig.block.EzBlocksBuilder;
 import net.distantdig.enums.EzArmorMaterials;
 import net.distantdig.enums.EzToolsMaterials;
 import net.distantdig.item.EzItemGroups;
@@ -15,7 +15,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
