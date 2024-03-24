@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-24T22:35:07.2593137	Ez Lib/Model Definitions
+// 1.20.1	2024-03-24T23:01:59.0379355	Ez Lib/Model Definitions
 0f6b0a2a8682f00057fb345490f806176d12e7af assets\other_mod\models\item\iron4_helmet.json
 18fd1e63956d0c60cf4eff52a3187c7911c816a4 assets\other_mod\models\item\iron2_helmet.json
 3ae41911699d92ee11b443b4a2219e4a48ad37f3 assets\other_mod\models\item\iron3_helmet.json
@@ -6,27 +6,27 @@
 fadfe8f78a5123aef4921ad3627082ed687aa7ea assets\other_mod\models\item\iron4_axe.json
 84ecfa0989caa37538735c2a78a79afb13ccee25 assets\other_mod\models\item\iron4_hoe.json
 0298806dd0b3255c549a774be18a9451cb19d217 assets\other_mod\models\item\iron3_pickaxe.json
-3aa9ef11da24fe611f9830de9cf800f4dd15e019 assets\other_mod\models\item\ingot_two.json
 0f72b6c5c9e85660bdc853c95d3f0f8b7947cdd7 assets\other_mod\models\item\not_steak2.json
+3aa9ef11da24fe611f9830de9cf800f4dd15e019 assets\other_mod\models\item\ingot_two.json
 89699274e52a11cd7c3d7ce024a642888384f2b4 assets\other_mod\models\item\iron2_pickaxe.json
 7a389b7a55b51d106e0980da7adab4ab8c71b738 assets\other_mod\models\item\iron3_boots.json
 ba223391bfad72d84ca483ce8beaa9b04b5a94e9 assets\other_mod\models\item\iron2_chestplate.json
-3e2ccb3ba86a8144156d65b0c320f3102f9ac796 assets\other_mod\models\item\ingot_four.json
 220d78431285a6fa261ba24de61948cab7e0964e assets\other_mod\models\item\iron3_shovel.json
+3e2ccb3ba86a8144156d65b0c320f3102f9ac796 assets\other_mod\models\item\ingot_four.json
 7ef212509045442c533d1287b09e6df429e35721 assets\other_mod\models\item\iron4_shovel.json
 d330871fb6e47f43a35e66993b38222d2196d0e7 assets\other_mod\models\item\iron4_leggings.json
 6c89e56cd71af40d6958219a38f2b845cb15040b assets\other_mod\models\item\iron4_chestplate.json
 4d638153cfb9ca93b272a6b79ab687206b841fd7 assets\other_mod\models\item\ingot_one.json
 7997096f12ceefe432ab24e8a783cec05df76b60 assets\other_mod\models\item\iron2_hoe.json
-f69b327e50b45afd166b45500a7fb944986373b5 assets\other_mod\models\item\iron4_sword.json
 4e7dc561975f000d1c03c61db1fc875a060a5039 assets\other_mod\models\item\iron2_boots.json
-e9fc1a515c9c99b76227536003920647a5fbe030 assets\other_mod\models\item\not_steak1.json
+f69b327e50b45afd166b45500a7fb944986373b5 assets\other_mod\models\item\iron4_sword.json
 45e4c48fb93cab18660d8e50aab29dd802e31a95 assets\other_mod\models\item\iron2_shovel.json
 5daa8a4e54325c4e8dbf8417ad62286f2adb469e assets\other_mod\models\item\iron2_leggings.json
+e9fc1a515c9c99b76227536003920647a5fbe030 assets\other_mod\models\item\not_steak1.json
 454d01edcb6d30e5587fc56d589b30ba82ead44b assets\other_mod\models\item\iron3_axe.json
 24dcd8285b5518886e466a4067a83f9bb781cdb3 assets\other_mod\models\item\iron3_hoe.json
-7ed817e78f03a4fb05258942a17a4e5e477764f6 assets\other_mod\models\item\not_coal.json
 f75076255a89c6efd902433aab89bdac7522a8e9 assets\other_mod\models\item\iron3_sword.json
+7ed817e78f03a4fb05258942a17a4e5e477764f6 assets\other_mod\models\item\not_coal.json
 4be13323aee817ed89177ebd49b932519d34aa2f assets\other_mod\models\item\ingot_three.json
 9a45ab9d8ce5a6f3ca93af79083a45cac0812ec4 assets\other_mod\models\item\iron3_chestplate.json
 c076291bbbfc55f04499bae13a560e478e4d1840 assets\other_mod\models\item\ingot_five.json

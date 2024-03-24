@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "other_mod:vertical_chalk_slab",
+    "other_mod:vertical_mahogany_slab",
     "other_mod:vertical_unobtainable_slab",
-    "other_mod:vertical_mahogany_slab"
+    "other_mod:vertical_chalk_slab"
   ]
 }

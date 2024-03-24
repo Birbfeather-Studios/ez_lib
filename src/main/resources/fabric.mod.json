@@ -17,13 +17,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.distantdig.ExampleMod"
+			"net.distantdig.ezLib.ExampleMod"
 		],
 		"client": [
-          "net.distantdig.EzLibClient"
+          "net.distantdig.ezLib.EzLibClient"
 		],
 		"fabric-datagen": [
-			"net.distantdig.EzLibDataGenerator"
+			"net.distantdig.ezLib.EzLibDataGenerator"
 		]
 	},
 	"mixins": [
