@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -50,6 +51,7 @@ public class ExampleMod extends EzLib {
 
         // Fuel Items
         Item NOT_COAL = EzItems.registerFuelItem("not_coal", 200, new FabricItemSettings());
+
     }
 
     @Override

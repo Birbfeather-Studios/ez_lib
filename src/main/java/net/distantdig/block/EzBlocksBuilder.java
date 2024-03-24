@@ -86,6 +86,7 @@ public class EzBlocksBuilder {
     public final static HashMap<Strings, RotatedPillarBlock> rotatedPillarMap = new HashMap<>();
     public final static HashMap<Strings, LeavesBlock> leavesMap = new HashMap<>();
     public final static HashMap<Strings, RotatedPillarBlock> woodMap = new HashMap<>();
+    public final static HashMap<String, Block> tempMap = new HashMap<>();
 
     public final static ArrayList<Block> pickaxable = new ArrayList<>();
     public final static ArrayList<Block> axable = new ArrayList<>();
@@ -94,7 +95,6 @@ public class EzBlocksBuilder {
     public final static ArrayList<Block> needsIronTool = new ArrayList<>();
     public final static ArrayList<Block> needsStoneTool = new ArrayList<>();
     public final static ArrayList<Block> needsDiamondTool = new ArrayList<>();
-
 
     public EzBlocksBuilder(String name, Block blockProperties, @Nullable String suffix, EzMaterial ezMaterial) {
         this.name = name;
@@ -107,6 +107,8 @@ public class EzBlocksBuilder {
         strings.blockname = name1;
         data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
+        Block block = data.block;
+        tempMap.put(name1, block);
         inventoryMap.put(name1, data.blockItem);
         blockMap.put(strings, data.block);
     }
