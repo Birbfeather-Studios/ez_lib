@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.placement.*;
 import java.util.List;
 
 public class EzOrePlacement {
-    private static List<PlacementModifier> orePlacement(PlacementModifier placementModifier, PlacementModifier placementModifier2) {
+    public static List<PlacementModifier> orePlacement(PlacementModifier placementModifier, PlacementModifier placementModifier2) {
         return List.of(placementModifier, InSquarePlacement.spread(), placementModifier2, BiomeFilter.biome());
     }
 
