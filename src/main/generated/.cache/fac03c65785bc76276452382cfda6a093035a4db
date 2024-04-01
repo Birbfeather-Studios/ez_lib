@@ -1,7 +1,8 @@
-// 1.20.1	2024-03-22T12:58:03.596521	Ez Lib/Block Loot Tables
+// 1.20.1	2024-04-01T13:52:24.807723	Ez Lib/Block Loot Tables
 048d1e0f74f952bf75bb37cc7e997c4e576d2a0f data\other_mod\loot_tables\blocks\chalk.json
 abf34d8df3d176b4fa689498e22e7fa38fc58a17 data\other_mod\loot_tables\blocks\cut_unobtainable.json
 447a4d3bf7c5f56829b622c388bbf8f84a49079a data\other_mod\loot_tables\blocks\turqoise_carpet.json
+8695eaf8b2f42dc00a9eb3e9c7d8608f9adbe975 data\other_mod\loot_tables\blocks\mahogany_wood.json
 99540c8ba9b1122ed6536b2a2603613323e38cae data\other_mod\loot_tables\blocks\unobtainable_door.json
 a71bd6da17b896f25713178572568fe42138c263 data\other_mod\loot_tables\blocks\unobtainable_fence.json
 d46c5e32d3fd56a099f9e851eff11c9769d12ce0 data\other_mod\loot_tables\blocks\unobtainable_slab.json
@@ -25,6 +26,7 @@ ccad5b53de50e2d1a20e52da59eda47961311ebb data\other_mod\loot_tables\blocks\mahog
 e84d6b8c2b1f538215efeea45514f119d366f4b9 data\other_mod\loot_tables\blocks\unobtainable_fence_gate.json
 94091bdd53e0b320f7c1db0e5ce1438224a7a05f data\other_mod\loot_tables\blocks\mahogany_pressure_plate.json
 529aac4bf94fa5eebb15c8d0d077a2df6fc3c10b data\other_mod\loot_tables\blocks\turqoise_wool.json
+5ac2a7f0b84dbb7f58bfdc1cd5efa81bfbd71315 data\other_mod\loot_tables\blocks\stripped_mahogany_wood.json
 b835b922477cae9b2b1ad2e74caf1e1dbc5f02db data\other_mod\loot_tables\blocks\zand.json
 3c28e87077420c34ac6765ca1dc1cf0779934177 data\other_mod\loot_tables\blocks\chiseled_unobtainable.json
 b65a130d316dc2c715f76f5553397345281c83eb data\other_mod\loot_tables\blocks\mahogany_planks.json

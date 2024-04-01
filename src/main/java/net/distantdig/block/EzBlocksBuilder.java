@@ -107,7 +107,8 @@ public class EzBlocksBuilder {
         Strings strings = new Strings();
         strings.ezMaterial = ezMaterial;
         strings.blockname = name1;
-        data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));
+        if (ezMaterial == EzMaterial.ice) {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new IceBlock(FabricBlockSettings.copyOf(blockProperties)));} else
+        {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));}
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
         inventoryMap.put(name1, data.blockItem);
         blockMap.put(strings, data.block);
@@ -334,7 +335,7 @@ public class EzBlocksBuilder {
         return this;
     }
 
-    public EzBlocksBuilder carpet() {
+    public EzBlocksBuilder carpet(Block blockProperties) {
         String carpetName = name + "_carpet";
         Strings strings = new Strings();
         strings.blockname = carpetName;

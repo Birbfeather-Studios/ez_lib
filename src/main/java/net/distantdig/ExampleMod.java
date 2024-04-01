@@ -91,7 +91,7 @@ public class ExampleMod extends EzLib {
         new EzBlocksBuilder("ketal", Blocks.IRON_BLOCK, "", EzBlocksBuilder.EzMaterial.metal).pickaxe().stoneTool();
 
         //woolset
-        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool", EzBlocksBuilder.EzMaterial.wool).carpet();
+        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool", EzBlocksBuilder.EzMaterial.wool).carpet(Blocks.WHITE_CARPET);
 
         //iceset
         new EzBlocksBuilder("mice", Blocks.ICE, "", EzBlocksBuilder.EzMaterial.ice).pickaxe();

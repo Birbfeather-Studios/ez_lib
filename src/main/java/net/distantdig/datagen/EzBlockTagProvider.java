@@ -71,6 +71,9 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         FabricTagProvider<Block>.FabricTagBuilder azaleaRoots = getOrCreateTagBuilder(BlockTags.AZALEA_ROOT_REPLACEABLE);
         FabricTagProvider<Block>.FabricTagBuilder lushGround = getOrCreateTagBuilder(BlockTags.LUSH_GROUND_REPLACEABLE);
         FabricTagProvider<Block>.FabricTagBuilder enderMan = getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE);
+        FabricTagProvider<Block>.FabricTagBuilder snapsGoatHorn = getOrCreateTagBuilder(BlockTags.SNAPS_GOAT_HORN);
+        FabricTagProvider<Block>.FabricTagBuilder goatsSpawnableOn = getOrCreateTagBuilder(BlockTags.GOATS_SPAWNABLE_ON);
+        FabricTagProvider<Block>.FabricTagBuilder stoneOreReplacable = getOrCreateTagBuilder(BlockTags.STONE_ORE_REPLACEABLES);
         //FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(BlockTags.);
         //FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(BlockTags.);
         //FabricTagProvider<Block>.FabricTagBuilder = getOrCreateTagBuilder(BlockTags.);
@@ -106,7 +109,12 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     convertsToMud.add(block);
                 }
                 case wood -> planks.add(block);
-                case stone -> overworldStone.add(block);
+                case stone -> {
+                    overworldStone.add(block);
+                    snapsGoatHorn.add(block);
+                    goatsSpawnableOn.add(block);
+                    stoneOreReplacable.add(block);
+                }
                 case wool -> wool.add(block);
                 case metal -> beaconBaseBlock.add(block);
                 case netherStone -> netherStone.add(block);
@@ -126,6 +134,17 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     dirt.add(rotatedPillarBlock);
                     snifferDigs.add(rotatedPillarBlock);
                     convertsToMud.add(rotatedPillarBlock);
+                }
+                case wood -> {
+                    if (strings.burnable) {
+                        burnableLogs.add(rotatedPillarBlock);
+                        naturalLogs.add(rotatedPillarBlock);
+                    } else {
+                        logs.add(rotatedPillarBlock);
+                    }
+                }
+                case stone -> {
+                    snapsGoatHorn.add(rotatedPillarBlock);
                 }
                 case wool -> wool.add(rotatedPillarBlock);
                 case metal -> beaconBaseBlock.add(rotatedPillarBlock);

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "other_mod:stripped_mahogany_log"
         }
       ],
       "rolls": 1.0
