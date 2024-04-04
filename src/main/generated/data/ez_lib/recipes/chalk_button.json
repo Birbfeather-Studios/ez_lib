@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "other_mod:chalk"
+    }
+  ],
+  "result": {
+    "item": "other_mod:chalk_button"
+  }
+}

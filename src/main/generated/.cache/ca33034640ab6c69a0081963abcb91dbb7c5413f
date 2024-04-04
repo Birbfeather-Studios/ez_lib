@@ -1,4 +1,4 @@
-// 1.20.1	2024-04-01T13:52:24.8087202	Ez Lib/Tags for minecraft:block
+// 1.20.1	2024-04-04T17:25:27.1006868	Ez Lib/Tags for minecraft:block
 efcae365e9cf0c390900d5ffc1c532e8f1bbd748 data\minecraft\tags\blocks\doors.json
 f8e22f460678d4a3181b8b0755e93545c48a68df data\minecraft\tags\blocks\wooden_doors.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\base_stone_nether.json
@@ -7,22 +7,22 @@ b2cebd0ddaf3752db91e7fb42b8d95ae0b0132b1 data\minecraft\tags\blocks\polar_bears_
 249239b29c7deec7c3f7bb6f42ba69a638eab948 data\minecraft\tags\blocks\wooden_fences.json
 d7ffc3e08838f0411e0234faec0029dfa5ed1d6c data\minecraft\tags\blocks\walls.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\needs_iron_tool.json
-351061df0d64a5bfa1fe93a84db14143f37d68a0 data\minecraft\tags\blocks\stone_ore_replaceables.json
-104884ac4a37c2665be8e88bb45652563e8de06d data\minecraft\tags\blocks\mineable\pickaxe.json
+877d73834144e7d6fdb7c269ab23a438ee2dd1b3 data\minecraft\tags\blocks\stone_ore_replaceables.json
+06c089512207c68c17b3ee3a7ae12d8ca045d300 data\minecraft\tags\blocks\mineable\pickaxe.json
 c8b7487ab907c406b4c496a8f81fa4623307a3bd data\minecraft\tags\blocks\mineable\shovel.json
-094bb5bed6af23ba43c1f2006df2b84ed6346372 data\minecraft\tags\blocks\mineable\axe.json
+e973cf260cd4c75ed6e1742af4e79b010c1ffe17 data\minecraft\tags\blocks\mineable\axe.json
 59bb570bd67436031dc6e7f53803a524dff11f5d data\minecraft\tags\blocks\leaves.json
 11c05003771d9adff2fa22ad6d512b165f3d7207 data\minecraft\tags\blocks\azalea_root_replaceable.json
 9157b4898a78308fdca5eaa5c34d1a66d089a1df data\minecraft\tags\blocks\dirt.json
 f91f33011130dcb5225bd2cdc602710659932d38 data\minecraft\tags\blocks\wooden_buttons.json
 b2cebd0ddaf3752db91e7fb42b8d95ae0b0132b1 data\minecraft\tags\blocks\snow_layer_cannot_survive_on.json
-0514304b6dd978ed0ab4a8cf1b601f16a174b8c7 data\minecraft\tags\blocks\logs_that_burn.json
-351061df0d64a5bfa1fe93a84db14143f37d68a0 data\minecraft\tags\blocks\base_stone_overworld.json
+bf60427ec125197cdfe3611d5efff26cd9558cf2 data\minecraft\tags\blocks\logs_that_burn.json
+877d73834144e7d6fdb7c269ab23a438ee2dd1b3 data\minecraft\tags\blocks\base_stone_overworld.json
 d685610d6df31e323431039f918e7c13e4e5e201 data\minecraft\tags\blocks\wool.json
-50f600f389da4d12fa41570e884b9c23a2a7ad19 data\minecraft\tags\blocks\fence_gates.json
+c51234c4761531882392c5777c28d6ecfcdb4d75 data\minecraft\tags\blocks\fence_gates.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\buttons.json
-91c376b31bc76ee0bb46677141501eefcef2daa3 data\minecraft\tags\blocks\stone_buttons.json
-e4dc603ac6976af232c3bd3931fc690e4a5c7a00 data\minecraft\tags\blocks\snaps_goat_horn.json
+e0221fc2b2d139dfde88b8ef29707c9b0280160d data\minecraft\tags\blocks\stone_buttons.json
+a390f9a230acf620675ca2e33e7bcdf3ce5f8b46 data\minecraft\tags\blocks\snaps_goat_horn.json
 ca62c1f31320aa93c6e978bf9e6ae6eb465a1cf4 data\minecraft\tags\blocks\wooden_pressure_plates.json
 38f0d468889c1dbfcb8dce5923df8bc682131d75 data\minecraft\tags\blocks\beacon_base_blocks.json
 649504c1055ad835b7bd39946841fa7b4c3e8f46 data\minecraft\tags\blocks\slabs.json
@@ -30,11 +30,11 @@ ca62c1f31320aa93c6e978bf9e6ae6eb465a1cf4 data\minecraft\tags\blocks\wooden_press
 06e04e0d4b291aca261ee0d96ca9067486d6f8e8 data\minecraft\tags\blocks\wool_carpets.json
 9157b4898a78308fdca5eaa5c34d1a66d089a1df data\minecraft\tags\blocks\convertable_to_mud.json
 3f8cad1d01237693eda86fe4b5ec3a158b69189c data\minecraft\tags\blocks\wooden_stairs.json
-0514304b6dd978ed0ab4a8cf1b601f16a174b8c7 data\minecraft\tags\blocks\overworld_natural_logs.json
+bf60427ec125197cdfe3611d5efff26cd9558cf2 data\minecraft\tags\blocks\overworld_natural_logs.json
 11c05003771d9adff2fa22ad6d512b165f3d7207 data\minecraft\tags\blocks\rabbits_spawnable_on.json
 11c05003771d9adff2fa22ad6d512b165f3d7207 data\minecraft\tags\blocks\enderman_holdable.json
 996cdac728b97e9180d2d9b5ca8848911d82e484 data\minecraft\tags\blocks\wooden_trapdoors.json
-ce37d98d1a5171fab7c58ac36c5dcfc2e24dc30d data\minecraft\tags\blocks\wooden_vertical_slab.json
+7a615e6bbaaaca06a8f9ca44e08769e35704580e data\minecraft\tags\blocks\wooden_vertical_slab.json
 184debf1037b94f08c529aa5ad266c339f7584f5 data\minecraft\tags\blocks\stone_pressure_plates.json
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\needs_diamond_tool.json
 11c05003771d9adff2fa22ad6d512b165f3d7207 data\minecraft\tags\blocks\lush_ground_replaceable.json
@@ -50,5 +50,5 @@ f86a7eda557412e297436d9a73ddd004d3f440c5 data\minecraft\tags\blocks\trapdoors.js
 8a23702b05296c8af5014d6aa6e9265ded85c7d9 data\minecraft\tags\blocks\replaceable.json
 ad5fa1b3a497b3b4878896d5c5d4982d565cd6c0 data\minecraft\tags\blocks\mineable\hoe.json
 dcbe86378f5a61159bf91c756664d226a4ace048 data\minecraft\tags\blocks\fences.json
-351061df0d64a5bfa1fe93a84db14143f37d68a0 data\minecraft\tags\blocks\goats_spawnable_on.json
+877d73834144e7d6fdb7c269ab23a438ee2dd1b3 data\minecraft\tags\blocks\goats_spawnable_on.json
 e6374fe91607f7deaa18213e50a44a3321d9ce33 data\minecraft\tags\blocks\stairs.json

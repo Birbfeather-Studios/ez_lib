@@ -7,8 +7,11 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -26,6 +29,8 @@ public class EzBlocksBuilder {
     private final Block blockProperties;
     private final String name1;
     private final EzMaterial ezMaterial;
+    private TagKey<Item> tagKey = null;
+    private boolean hasWall;
     private BlockData data;
 
     public static class BlockData {
@@ -66,6 +71,8 @@ public class EzBlocksBuilder {
         public EzMaterial ezMaterial;
         public Block saplingBlock;
         public boolean burnable;
+        public TagKey<Item> tagKey;
+        public boolean hasWall;
     }
 
     public enum EzMaterial {
@@ -107,9 +114,12 @@ public class EzBlocksBuilder {
         Strings strings = new Strings();
         strings.ezMaterial = ezMaterial;
         strings.blockname = name1;
+        strings.fullblockname = name1;
         if (ezMaterial == EzMaterial.ice) {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new IceBlock(FabricBlockSettings.copyOf(blockProperties)));} else
         {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));}
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
+        if (ezMaterial == EzMaterial.wood) {this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));}
+        strings.tagKey = this.tagKey;
         inventoryMap.put(name1, data.blockItem);
         blockMap.put(strings, data.block);
     }
@@ -158,6 +168,7 @@ public class EzBlocksBuilder {
         Strings strings = new Strings();
         strings.blockname = prefix + name + suffix;
         strings.ezMaterial = ezMaterial;
+        strings.fullblockname = name1;
         if (extraBlockProperties == null) {
             extraProperies = this.blockProperties;
         }
@@ -241,6 +252,7 @@ public class EzBlocksBuilder {
         BlockItem woodItem = registerItem(strings1.blockname, woodBlock);
         BlockItem strippedwoodItem = registerItem(strings2.blockname, strippedwoodBlock);
         StrippableBlockRegistry.register(woodBlock, strippedwoodBlock);
+        strings1.tagKey = this.tagKey;
         inventoryMap.put(strings1.blockname, woodItem);
         inventoryMap.put(strings2.blockname, strippedwoodItem);
         woodMap.put(strings1, woodBlock);
@@ -248,10 +260,25 @@ public class EzBlocksBuilder {
         return this;
     }
 
+    public EzBlocksBuilder wall() {
+        String wallName = name + "_wall";
+        Strings strings = new Strings();
+        strings.blockname = wallName;
+        strings.fullblockname = this.name1;
+        strings.ezMaterial = ezMaterial;
+        this.data.wallBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), wallName), new WallBlock(FabricBlockSettings.copyOf(blockProperties)));
+        this.data.wallItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), wallName), new BlockItem(this.data.wallBlock, new FabricItemSettings()));
+        inventoryMap.put(wallName, data.wallItem);
+        wallMap.put(strings, data.wallBlock);
+        this.hasWall = true;
+        return this;
+    }
+
     public EzBlocksBuilder door(BlockSetType blockSetType, Block blockProperties) {
         Strings strings = new Strings();
         strings.blockname = name + "_door";
         strings.ezMaterial = ezMaterial;
+        strings.fullblockname = this.name1;
         this.data.doorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), strings.blockname), new DoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), strings.blockname), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
         inventoryMap.put(strings.blockname, data.doorItem);
@@ -263,6 +290,8 @@ public class EzBlocksBuilder {
         Strings strings = new Strings();
         strings.blockname = name + "_trapdoor";
         strings.ezMaterial = ezMaterial;
+        strings.fullblockname = this.name1;
+        strings.hasWall = this.hasWall;
         this.data.trapdoorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), strings.blockname), new TrapDoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), strings.blockname), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
         inventoryMap.put(strings.blockname, data.trapdoorItem);
@@ -306,19 +335,6 @@ public class EzBlocksBuilder {
         this.data.fenceGateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceGateName), new BlockItem(this.data.fenceGateBlock, new FabricItemSettings()));
         inventoryMap.put(fenceGateName, data.fenceGateItem);
         fenceGateMap.put(strings, data.fenceGateBlock);
-        return this;
-    }
-
-    public EzBlocksBuilder wall() {
-        String wallName = name + "_wall";
-        Strings strings = new Strings();
-        strings.blockname = wallName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
-        this.data.wallBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), wallName), new WallBlock(FabricBlockSettings.copyOf(blockProperties)));
-        this.data.wallItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), wallName), new BlockItem(this.data.wallBlock, new FabricItemSettings()));
-        inventoryMap.put(wallName, data.wallItem);
-        wallMap.put(strings, data.wallBlock);
         return this;
     }
 

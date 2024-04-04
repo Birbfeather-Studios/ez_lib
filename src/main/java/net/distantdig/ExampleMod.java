@@ -66,12 +66,12 @@ public class ExampleMod extends EzLib {
                 .pillar("broad_","_pillar", null)
                 .button(BlockSetType.OAK, 30, true)
                 .pressurePlate(BlockSetType.OAK,PressurePlateBlock.Sensitivity.MOBS)
+                .wall()
                 .trapdoor(BlockSetType.OAK, Blocks.OAK_TRAPDOOR)
                 .door(BlockSetType.OAK, Blocks.OAK_DOOR)
                 .fence()
                 .fenceGate()
-                .pickaxe()
-                .wall();
+                .pickaxe();
         //slab,stair, door, trapdoor, button, pressureplate, fence, fencegate, wall, pillar, logsAndWoods
         //needs to be able to make additional blocks, like leaves
         //needs to be able to have different minables, such as axes for wood, pickaxes for stone, and shears for wool

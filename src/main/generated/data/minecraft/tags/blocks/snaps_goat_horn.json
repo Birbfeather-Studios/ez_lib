@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "other_mod:cut_unobtainable",
     "other_mod:unobtainable",
-    "other_mod:chiseled_unobtainable",
+    "other_mod:cut_unobtainable",
     "other_mod:chalk",
-    "other_mod:ornate_unobtainable_pillar",
-    "other_mod:broad_unobtainable_pillar"
+    "other_mod:chiseled_unobtainable",
+    "other_mod:broad_unobtainable_pillar",
+    "other_mod:ornate_unobtainable_pillar"
   ]
 }
