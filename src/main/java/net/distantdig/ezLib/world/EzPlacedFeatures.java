@@ -21,12 +21,12 @@ public class EzPlacedFeatures {
         var EntryLookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, BIRT_ORE_PLACED, EntryLookup.getOrThrow(EzConfiguredFeatures.BIRT_KEY),
-                EzOrePlacement.commonOrePlacement(12, //viens per chunk
+                EzOrePlacement.commonOrePlacement(12, //veins per chunk
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80))));
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(EzLib.getModId(), name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation("ez_lib", name));
     }
 
     public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> config,

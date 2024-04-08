@@ -25,7 +25,6 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
-		LoggerFactory.getLogger(EzLib.getModId()).info("buildRegistry");
 		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
 		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
 	}

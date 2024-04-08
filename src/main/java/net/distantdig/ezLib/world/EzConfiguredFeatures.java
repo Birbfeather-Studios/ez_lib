@@ -21,12 +21,12 @@ public class EzConfiguredFeatures {
 
     public static void boostrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplacables = new BlockMatchTest(Blocks.OAK_LOG);
-        List<OreConfiguration.TargetBlockState> overworldbirtOres = List.of(OreConfiguration.target(stoneReplacables, EzBlocksBuilder.tempMap.get("birt").defaultBlockState()));
+        List<OreConfiguration.TargetBlockState> overworldbirtOres = List.of(OreConfiguration.target(stoneReplacables, Blocks.WHITE_WOOL.defaultBlockState()));
         register(context, BIRT_KEY, Feature.ORE, new OreConfiguration(overworldbirtOres, 12));
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(EzLib.getModId(), name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation("ez_lib", name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(
