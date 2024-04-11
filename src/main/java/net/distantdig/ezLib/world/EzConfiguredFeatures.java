@@ -1,7 +1,6 @@
 package net.distantdig.ezLib.world;
 
-import net.distantdig.ezLib.EzLib;
-import net.distantdig.ezLib.block.EzBlocksBuilder;
+import net.distantdig.ezLib.EzLibDataGenerator;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -26,7 +25,7 @@ public class EzConfiguredFeatures {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation("ez_lib", name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(EzLibDataGenerator.getModId(), name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(

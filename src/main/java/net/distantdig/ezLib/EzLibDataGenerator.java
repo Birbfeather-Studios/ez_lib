@@ -5,11 +5,19 @@ import net.distantdig.ezLib.world.EzConfiguredFeatures;
 import net.distantdig.ezLib.world.EzPlacedFeatures;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import org.slf4j.LoggerFactory;
+import org.jetbrains.annotations.Nullable;
 
 public class EzLibDataGenerator implements DataGeneratorEntrypoint {
+
+	protected static String MOD_ID;
+
+	public static String getModId() {
+		return MOD_ID;
+	}
+
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
@@ -21,6 +29,18 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(EzRecipeProvider::new);
 		pack.addProvider(EzLangProvider::new);
 		pack.addProvider(EzWorldGenerator::new);
+	}
+
+	@Override
+	public @Nullable String getEffectiveModId() {
+		String modId = EzLib.getModId();
+		if (FabricLoader.getInstance().getModContainer(modId).isPresent()) {
+			EzLibDataGenerator.MOD_ID = modId;
+			return modId;
+		} else {
+			EzLibDataGenerator.MOD_ID = "ez_lib";
+			return null;
+		}
 	}
 
 	@Override
