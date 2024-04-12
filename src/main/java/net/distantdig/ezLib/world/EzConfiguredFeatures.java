@@ -1,27 +1,29 @@
 package net.distantdig.ezLib.world;
 
 import net.distantdig.ezLib.EzLibDataGenerator;
+import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
 import java.util.List;
 
 public class EzConfiguredFeatures {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BIRT_KEY = registerKey("birt");
 
     public static void boostrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        RuleTest stoneReplacables = new BlockMatchTest(Blocks.OAK_LOG);
-        List<OreConfiguration.TargetBlockState> overworldbirtOres = List.of(OreConfiguration.target(stoneReplacables, Blocks.WHITE_WOOL.defaultBlockState()));
-        register(context, BIRT_KEY, Feature.ORE, new OreConfiguration(overworldbirtOres, 12));
+        EzBlocksBuilder.oreMap.forEach((String, OreData) -> {
+            ResourceKey<ConfiguredFeature<?, ?>> ORE_KEY = registerKey(String);
+            OreData.oreKey = registerKey(String);
+
+            List<OreConfiguration.TargetBlockState> OreList = List.of(OreConfiguration.target(OreData.ruleTest, OreData.oreBlock.defaultBlockState()));
+
+            register(context, ORE_KEY, Feature.ORE, new OreConfiguration(OreList, OreData.veinSize));
+        });
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {

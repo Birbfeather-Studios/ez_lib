@@ -1,28 +1,31 @@
 package net.distantdig.ezLib.world;
 
 import net.distantdig.ezLib.EzLibDataGenerator;
+import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 
 import java.util.List;
 
 public class EzPlacedFeatures {
-    public static final ResourceKey<PlacedFeature> BIRT_ORE_PLACED = registerKey("birt_ore_placed");
 
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         var EntryLookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        register(context, BIRT_ORE_PLACED, EntryLookup.getOrThrow(EzConfiguredFeatures.BIRT_KEY),
-                EzOrePlacement.commonOrePlacement(12, //veins per chunk
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80))));
+        EzBlocksBuilder.oreMap.forEach((String, OreData) -> {
+            ResourceKey<PlacedFeature> ORE_PLACED_KEY = registerKey(String);
+            OreData.orePlacedKey = ORE_PLACED_KEY;
+
+            register(context, ORE_PLACED_KEY, EntryLookup.getOrThrow(OreData.oreKey),
+                    EzOrePlacement.commonOrePlacement(OreData.veinsPerChunk, //veins per chunk
+                            OreData.heightRangePlacement));
+        });
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

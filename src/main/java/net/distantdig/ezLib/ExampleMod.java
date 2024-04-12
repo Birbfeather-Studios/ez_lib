@@ -18,6 +18,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 
 public class ExampleMod extends EzLib {
 
@@ -55,6 +57,12 @@ public class ExampleMod extends EzLib {
 
     @Override
     public void registerModBlocks() {
+
+        new EzBlocksBuilder("not_coal_ore", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
+                .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)))
+                .pickaxe()
+                .stoneTool();
 
         new EzBlocksBuilder("unobtainable", Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)
                 .stair()

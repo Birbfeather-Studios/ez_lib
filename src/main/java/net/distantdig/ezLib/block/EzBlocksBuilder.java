@@ -6,12 +6,20 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -26,6 +34,11 @@ public class EzBlocksBuilder {
     private final String name1;
     private final EzMaterial ezMaterial;
     private BlockData data;
+
+    public static RuleTest stoneReplacables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+    public static RuleTest deepslateReplacables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+    public static RuleTest netherReplacables = new TagMatchTest(BlockTags.BASE_STONE_NETHER);
+    public static RuleTest endReplacables = new BlockMatchTest(Blocks.END_STONE);
 
     public static class BlockData {
         public Block block;
@@ -66,12 +79,23 @@ public class EzBlocksBuilder {
         public boolean burnable;
     }
 
+    public static class OreData {
+        public Block oreBlock;
+        public RuleTest ruleTest;
+        public int veinSize;
+        public int veinsPerChunk;
+        public HeightRangePlacement heightRangePlacement;
+        public ResourceKey<ConfiguredFeature<?, ?>> oreKey;
+        public ResourceKey<PlacedFeature> orePlacedKey;
+    }
+
     public enum EzMaterial {
         wood, stone, metal, wool, ice, sand, dirt, netherStone
     }
 
     public final static HashMap<String, BlockItem> inventoryMap = new HashMap<>();
     public final static HashMap<Strings, Block> blockMap = new HashMap<>();
+    public final static HashMap<String, OreData> oreMap = new HashMap<>();
     public final static HashMap<Strings, StairBlock> stairMap = new HashMap<>();
     public final static HashMap<Strings, SlabBlock> slabMap = new HashMap<>();
     public final static HashMap<Strings, EzVerticalSlabBlock> verticalSlabMap = new HashMap<>();
@@ -111,6 +135,18 @@ public class EzBlocksBuilder {
         tempMap.put(name1, block);
         inventoryMap.put(name1, data.blockItem);
         blockMap.put(strings, data.block);
+    }
+
+    public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement) {
+        OreData oreData = new OreData();
+        oreData.oreBlock = data.block;
+        oreData.ruleTest = replaceTestType;
+        oreData.veinSize = vienSize;
+        oreData.veinsPerChunk = veinsPerChunk;
+        oreData.heightRangePlacement = heightRangePlacement;
+
+                oreMap.put(name, oreData);
+        return this;
     }
 
     public EzBlocksBuilder stair() {
