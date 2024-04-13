@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "other_mod:block/broad_unobtainable_pillar_top",
+    "side": "other_mod:block/broad_unobtainable_pillar"
+  }
+}

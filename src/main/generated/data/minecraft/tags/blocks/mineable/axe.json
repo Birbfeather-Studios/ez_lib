@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "other_mod:mahogany_planks",
+    "other_mod:mahogany_slab",
+    "other_mod:mahogany_stair",
+    "other_mod:vertical_mahogany_slab",
+    "other_mod:mahogany_door",
+    "other_mod:mahogany_trapdoor",
+    "other_mod:mahogany_button",
+    "other_mod:mahogany_fence",
+    "other_mod:mahogany_fence_gate",
+    "other_mod:mahogany_pressure_plate",
+    "other_mod:stripped_mahogany_log",
+    "other_mod:mahogany_log"
+  ]
+}

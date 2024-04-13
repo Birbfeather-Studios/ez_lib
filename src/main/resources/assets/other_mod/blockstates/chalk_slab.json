@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "other_mod:block/chalk_slab"
+    },
+    "type=double": {
+      "model": "other_mod:block/chalk"
+    },
+    "type=top": {
+      "model": "other_mod:block/chalk_slab_top"
+    }
+  }
+}
