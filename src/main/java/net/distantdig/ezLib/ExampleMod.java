@@ -58,7 +58,7 @@ public class ExampleMod extends EzLib {
     public void registerModBlocks() {
 
         new EzBlocksBuilder("not_coal_ore", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
-                .makeOre(EzBlocksBuilder.stoneReplacables, 100, 1,
+                .makeOre(EzBlocksBuilder.stoneReplacables, 64, 1,
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)))
                 .pickaxe()
                 .stoneTool();

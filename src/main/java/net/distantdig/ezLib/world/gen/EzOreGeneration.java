@@ -4,8 +4,6 @@ import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static net.distantdig.ezLib.block.EzBlocksBuilder.*;
 
