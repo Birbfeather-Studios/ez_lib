@@ -73,11 +73,12 @@ public class ExampleMod extends EzLib {
                 .pillar("broad_","_pillar", null)
                 .button(BlockSetType.OAK, 30, true)
                 .pressurePlate(BlockSetType.OAK,PressurePlateBlock.Sensitivity.MOBS)
+                .wall()
                 .trapdoor(BlockSetType.OAK, Blocks.OAK_TRAPDOOR)
                 .door(BlockSetType.OAK, Blocks.OAK_DOOR)
                 .fence()
                 .fenceGate()
-                .wall();
+                .pickaxe();
         //slab,stair, door, trapdoor, button, pressureplate, fence, fencegate, wall, pillar, logsAndWoods
         //needs to be able to make additional blocks, like leaves
         //needs to be able to have different minables, such as axes for wood, pickaxes for stone, and shears for wool
@@ -85,7 +86,8 @@ public class ExampleMod extends EzLib {
         //need seperate builder for plants, such as two block plants, plants like sugarcane or bamboo and growable samplings or just simple grass/mushrooms etc.
 
         //woodset
-        new EzBlockSets().woodSet("mahogany", true);
+        new EzBlockSets().woodSet("mahogany", true, Blocks.OAK_SAPLING);
+        //you will need to register the sapling block seperately because this requires you to create a custom tree.
         //EzBlocks.registerWoodSet("mahogany", Blocks.OAK_PLANKS, false);
 
         //rockset
@@ -96,7 +98,7 @@ public class ExampleMod extends EzLib {
         new EzBlocksBuilder("ketal", Blocks.IRON_BLOCK, "", EzBlocksBuilder.EzMaterial.metal).pickaxe().stoneTool();
 
         //woolset
-        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool", EzBlocksBuilder.EzMaterial.wool).carpet();
+        new EzBlocksBuilder("turqoise", Blocks.WHITE_WOOL, "_wool", EzBlocksBuilder.EzMaterial.wool).carpet(Blocks.WHITE_CARPET);
 
         //iceset
         new EzBlocksBuilder("mice", Blocks.ICE, "", EzBlocksBuilder.EzMaterial.ice).pickaxe();

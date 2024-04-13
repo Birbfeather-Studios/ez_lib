@@ -7,15 +7,14 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class EzBlockSets {
 
-    public void woodSet (String material, Boolean verticalSlab) {
+    public void woodSet(String material, Boolean verticalSlab, Block saplingBlock) {
         Block log = Blocks.OAK_LOG;
         BlockSetType wood = BlockSetType.OAK;
         PressurePlateBlock.Sensitivity all = PressurePlateBlock.Sensitivity.EVERYTHING;
-        EzBlocksBuilder woodBuilder = new  EzBlocksBuilder(material, Blocks.OAK_PLANKS, "_planks", EzBlocksBuilder.EzMaterial.wood)     //planks
+        EzBlocksBuilder woodBuilder = new EzBlocksBuilder(material, Blocks.OAK_PLANKS, "_planks", EzBlocksBuilder.EzMaterial.wood)     //planks
                 .stair()                                                      //stair
-                .slab()                                                       //slab
-                .pillar("", "_log", log)                         //log
-                .pillar("stripped_", "_log", log)                //stripped log
+                .slab()//slab
+                .logs("", "_log", log, true)
                 .wood(material + "_log", "stripped_" + material + "_log", true)
                 .door(wood, Blocks.OAK_DOOR)                                  //door
                 .trapdoor(wood, Blocks.OAK_TRAPDOOR)                          //trapdoor
@@ -24,12 +23,11 @@ public class EzBlockSets {
                 .pressurePlate(wood, all)                                     //pressure plate
                 .button(wood, 30, true)                  //button
                 .verticalSlab()                                               //vertical slab
-                .axe()
-                ;
-        woodBuilder.leaves("","");    //leaves
+                .axe();
+        woodBuilder.leaves("", "", saplingBlock);    //leaves
     }
 
-    public void simpleStoneSet (String material) {
+    public void simpleStoneSet(String material) {
         EzBlocksBuilder stoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)
                 .stair()
                 .slab()
@@ -37,7 +35,8 @@ public class EzBlockSets {
                 .verticalSlab()
                 .pickaxe();
     }
-    public void advancedStoneSet (String material) {
+
+    public void advancedStoneSet(String material) {
         BlockSetType stone = BlockSetType.STONE;
         PressurePlateBlock.Sensitivity mobs = PressurePlateBlock.Sensitivity.MOBS;
         EzBlocksBuilder advancedStoneBuilder = new EzBlocksBuilder(material, Blocks.STONE, null, EzBlocksBuilder.EzMaterial.stone)

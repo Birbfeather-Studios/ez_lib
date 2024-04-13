@@ -1,5 +1,6 @@
 package net.distantdig.ezLib.datagen;
 
+import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.distantdig.ezLib.item.EzItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -21,5 +22,12 @@ public class EzItemTagProvider extends FabricTagProvider.ItemTagProvider {
     protected void addTags(HolderLookup.Provider arg) {
         trimmableArmor.forEach((armorSet -> getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
                 .add(armorSet.helmet, armorSet.chestplate,armorSet.leggings,armorSet.boots)));
+        EzBlocksBuilder.woodMap.forEach((strings, block) -> {
+            if(strings.tagKey != null) {
+                getOrCreateTagBuilder(strings.tagKey)
+                        .add(EzBlocksBuilder.inventoryMap.get(strings.blockname))
+                        .add(EzBlocksBuilder.inventoryMap.get("stripped_" + strings.blockname))
+                        .add(EzBlocksBuilder.inventoryMap.get(strings.fullblockname))
+                        .add(EzBlocksBuilder.inventoryMap.get("stripped_" + strings.fullblockname));}});
     }
 }
