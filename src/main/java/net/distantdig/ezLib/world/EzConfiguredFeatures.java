@@ -1,7 +1,7 @@
 package net.distantdig.ezLib.world;
 
-import net.distantdig.ezLib.EzLibDataGenerator;
 import net.distantdig.ezLib.block.EzBlocksBuilder;
+import net.distantdig.ezLib.util.EzUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -17,17 +17,16 @@ public class EzConfiguredFeatures {
 
     public static void boostrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         EzBlocksBuilder.oreMap.forEach((String, OreData) -> {
-            ResourceKey<ConfiguredFeature<?, ?>> ORE_KEY = registerKey(String);
-            OreData.oreKey = registerKey(String);
+//            OreData.oreKey = registerKey(String + "_key");
 
             List<OreConfiguration.TargetBlockState> OreList = List.of(OreConfiguration.target(OreData.ruleTest, OreData.oreBlock.defaultBlockState()));
 
-            register(context, ORE_KEY, Feature.ORE, new OreConfiguration(OreList, OreData.veinSize));
+            register(context, OreData.oreKey, Feature.ORE, new OreConfiguration(OreList, OreData.veinSize));
         });
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(EzLibDataGenerator.getModId(), name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(EzUtils.checkModContainerId(), name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(

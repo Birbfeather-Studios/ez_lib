@@ -1,5 +1,6 @@
 package net.distantdig.ezLib;
 
+import net.distantdig.ezLib.world.gen.EzOreGeneration;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,5 +33,7 @@ public abstract class EzLib implements ModInitializer {
 		registerModBlocks();
 		registerModGroup();
 		registerModEffects();
+
+		EzOreGeneration.generateOres();
 	}
 }

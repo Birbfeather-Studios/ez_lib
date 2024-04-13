@@ -2,6 +2,8 @@ package net.distantdig.ezLib.block;
 
 
 import net.distantdig.ezLib.EzLib;
+import net.distantdig.ezLib.world.EzConfiguredFeatures;
+import net.distantdig.ezLib.world.EzPlacedFeatures;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.Registry;
@@ -85,8 +87,8 @@ public class EzBlocksBuilder {
         public int veinSize;
         public int veinsPerChunk;
         public HeightRangePlacement heightRangePlacement;
-        public ResourceKey<ConfiguredFeature<?, ?>> oreKey;
-        public ResourceKey<PlacedFeature> orePlacedKey;
+        public static ResourceKey<ConfiguredFeature<?, ?>> oreKey;
+        public static ResourceKey<PlacedFeature> orePlacedKey;
     }
 
     public enum EzMaterial {
@@ -144,6 +146,9 @@ public class EzBlocksBuilder {
         oreData.veinSize = vienSize;
         oreData.veinsPerChunk = veinsPerChunk;
         oreData.heightRangePlacement = heightRangePlacement;
+
+        OreData.oreKey = EzConfiguredFeatures.registerKey(name + "_key");
+        OreData.orePlacedKey = EzPlacedFeatures.registerKey(name + "_placed_key");
 
                 oreMap.put(name, oreData);
         return this;

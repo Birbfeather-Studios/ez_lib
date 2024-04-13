@@ -52,14 +52,13 @@ public class ExampleMod extends EzLib {
 
         // Fuel Items
         Item NOT_COAL = EzItems.registerFuelItem("not_coal", 200, new FabricItemSettings());
-
     }
 
     @Override
     public void registerModBlocks() {
 
         new EzBlocksBuilder("not_coal_ore", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
-                .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
+                .makeOre(EzBlocksBuilder.stoneReplacables, 100, 1,
                         HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)))
                 .pickaxe()
                 .stoneTool();
