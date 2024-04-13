@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "other_mod:block/unobtainable",
-    "side": "other_mod:block/unobtainable",
-    "top": "other_mod:block/unobtainable"
-  }
-}
