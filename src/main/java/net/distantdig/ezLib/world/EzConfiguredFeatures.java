@@ -17,11 +17,9 @@ public class EzConfiguredFeatures {
 
     public static void boostrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
         EzBlocksBuilder.oreMap.forEach((String, OreData) -> {
-//            OreData.oreKey = registerKey(String + "_key");
-
             List<OreConfiguration.TargetBlockState> OreList = List.of(OreConfiguration.target(OreData.ruleTest, OreData.oreBlock.defaultBlockState()));
 
-            register(context, OreData.oreKey, Feature.ORE, new OreConfiguration(OreList, OreData.veinSize));
+            register(context, EzBlocksBuilder.OreData.getOreKey(OreData.oreKey), Feature.ORE, new OreConfiguration(OreList, OreData.veinSize));
         });
     }
 

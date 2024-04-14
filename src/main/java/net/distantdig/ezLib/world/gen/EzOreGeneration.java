@@ -13,13 +13,13 @@ public class EzOreGeneration {
         EzBlocksBuilder.oreMap.forEach((String, OreData) -> {
             if (OreData.ruleTest.equals(stoneReplacables) || OreData.ruleTest.equals(deepslateReplacables)) {
                 BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
-                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.orePlacedKey);
+                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.getInstancePlacedKey());
             } else if (OreData.ruleTest.equals(netherReplacables)) {
                 BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
-                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.orePlacedKey);
+                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.getInstancePlacedKey());
             } else if (OreData.ruleTest.equals(endReplacables)) {
                 BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
-                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.orePlacedKey);
+                        GenerationStep.Decoration.UNDERGROUND_ORES, OreData.getInstancePlacedKey());
             }
         });
     }

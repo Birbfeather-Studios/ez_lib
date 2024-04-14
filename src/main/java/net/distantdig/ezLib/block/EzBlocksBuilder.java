@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -92,12 +93,40 @@ public class EzBlocksBuilder {
 
     public static class OreData {
         public Block oreBlock;
+        public Item dropItem;
         public RuleTest ruleTest;
         public int veinSize;
         public int veinsPerChunk;
         public HeightRangePlacement heightRangePlacement;
-        public static ResourceKey<ConfiguredFeature<?, ?>> oreKey;
-        public static ResourceKey<PlacedFeature> orePlacedKey;
+        public String oreKey;
+        public String orePlacedKey;
+
+        private static Map<String, ResourceKey<ConfiguredFeature<?, ?>>> keyMap = new HashMap<>();
+        private static Map<String, ResourceKey<PlacedFeature>> placedKeyMap = new HashMap<>();
+
+        private ResourceKey<ConfiguredFeature<?, ?>> instanceKey;
+        private ResourceKey<PlacedFeature> instancePlacedKey;
+
+        public OreData(String oreKey, String orePlacedKey) {
+            this.oreKey = oreKey;
+            this.orePlacedKey = orePlacedKey;
+            this.instanceKey = keyMap.computeIfAbsent(oreKey, k -> EzConfiguredFeatures.registerKey(oreKey));
+            this.instancePlacedKey = placedKeyMap.computeIfAbsent(orePlacedKey, k -> EzPlacedFeatures.registerKey(orePlacedKey));
+        }
+
+        public ResourceKey<ConfiguredFeature<?, ?>> getInstanceKey() {
+            return instanceKey;
+        }
+        public ResourceKey<PlacedFeature> getInstancePlacedKey() {
+            return instancePlacedKey;
+        }
+
+        public static ResourceKey<ConfiguredFeature<?, ?>> getOreKey(String oreKey) {
+            return keyMap.get(oreKey);
+        }
+        public static ResourceKey<PlacedFeature> getOrePlacedKey(String orePlacedKey) {
+            return placedKeyMap.get(orePlacedKey);
+        }
     }
 
     public enum EzMaterial {
@@ -150,17 +179,27 @@ public class EzBlocksBuilder {
     }
 
     public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement) {
-        OreData oreData = new OreData();
+        OreData oreData = new OreData(name + "_key", name + "_placed_key");
         oreData.oreBlock = data.block;
         oreData.ruleTest = replaceTestType;
         oreData.veinSize = vienSize;
         oreData.veinsPerChunk = veinsPerChunk;
         oreData.heightRangePlacement = heightRangePlacement;
 
-        OreData.oreKey = EzConfiguredFeatures.registerKey(name + "_key");
-        OreData.orePlacedKey = EzPlacedFeatures.registerKey(name + "_placed_key");
+        oreMap.put(name, oreData);
+        return this;
+    }
 
-                oreMap.put(name, oreData);
+    public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement, Item dropItem) {
+        OreData oreData = new OreData(name + "_key", name + "_placed_key");
+        oreData.oreBlock = data.block;
+        oreData.ruleTest = replaceTestType;
+        oreData.veinSize = vienSize;
+        oreData.veinsPerChunk = veinsPerChunk;
+        oreData.heightRangePlacement = heightRangePlacement;
+        oreData.dropItem = dropItem;
+
+        oreMap.put(name, oreData);
         return this;
     }
 

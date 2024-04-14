@@ -27,14 +27,24 @@ public class ExampleMod extends EzLib {
         super("other_mod");
     }
 
+    // Item Pointers
+    Item INGOT_ONE = EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
+    Item INGOT_TWO;
+    Item INGOT_THREE;
+    Item INGOT_FOUR;
+    Item INGOT_FIVE;
+
+    Item NOT_COAL;
+    Item NOT_STEAK1;
+    Item NOT_STEAK2;
+
     @Override
     public void registerModItems() {
         // Simple Items
-        Item INGOT_ONE = EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
-        Item INGOT_TWO = EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
-        Item INGOT_THREE = EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
-        Item INGOT_FOUR = EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
-        Item INGOT_FIVE = EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
+        INGOT_TWO = EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
+        INGOT_THREE = EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
+        INGOT_FOUR = EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
+        INGOT_FIVE = EzItems.registerItem("ingot_five", Item::new, new FabricItemSettings());
 
         // Tool Sets
         EzItems.ToolSet IRON_TOOL_SET_2 = EzItems.registerToolSet("iron2", EzToolsMaterials.TEST_MATERIAL1, 3, 1.6f, new FabricItemSettings());
@@ -47,19 +57,30 @@ public class ExampleMod extends EzLib {
         EzItems.ArmorSet IRON_ARMOR_SET_4 = EzItems.registerArmorSet("iron4", EzArmorMaterials.TEST_MATERIAL1, new FabricItemSettings(), IRON_ARMOR_SET_3);
 
         // Food Items
-        Item NOT_STEAK1 = EzItems.registerFoodItem("not_steak1", new FoodProperties.Builder().nutrition(8).build(), new FabricItemSettings());
-        Item NOT_STEAK2 = EzItems.registerFoodItem("not_steak2", 8, 2, new FabricItemSettings());
+        NOT_STEAK1 = EzItems.registerFoodItem("not_steak1", new FoodProperties.Builder().nutrition(8).build(), new FabricItemSettings());
+        NOT_STEAK2 = EzItems.registerFoodItem("not_steak2", 8, 2, new FabricItemSettings());
 
         // Fuel Items
-        Item NOT_COAL = EzItems.registerFuelItem("not_coal", 200, new FabricItemSettings());
+        NOT_COAL = EzItems.registerFuelItem("not_coal", 200, new FabricItemSettings());
     }
 
     @Override
     public void registerModBlocks() {
+        new EzBlocksBuilder("not_andesite", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
+                .makeOre(EzBlocksBuilder.stoneReplacables, 64, 1,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), NOT_COAL)
+                .pickaxe()
+                .stoneTool();
 
         new EzBlocksBuilder("not_coal_ore", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
-                .makeOre(EzBlocksBuilder.stoneReplacables, 64, 1,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)))
+                .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), NOT_COAL)
+                .pickaxe()
+                .stoneTool();
+
+        new EzBlocksBuilder("not_iron_ore", Blocks.IRON_ORE, null, EzBlocksBuilder.EzMaterial.stone)
+                .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), INGOT_ONE)
                 .pickaxe()
                 .stoneTool();
 

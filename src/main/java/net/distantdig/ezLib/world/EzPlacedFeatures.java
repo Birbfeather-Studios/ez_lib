@@ -1,5 +1,6 @@
 package net.distantdig.ezLib.world;
 
+import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.distantdig.ezLib.util.EzUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -22,7 +23,8 @@ public class EzPlacedFeatures {
         oreMap.forEach((String, OreData) -> {
 //            OreData.orePlacedKey = registerKey(String + "_placed_key");
 
-            register(context, OreData.orePlacedKey, EntryLookup.getOrThrow(OreData.oreKey),
+            register(context, EzBlocksBuilder.OreData.getOrePlacedKey(OreData.orePlacedKey),
+                    EntryLookup.getOrThrow(EzBlocksBuilder.OreData.getOreKey(OreData.oreKey)),
                     EzOrePlacement.commonOrePlacement(OreData.veinsPerChunk, //veins per chunk
                             OreData.heightRangePlacement));
         });
