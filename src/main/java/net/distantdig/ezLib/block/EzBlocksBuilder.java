@@ -94,6 +94,8 @@ public class EzBlocksBuilder {
     public static class OreData {
         public Block oreBlock;
         public Item dropItem;
+        public int minDrops;
+        public int maxDrops;
         public RuleTest ruleTest;
         public int veinSize;
         public int veinsPerChunk;
@@ -190,7 +192,7 @@ public class EzBlocksBuilder {
         return this;
     }
 
-    public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement, Item dropItem) {
+    public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement, Item dropItem, int minDrops, int maxDrops) {
         OreData oreData = new OreData(name + "_key", name + "_placed_key");
         oreData.oreBlock = data.block;
         oreData.ruleTest = replaceTestType;
@@ -198,6 +200,8 @@ public class EzBlocksBuilder {
         oreData.veinsPerChunk = veinsPerChunk;
         oreData.heightRangePlacement = heightRangePlacement;
         oreData.dropItem = dropItem;
+        oreData.minDrops = minDrops;
+        oreData.maxDrops = maxDrops;
 
         oreMap.put(name, oreData);
         return this;

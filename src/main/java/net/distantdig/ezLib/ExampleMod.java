@@ -28,7 +28,7 @@ public class ExampleMod extends EzLib {
     }
 
     // Item Pointers
-    Item INGOT_ONE = EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
+    Item INGOT_ONE;
     Item INGOT_TWO;
     Item INGOT_THREE;
     Item INGOT_FOUR;
@@ -41,6 +41,7 @@ public class ExampleMod extends EzLib {
     @Override
     public void registerModItems() {
         // Simple Items
+        INGOT_ONE = EzItems.registerItem("ingot_one", Item::new, new FabricItemSettings());
         INGOT_TWO = EzItems.registerItem("ingot_two", Item::new, new FabricItemSettings());
         INGOT_THREE = EzItems.registerItem("ingot_three", Item::new, new FabricItemSettings());
         INGOT_FOUR = EzItems.registerItem("ingot_four", Item::new, new FabricItemSettings());
@@ -68,19 +69,21 @@ public class ExampleMod extends EzLib {
     public void registerModBlocks() {
         new EzBlocksBuilder("not_andesite", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
                 .makeOre(EzBlocksBuilder.stoneReplacables, 64, 1,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), NOT_COAL)
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)))
                 .pickaxe()
                 .stoneTool();
 
         new EzBlocksBuilder("not_coal_ore", Blocks.COAL_ORE, null, EzBlocksBuilder.EzMaterial.stone)
                 .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), NOT_COAL)
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)),
+                        NOT_COAL, 2, 5)
                 .pickaxe()
                 .stoneTool();
 
         new EzBlocksBuilder("not_iron_ore", Blocks.IRON_ORE, null, EzBlocksBuilder.EzMaterial.stone)
                 .makeOre(EzBlocksBuilder.stoneReplacables, 12, 12,
-                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)), INGOT_ONE)
+                        HeightRangePlacement.uniform(VerticalAnchor.absolute(-80), VerticalAnchor.absolute(80)),
+                        INGOT_ONE, 1, 2)
                 .pickaxe()
                 .stoneTool();
 
