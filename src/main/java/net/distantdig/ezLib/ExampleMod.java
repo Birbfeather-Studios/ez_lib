@@ -24,7 +24,7 @@ import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 public class ExampleMod extends EzLib {
 
     public ExampleMod() {
-        super("other_mod");
+        super("example_mod");
     }
 
     // Item Pointers
