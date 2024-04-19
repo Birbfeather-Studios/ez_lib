@@ -20,15 +20,15 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
-		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-
-		pack.addProvider(EzBlockTagProvider::new);
-		pack.addProvider(EzItemTagProvider::new);
-		pack.addProvider(EzLootTableProvider::new);
-		pack.addProvider(EzModelProvider::new);
-		pack.addProvider(EzRecipeProvider::new);
-		pack.addProvider(EzLangProvider::new);
-		pack.addProvider(EzWorldGenerator::new);
+//		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+//
+//		pack.addProvider(EzBlockTagProvider::new);
+//		pack.addProvider(EzItemTagProvider::new);
+//		pack.addProvider(EzLootTableProvider::new);
+//		pack.addProvider(EzModelProvider::new);
+//		pack.addProvider(EzRecipeProvider::new);
+//		pack.addProvider(EzLangProvider::new);
+//		pack.addProvider(EzWorldGenerator::new);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
-		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
+//		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
+//		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
 	}
 }
