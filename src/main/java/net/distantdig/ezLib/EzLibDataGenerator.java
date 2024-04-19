@@ -10,13 +10,9 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class EzLibDataGenerator implements DataGeneratorEntrypoint {
+public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	public static String MOD_ID;
-
-	public EzLibDataGenerator(String modId) {
-		MOD_ID = modId;
-	}
 
 	protected static String getModId() {
 		return MOD_ID;
