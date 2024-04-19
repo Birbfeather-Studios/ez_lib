@@ -14,6 +14,10 @@ public abstract class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	public static String MOD_ID;
 
+	public EzLibDataGenerator(String modId) {
+		MOD_ID = modId;
+	}
+
 	protected static String getModId() {
 		return MOD_ID;
 	}
