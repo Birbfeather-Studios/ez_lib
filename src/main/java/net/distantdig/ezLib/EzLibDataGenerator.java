@@ -18,7 +18,7 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		return MOD_ID;
 	}
 
-	public void runDataGen(FabricDataGenerator fabricDataGenerator) {
+	public static void runDataGen(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 //
 		pack.addProvider(EzBlockTagProvider::new);
@@ -30,7 +30,7 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(EzWorldGenerator::new);
 	}
 
-	public void runBuildRegistry(RegistrySetBuilder registryBuilder) {
+	public static void runBuildRegistry(RegistrySetBuilder registryBuilder) {
 		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
 		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
 	}
