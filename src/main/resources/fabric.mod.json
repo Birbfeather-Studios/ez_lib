@@ -17,7 +17,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.distantdig.ezLib.ExampleMod"
+			"net.distantdig.ezLib.Initializer"
 		],
 		"client": [
           "net.distantdig.ezLib.EzLibClient"
