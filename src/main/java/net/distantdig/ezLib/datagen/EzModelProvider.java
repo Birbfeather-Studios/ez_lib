@@ -24,7 +24,7 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        EzBlocksBuilder.blockMap.forEach((strings, block) -> {JsonGenerators.createEzBlock(strings);});
+        EzBlocksBuilder.blockMap.forEach((strings, block) -> {blockStateModelGenerator.createTrivialCube(block);});
         EzBlocksBuilder.stairMap.forEach((strings, block) -> {JsonGenerators.createEzStair(strings);});
         EzBlocksBuilder.slabMap.forEach((strings, block) -> {JsonGenerators.createEzSlab(strings);});
         EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
