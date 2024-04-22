@@ -1,6 +1,6 @@
 package net.distantdig.ezLib.datagen;
 
-import net.distantdig.ezLib.block.EzBlocksBuilder.Strings;
+import net.distantdig.ezLib.block.EzBlocksBuilder.BlockMapData;
 import net.distantdig.ezLib.util.EzUtils;
 
 import java.io.File;
@@ -17,89 +17,89 @@ public class JsonGenerators {
 
 
     //full generators -> use these outside this class!!
-    public static void createEzBlock(Strings strings) {
-        EzBlockStateGenerator(strings.blockname);
-        EzBlockModelGenerator(strings.blockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzBlock(BlockMapData blockMapData) {
+        EzBlockStateGenerator(blockMapData.blockname);
+        EzBlockModelGenerator(blockMapData.blockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzStair(Strings strings) {
-        EzStairStateGenerator(strings.blockname);
-        EzStairModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzStair(BlockMapData blockMapData) {
+        EzStairStateGenerator(blockMapData.blockname);
+        EzStairModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzSlab(Strings strings) {
+    public static void createEzSlab(BlockMapData blockMapData) {
 
-        EzSlabStateGenerator(strings.blockname, strings.fullblockname);
-        EzSlabModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+        EzSlabStateGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzSlabModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzVerticalSlab(Strings strings) {
-        EzVerticalSlabStateGenerator(strings.blockname, strings.fullblockname);
-        EzVerticalSlabModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_west");
+    public static void createEzVerticalSlab(BlockMapData blockMapData) {
+        EzVerticalSlabStateGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzVerticalSlabModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_west");
     }
 
-    public static void createEzColumn(Strings strings) {
-        EzColumnStateGenerator(strings.blockname);
-        EzColumnModelGenerator(strings.blockname, strings.blockname, true);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzColumn(BlockMapData blockMapData) {
+        EzColumnStateGenerator(blockMapData.blockname);
+        EzColumnModelGenerator(blockMapData.blockname, blockMapData.blockname, true);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzWood(Strings strings) {
-        EzColumnStateGenerator(strings.blockname);
-        EzColumnModelGenerator(strings.blockname, strings.fullblockname, false);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzWood(BlockMapData blockMapData) {
+        EzColumnStateGenerator(blockMapData.blockname);
+        EzColumnModelGenerator(blockMapData.blockname, blockMapData.fullblockname, false);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzDoor(Strings strings) {
-        EzDoorStateGenerator(strings.blockname);
-        EzDoorModelGenerator(strings.blockname);
-        EzFlatItemModelGenerator(strings.blockname);
+    public static void createEzDoor(BlockMapData blockMapData) {
+        EzDoorStateGenerator(blockMapData.blockname);
+        EzDoorModelGenerator(blockMapData.blockname);
+        EzFlatItemModelGenerator(blockMapData.blockname);
     }
 
-    public static void createEzTrapDoor(Strings strings) {
-        EzTrapDoorStateGenerator(strings.blockname);
-        EzTrapDoorModelGenerator(strings.blockname);
-        EzItemModelGenerator(strings.blockname, "_bottom");
+    public static void createEzTrapDoor(BlockMapData blockMapData) {
+        EzTrapDoorStateGenerator(blockMapData.blockname);
+        EzTrapDoorModelGenerator(blockMapData.blockname);
+        EzItemModelGenerator(blockMapData.blockname, "_bottom");
     }
 
-    public static void createEzButton(Strings strings) {
-        EzButtonStateGenerator(strings.blockname);
-        EzButtonModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzButton(BlockMapData blockMapData) {
+        EzButtonStateGenerator(blockMapData.blockname);
+        EzButtonModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzFence(Strings strings) {
-        EzFenceStateGenerator(strings.blockname);
-        EzFenceModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzFence(BlockMapData blockMapData) {
+        EzFenceStateGenerator(blockMapData.blockname);
+        EzFenceModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzFenceGate(Strings strings) {
-        EzFenceGateStateGenerator(strings.blockname);
-        EzFenceGateModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzFenceGate(BlockMapData blockMapData) {
+        EzFenceGateStateGenerator(blockMapData.blockname);
+        EzFenceGateModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzWall(Strings strings) {
-        EzWallStateGenerator(strings.blockname);
-        EzWallModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzWall(BlockMapData blockMapData) {
+        EzWallStateGenerator(blockMapData.blockname);
+        EzWallModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzPressurePlate(Strings strings) {
-        EzPressurePlateStateGenerator(strings.blockname);
-        EzPressurePlateModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzPressurePlate(BlockMapData blockMapData) {
+        EzPressurePlateStateGenerator(blockMapData.blockname);
+        EzPressurePlateModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzCarpet(Strings strings) {
-        EzCarpetStateGenerator(strings.blockname);
-        EzCarpetModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzCarpet(BlockMapData blockMapData) {
+        EzCarpetStateGenerator(blockMapData.blockname);
+        EzCarpetModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
     //Blockstates

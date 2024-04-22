@@ -147,7 +147,7 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 
         //block -> because there can be multiple blocks of these, and they can be associated in different ways players should probably make these themselves
         //planks
-        EzBlocksBuilder.blockMap.forEach((strings, block) -> {
+        EzBlocksBuilder.blockMap.forEach((block, strings) -> {
             if (strings.ezMaterial == EzBlocksBuilder.EzMaterial.wood & Objects.equals(strings.blockname, strings.fullblockname)) {
                 VanillaRecipeProvider.planksFromLogs(exporter, EzBlocksBuilder.inventoryMap.get(strings.blockname), strings.tagKey, 4);
             }

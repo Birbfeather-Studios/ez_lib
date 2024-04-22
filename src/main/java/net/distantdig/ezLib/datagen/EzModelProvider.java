@@ -27,17 +27,13 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        EzBlocksBuilder.blockMap.forEach((strings, block) -> {blockStateModelGenerator.createTrivialCube(block);});
-        EzBlocksBuilder.stairMap.forEach((strings, block) -> {
-            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock());
-
-            blockPool.stairs(block);
+        EzBlocksBuilder.blockMap.forEach((block, strings) -> {
+//            blockStateModelGenerator.createTrivialCube(block);
+            strings.family = blockStateModelGenerator.family(block);
         });
-        EzBlocksBuilder.slabMap.forEach((strings, block) -> {
-            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock());
-
-            blockPool.slab(block);
+        EzBlocksBuilder.stairMap.forEach((strings, block) -> {EzBlocksBuilder.blockMap.get(strings.fullblockname).family.stairs(block);
         });
+        EzBlocksBuilder.slabMap.forEach((strings, block) -> EzBlocksBuilder.blockMap.get(strings.fullblockname).family.slab(block));
         EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
         EzBlocksBuilder.leavesMap.forEach((strings, block) -> {JsonGenerators.createEzBlock(strings);});
         EzBlocksBuilder.rotatedPillarMap.forEach((strings, block) -> {JsonGenerators.createEzColumn(strings);});

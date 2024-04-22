@@ -85,7 +85,7 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         EzBlocksBuilder.needsIronTool.forEach(ironTool::add);
         EzBlocksBuilder.needsStoneTool.forEach(stoneTool::add);
         EzBlocksBuilder.needsDiamondTool.forEach(diamondTool::add);
-        EzBlocksBuilder.blockMap.forEach((strings, block) -> {
+        EzBlocksBuilder.blockMap.forEach((block, strings) -> {
             switch (strings.ezMaterial) {
                 case ice -> {
                     ice.add(block);
@@ -118,14 +118,14 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 case netherStone -> netherStone.add(block);
             }
         });
-        EzBlocksBuilder.stairMap.forEach((strings, stairBlock) -> ezAdd(woodenStairs, stairs, stairBlock, EzBlocksBuilder.EzMaterial.wood, strings));
-        EzBlocksBuilder.slabMap.forEach((strings, slabBlock) -> ezAdd(woodenSlabs, slabs, slabBlock, EzBlocksBuilder.EzMaterial.wood, strings));
-        EzBlocksBuilder.verticalSlabMap.forEach((strings, ezVerticalSlabBlock) -> woodenVerticalSlabs.add(ezVerticalSlabBlock));
-        EzBlocksBuilder.doorMap.forEach((strings, doorBlock) -> ezAdd(woodenDoors, doors, doorBlock, EzBlocksBuilder.EzMaterial.wood, strings));
-        EzBlocksBuilder.trapDoorMap.forEach((strings, trapDoorBlock) -> ezAdd(woodenTrapdoors, trapdoors, trapDoorBlock, EzBlocksBuilder.EzMaterial.wood, strings));
-        EzBlocksBuilder.leavesMap.forEach((strings, leavesBlock) -> leaves.add(leavesBlock));
-        EzBlocksBuilder.rotatedPillarMap.forEach((strings, rotatedPillarBlock) -> {
-            switch (strings.ezMaterial) {
+        EzBlocksBuilder.stairMap.forEach((blockMapData, stairBlock) -> ezAdd(woodenStairs, stairs, stairBlock, EzBlocksBuilder.EzMaterial.wood, blockMapData));
+        EzBlocksBuilder.slabMap.forEach((blockMapData, slabBlock) -> ezAdd(woodenSlabs, slabs, slabBlock, EzBlocksBuilder.EzMaterial.wood, blockMapData));
+        EzBlocksBuilder.verticalSlabMap.forEach((blockMapData, ezVerticalSlabBlock) -> woodenVerticalSlabs.add(ezVerticalSlabBlock));
+        EzBlocksBuilder.doorMap.forEach((blockMapData, doorBlock) -> ezAdd(woodenDoors, doors, doorBlock, EzBlocksBuilder.EzMaterial.wood, blockMapData));
+        EzBlocksBuilder.trapDoorMap.forEach((blockMapData, trapDoorBlock) -> ezAdd(woodenTrapdoors, trapdoors, trapDoorBlock, EzBlocksBuilder.EzMaterial.wood, blockMapData));
+        EzBlocksBuilder.leavesMap.forEach((blockMapData, leavesBlock) -> leaves.add(leavesBlock));
+        EzBlocksBuilder.rotatedPillarMap.forEach((blockMapData, rotatedPillarBlock) -> {
+            switch (blockMapData.ezMaterial) {
                 case ice -> ice.add(rotatedPillarBlock);
                 case sand -> sand.add(rotatedPillarBlock);
                 case dirt -> {
@@ -134,7 +134,7 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                     convertsToMud.add(rotatedPillarBlock);
                 }
                 case wood -> {
-                    if (strings.burnable) {
+                    if (blockMapData.burnable) {
                         burnableLogs.add(rotatedPillarBlock);
                         naturalLogs.add(rotatedPillarBlock);
                     } else {
@@ -149,37 +149,37 @@ public class EzBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 case netherStone -> netherStone.add(rotatedPillarBlock);
             }
         });
-        EzBlocksBuilder.woodMap.forEach((strings, rotatedPillarBlock) -> {
-            if (strings.burnable) {
+        EzBlocksBuilder.woodMap.forEach((blockMapData, rotatedPillarBlock) -> {
+            if (blockMapData.burnable) {
                 burnableLogs.add(rotatedPillarBlock);
                 naturalLogs.add(rotatedPillarBlock);
             } else {
                 logs.add(rotatedPillarBlock);
             }
         });
-        EzBlocksBuilder.wallMap.forEach((strings, wallBlock) -> walls.add(wallBlock));
-        EzBlocksBuilder.buttonMap.forEach((strings, buttonBlock) -> ezAddTwo(woodenButtons, stoneButtons, buttons, buttonBlock, EzBlocksBuilder.EzMaterial.wood, EzBlocksBuilder.EzMaterial.stone, strings));
-        EzBlocksBuilder.pressurePlateMap.forEach((strings, pressurePlateBlock) -> ezAddTwo(woodenPressurePlates, stonePressurePlates, pressurePlates, pressurePlateBlock, EzBlocksBuilder.EzMaterial.wood, EzBlocksBuilder.EzMaterial.stone, strings));
-        EzBlocksBuilder.fenceMap.forEach((strings, fenceBlock) -> ezAdd(woodenFences, fences, fenceBlock, EzBlocksBuilder.EzMaterial.wood, strings));
-        EzBlocksBuilder.fenceGateMap.forEach((strings, fenceGateBlock) -> fenceGates.add(fenceGateBlock));
-        EzBlocksBuilder.carpetMap.forEach((strings, carpetBlock) -> ezAdd(woolCarpets, replacable, carpetBlock, EzBlocksBuilder.EzMaterial.wool, strings));
+        EzBlocksBuilder.wallMap.forEach((blockMapData, wallBlock) -> walls.add(wallBlock));
+        EzBlocksBuilder.buttonMap.forEach((blockMapData, buttonBlock) -> ezAddTwo(woodenButtons, stoneButtons, buttons, buttonBlock, EzBlocksBuilder.EzMaterial.wood, EzBlocksBuilder.EzMaterial.stone, blockMapData));
+        EzBlocksBuilder.pressurePlateMap.forEach((blockMapData, pressurePlateBlock) -> ezAddTwo(woodenPressurePlates, stonePressurePlates, pressurePlates, pressurePlateBlock, EzBlocksBuilder.EzMaterial.wood, EzBlocksBuilder.EzMaterial.stone, blockMapData));
+        EzBlocksBuilder.fenceMap.forEach((blockMapData, fenceBlock) -> ezAdd(woodenFences, fences, fenceBlock, EzBlocksBuilder.EzMaterial.wood, blockMapData));
+        EzBlocksBuilder.fenceGateMap.forEach((blockMapData, fenceGateBlock) -> fenceGates.add(fenceGateBlock));
+        EzBlocksBuilder.carpetMap.forEach((blockMapData, carpetBlock) -> ezAdd(woolCarpets, replacable, carpetBlock, EzBlocksBuilder.EzMaterial.wool, blockMapData));
 
-        EzBlocksBuilder.wallMap.forEach((strings, wallBlock) -> walls.add(wallBlock));
-        EzBlocksBuilder.leavesMap.forEach((strings, leavesBlock) -> leaves.add(leavesBlock));
+        EzBlocksBuilder.wallMap.forEach((blockMapData, wallBlock) -> walls.add(wallBlock));
+        EzBlocksBuilder.leavesMap.forEach((blockMapData, leavesBlock) -> leaves.add(leavesBlock));
     }
 
-    public void ezAdd(FabricTagProvider<Block>.FabricTagBuilder tag1, FabricTagProvider<Block>.FabricTagBuilder tag2, Block block, EzBlocksBuilder.EzMaterial material, EzBlocksBuilder.Strings strings) {
-        if (strings.ezMaterial == material) {
+    public void ezAdd(FabricTagProvider<Block>.FabricTagBuilder tag1, FabricTagProvider<Block>.FabricTagBuilder tag2, Block block, EzBlocksBuilder.EzMaterial material, EzBlocksBuilder.BlockMapData blockMapData) {
+        if (blockMapData.ezMaterial == material) {
             tag1.add(block);
         } else {
             tag2.add(block);
         }
     }
 
-    public void ezAddTwo(FabricTagProvider<Block>.FabricTagBuilder tag1, FabricTagProvider<Block>.FabricTagBuilder tag2, FabricTagProvider<Block>.FabricTagBuilder tag3, Block block, EzBlocksBuilder.EzMaterial material, EzBlocksBuilder.EzMaterial material2, EzBlocksBuilder.Strings strings) {
-        if (strings.ezMaterial == material) {
+    public void ezAddTwo(FabricTagProvider<Block>.FabricTagBuilder tag1, FabricTagProvider<Block>.FabricTagBuilder tag2, FabricTagProvider<Block>.FabricTagBuilder tag3, Block block, EzBlocksBuilder.EzMaterial material, EzBlocksBuilder.EzMaterial material2, EzBlocksBuilder.BlockMapData blockMapData) {
+        if (blockMapData.ezMaterial == material) {
             tag1.add(block);
-        } else if (strings.ezMaterial == material2) {
+        } else if (blockMapData.ezMaterial == material2) {
             tag2.add(block);
         } else {
             tag3.add(block);
