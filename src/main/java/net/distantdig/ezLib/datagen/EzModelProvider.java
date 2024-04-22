@@ -31,9 +31,8 @@ public class EzModelProvider extends FabricModelProvider {
 //            blockStateModelGenerator.createTrivialCube(block);
             strings.family = blockStateModelGenerator.family(block);
         });
-        EzBlocksBuilder.stairMap.forEach((strings, block) -> {EzBlocksBuilder.blockMap.get(strings.fullblockname).family.stairs(block);
-        });
-        EzBlocksBuilder.slabMap.forEach((strings, block) -> EzBlocksBuilder.blockMap.get(strings.fullblockname).family.slab(block));
+        EzBlocksBuilder.stairMap.forEach((strings, block) -> EzBlocksBuilder.blockMap.get(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock()).family.stairs(block));
+        EzBlocksBuilder.slabMap.forEach((strings, block) -> EzBlocksBuilder.blockMap.get(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock()).family.slab(block));
         EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
         EzBlocksBuilder.leavesMap.forEach((strings, block) -> {JsonGenerators.createEzBlock(strings);});
         EzBlocksBuilder.rotatedPillarMap.forEach((strings, block) -> {JsonGenerators.createEzColumn(strings);});
