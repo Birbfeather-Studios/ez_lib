@@ -29,12 +29,12 @@ public class EzModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         EzBlocksBuilder.blockMap.forEach((strings, block) -> {blockStateModelGenerator.createTrivialCube(block);});
         EzBlocksBuilder.stairMap.forEach((strings, block) -> {
-            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.blockMap.get(strings.fullblockname));
+            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock());
 
             blockPool.stairs(block);
         });
         EzBlocksBuilder.slabMap.forEach((strings, block) -> {
-            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.blockMap.get(strings.fullblockname));
+            BlockModelGenerators.BlockFamilyProvider blockPool = blockStateModelGenerator.family(EzBlocksBuilder.inventoryMap.get(strings.fullblockname).getBlock());
 
             blockPool.slab(block);
         });
