@@ -62,13 +62,4 @@ public class EzModelProvider extends FabricModelProvider {
         HandheldModelList.forEach((item -> itemModelGenerator.generateFlatItem(item, ModelTemplates.FLAT_HANDHELD_ITEM)));
         ArmorModelList.forEach((armorData -> itemModelGenerator.generateArmorTrims(armorData.armorItem)));
     }
-
-    public BlockModelGenerators.BlockFamilyProvider stairs(Block block) {
-        ResourceLocation resourceLocation = getOrCreateModel(ModelTemplates.STAIRS_INNER, block);
-        ResourceLocation resourceLocation2 = this.getOrCreateModel(ModelTemplates.STAIRS_STRAIGHT, block);
-        ResourceLocation resourceLocation3 = this.getOrCreateModel(ModelTemplates.STAIRS_OUTER, block);
-        BlockModelGenerators.this.blockStateOutput.accept(BlockModelGenerators.createStairs(block, resourceLocation, resourceLocation2, resourceLocation3));
-        BlockModelGenerators.this.delegateItemModel(block, resourceLocation2);
-        return this;
-    }
 }
