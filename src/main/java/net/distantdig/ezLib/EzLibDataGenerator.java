@@ -24,7 +24,7 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(EzBlockTagProvider::new);
 		pack.addProvider(EzItemTagProvider::new);
 		pack.addProvider(EzLootTableProvider::new);
-//		pack.addProvider(EzModelProvider::new);
+		pack.addProvider(EzModelProvider::new);
 		pack.addProvider(EzRecipeProvider::new);
 		pack.addProvider(EzLangProvider::new);
 		pack.addProvider(EzWorldGenerator::new);
