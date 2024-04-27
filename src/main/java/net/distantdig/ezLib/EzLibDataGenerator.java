@@ -18,10 +18,9 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		return MOD_ID;
 	}
 
-	@Override
-	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+	public static void runDataGen(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-
+//
 		pack.addProvider(EzBlockTagProvider::new);
 		pack.addProvider(EzItemTagProvider::new);
 		pack.addProvider(EzLootTableProvider::new);
@@ -31,6 +30,15 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(EzWorldGenerator::new);
 	}
 
+	public static void runBuildRegistry(RegistrySetBuilder registryBuilder) {
+		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
+		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
+	}
+
+	@Override
+	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+	}
+
 	@Override
 	public @Nullable String getEffectiveModId() {
 		return EzUtils.checkModContainerId();
@@ -38,7 +46,5 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, EzConfiguredFeatures::boostrap);
-		registryBuilder.add(Registries.PLACED_FEATURE, EzPlacedFeatures::bootstrap);
 	}
 }

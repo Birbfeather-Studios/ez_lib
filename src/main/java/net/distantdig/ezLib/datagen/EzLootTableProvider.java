@@ -19,7 +19,7 @@ public class EzLootTableProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        EzBlocksBuilder.blockMap.forEach((s, block) -> {if(s.ezMaterial == EzBlocksBuilder.EzMaterial.ice) {this.dropWhenSilkTouch(block);} else {dropSelf(block);}});
+        EzBlocksBuilder.blockMap.forEach((block, s) -> {if(s.ezMaterial == EzBlocksBuilder.EzMaterial.ice) {this.dropWhenSilkTouch(block);} else {dropSelf(block);}});
         EzBlocksBuilder.stairMap.forEach((s, block) -> dropSelf(block));
         EzBlocksBuilder.slabMap.forEach((s, block) -> this.add(block, this::createSlabItemTable));
         EzBlocksBuilder.verticalSlabMap.forEach((s, block) -> dropSelf(block));

@@ -1,7 +1,7 @@
 package net.distantdig.ezLib.datagen;
 
-import net.distantdig.ezLib.EzLib;
-import net.distantdig.ezLib.block.EzBlocksBuilder.Strings;
+import net.distantdig.ezLib.block.EzBlocksBuilder.BlockMapData;
+import net.distantdig.ezLib.util.EzUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,98 +13,98 @@ import java.nio.file.Paths;
 public class JsonGenerators {
 
     static Path resourcePath = Paths.get(System.getProperty("user.dir")).getParent().getParent()
-            .resolve(Paths.get("src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator));
+            .resolve(Paths.get("src" + File.separator + "main" + File.separator + "generated" + File.separator + "assets" + File.separator));
 
 
     //full generators -> use these outside this class!!
-    public static void createEzBlock(Strings strings) {
-        EzBlockStateGenerator(strings.blockname);
-        EzBlockModelGenerator(strings.blockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzBlock(BlockMapData blockMapData) {
+        EzBlockStateGenerator(blockMapData.blockname);
+        EzBlockModelGenerator(blockMapData.blockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzStair(Strings strings) {
-        EzStairStateGenerator(strings.blockname);
-        EzStairModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzStair(BlockMapData blockMapData) {
+        EzStairStateGenerator(blockMapData.blockname);
+        EzStairModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzSlab(Strings strings) {
+    public static void createEzSlab(BlockMapData blockMapData) {
 
-        EzSlabStateGenerator(strings.blockname, strings.fullblockname);
-        EzSlabModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+        EzSlabStateGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzSlabModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzVerticalSlab(Strings strings) {
-        EzVerticalSlabStateGenerator(strings.blockname, strings.fullblockname);
-        EzVerticalSlabModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_west");
+    public static void createEzVerticalSlab(BlockMapData blockMapData) {
+        EzVerticalSlabStateGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzVerticalSlabModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_west");
     }
 
-    public static void createEzColumn(Strings strings) {
-        EzColumnStateGenerator(strings.blockname);
-        EzColumnModelGenerator(strings.blockname, strings.blockname, true);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzColumn(BlockMapData blockMapData) {
+        EzColumnStateGenerator(blockMapData.blockname);
+        EzColumnModelGenerator(blockMapData.blockname, blockMapData.blockname, true);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzWood(Strings strings) {
-        EzColumnStateGenerator(strings.blockname);
-        EzColumnModelGenerator(strings.blockname, strings.fullblockname, false);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzWood(BlockMapData blockMapData) {
+        EzColumnStateGenerator(blockMapData.blockname);
+        EzColumnModelGenerator(blockMapData.blockname, blockMapData.fullblockname, false);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzDoor(Strings strings) {
-        EzDoorStateGenerator(strings.blockname);
-        EzDoorModelGenerator(strings.blockname);
-        EzFlatItemModelGenerator(strings.blockname);
+    public static void createEzDoor(BlockMapData blockMapData) {
+        EzDoorStateGenerator(blockMapData.blockname);
+        EzDoorModelGenerator(blockMapData.blockname);
+        EzFlatItemModelGenerator(blockMapData.blockname);
     }
 
-    public static void createEzTrapDoor(Strings strings) {
-        EzTrapDoorStateGenerator(strings.blockname);
-        EzTrapDoorModelGenerator(strings.blockname);
-        EzItemModelGenerator(strings.blockname, "_bottom");
+    public static void createEzTrapDoor(BlockMapData blockMapData) {
+        EzTrapDoorStateGenerator(blockMapData.blockname);
+        EzTrapDoorModelGenerator(blockMapData.blockname);
+        EzItemModelGenerator(blockMapData.blockname, "_bottom");
     }
 
-    public static void createEzButton(Strings strings) {
-        EzButtonStateGenerator(strings.blockname);
-        EzButtonModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzButton(BlockMapData blockMapData) {
+        EzButtonStateGenerator(blockMapData.blockname);
+        EzButtonModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzFence(Strings strings) {
-        EzFenceStateGenerator(strings.blockname);
-        EzFenceModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzFence(BlockMapData blockMapData) {
+        EzFenceStateGenerator(blockMapData.blockname);
+        EzFenceModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzFenceGate(Strings strings) {
-        EzFenceGateStateGenerator(strings.blockname);
-        EzFenceGateModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzFenceGate(BlockMapData blockMapData) {
+        EzFenceGateStateGenerator(blockMapData.blockname);
+        EzFenceGateModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzWall(Strings strings) {
-        EzWallStateGenerator(strings.blockname);
-        EzWallModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "_inventory");
+    public static void createEzWall(BlockMapData blockMapData) {
+        EzWallStateGenerator(blockMapData.blockname);
+        EzWallModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "_inventory");
     }
 
-    public static void createEzPressurePlate(Strings strings) {
-        EzPressurePlateStateGenerator(strings.blockname);
-        EzPressurePlateModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzPressurePlate(BlockMapData blockMapData) {
+        EzPressurePlateStateGenerator(blockMapData.blockname);
+        EzPressurePlateModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
-    public static void createEzCarpet(Strings strings) {
-        EzCarpetStateGenerator(strings.blockname);
-        EzCarpetModelGenerator(strings.blockname, strings.fullblockname);
-        EzItemModelGenerator(strings.blockname, "");
+    public static void createEzCarpet(BlockMapData blockMapData) {
+        EzCarpetStateGenerator(blockMapData.blockname);
+        EzCarpetModelGenerator(blockMapData.blockname, blockMapData.fullblockname);
+        EzItemModelGenerator(blockMapData.blockname, "");
     }
 
     //Blockstates
     public static void EzBlockStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -114,7 +114,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -340,8 +340,8 @@ public class JsonGenerators {
                                 "y": 180
                     }
                     }
-                }""".replace("$modid", EzLib.getModId()).replace("$name", key);
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+                }""".replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
 
         try {
@@ -360,7 +360,7 @@ public class JsonGenerators {
     }
 
     public static void EzSlabStateGenerator(String key, String fullBlock) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -376,7 +376,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key).replace("$full_name", fullBlock);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key).replace("$full_name", fullBlock);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -393,7 +393,7 @@ public class JsonGenerators {
     }
 
     public static void EzVerticalSlabStateGenerator(String key, String fullBlock) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -424,7 +424,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key).replace("$full_name", fullBlock);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key).replace("$full_name", fullBlock);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -441,7 +441,7 @@ public class JsonGenerators {
     }
 
     public static void EzColumnStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -460,7 +460,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -477,7 +477,7 @@ public class JsonGenerators {
     }
 
     public static void EzDoorStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -604,7 +604,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -621,7 +621,7 @@ public class JsonGenerators {
     }
 
     public static void EzTrapDoorStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -682,7 +682,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -699,7 +699,7 @@ public class JsonGenerators {
     }
 
     public static void EzButtonStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -820,7 +820,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -837,7 +837,7 @@ public class JsonGenerators {
     }
 
     public static void EzFenceStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -888,7 +888,7 @@ public class JsonGenerators {
                     }
                   ]
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -905,7 +905,7 @@ public class JsonGenerators {
     }
 
     public static void EzFenceGateStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String FenceGate = """
                 {
@@ -988,7 +988,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1005,7 +1005,7 @@ public class JsonGenerators {
     }
 
     public static void EzWallStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -1098,7 +1098,7 @@ public class JsonGenerators {
                     }
                   ]
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1115,7 +1115,7 @@ public class JsonGenerators {
     }
 
     public static void EzPressurePlateStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -1128,7 +1128,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1145,7 +1145,7 @@ public class JsonGenerators {
     }
 
     public static void EzCarpetStateGenerator(String key) {
-        Path blockStatePath = Paths.get(EzLib.getModId() + File.separator + "blockstates" + File.separator + key + ".json");
+        Path blockStatePath = Paths.get(EzUtils.checkModContainerId() + File.separator + "blockstates" + File.separator + key + ".json");
         Path path = resourcePath.resolve(blockStatePath);
         String blockStateContent = """
                 {
@@ -1155,7 +1155,7 @@ public class JsonGenerators {
                     }
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1787,13 +1787,13 @@ public class JsonGenerators {
 
     //ItemModels
     public static void EzItemModelGenerator(String key, String suffix) {
-        Path itemModelPath = Paths.get(EzLib.getModId() + File.separator + "models" + File.separator + "item" + File.separator + key + ".json");
+        Path itemModelPath = Paths.get(EzUtils.checkModContainerId() + File.separator + "models" + File.separator + "item" + File.separator + key + ".json");
         Path path = resourcePath.resolve(itemModelPath);
         String blockStateContent = """
                 {
                   "parent": "$modid:block/$name"
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key + suffix);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key + suffix);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1809,7 +1809,7 @@ public class JsonGenerators {
     }
 
     public static void EzFlatItemModelGenerator(String key) {
-        Path itemModelPath = Paths.get(EzLib.getModId() + File.separator + "models" + File.separator + "item" + File.separator + key + ".json");
+        Path itemModelPath = Paths.get(EzUtils.checkModContainerId() + File.separator + "models" + File.separator + "item" + File.separator + key + ".json");
         Path path = resourcePath.resolve(itemModelPath);
         String blockStateContent = """
                 {
@@ -1818,7 +1818,7 @@ public class JsonGenerators {
                     "layer0": "$modid:item/$name"
                   }
                 }
-                """.replace("$modid", EzLib.getModId()).replace("$name", key);
+                """.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1835,9 +1835,9 @@ public class JsonGenerators {
 
     //BaseJsonGenerator -> this makes it way easyer to create the other methods...
     public static void baseModelJsonGenWithFullTexture(String key, String fullName, String blockModelContentString) {
-        Path modelPath = Paths.get(EzLib.getModId() + File.separator + "models" + File.separator + "block" + File.separator + key + ".json");
+        Path modelPath = Paths.get(EzUtils.checkModContainerId() + File.separator + "models" + File.separator + "block" + File.separator + key + ".json");
         Path path = resourcePath.resolve(modelPath);
-        String blockModelContent = blockModelContentString.replace("$modid", EzLib.getModId()).replace("$name", key).replace("$full_name", fullName);
+        String blockModelContent = blockModelContentString.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key).replace("$full_name", fullName);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {
@@ -1854,9 +1854,9 @@ public class JsonGenerators {
     }
 
     public static void baseModelJsonGenWithCustomTexture(String key, String key2, String blockModelContentString) {
-        Path modelPath = Paths.get(EzLib.getModId() + File.separator + "models" + File.separator + "block" + File.separator + key + ".json");
+        Path modelPath = Paths.get(EzUtils.checkModContainerId() + File.separator + "models" + File.separator + "block" + File.separator + key + ".json");
         Path path = resourcePath.resolve(modelPath);
-        String blockModelContent = blockModelContentString.replace("$modid", EzLib.getModId()).replace("$name", key2);
+        String blockModelContent = blockModelContentString.replace("$modid", EzUtils.checkModContainerId()).replace("$name", key2);
         try {
             Files.createDirectories(path.getParent());
         } catch (IOException e) {

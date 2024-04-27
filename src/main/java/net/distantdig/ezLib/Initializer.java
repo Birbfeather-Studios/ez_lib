@@ -1,11 +1,13 @@
 package net.distantdig.ezLib;
 
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 
-public class ExampleMod extends EzLib {
+public class Initializer implements ModInitializer {
 
     private static final boolean isDevEnvironment = FabricLoader.getInstance().isDevelopmentEnvironment();
-    public ExampleMod() {
-        super("example_mod");
+
+    @Override
+    public void onInitialize() {
     }
 }

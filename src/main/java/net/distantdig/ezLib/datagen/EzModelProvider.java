@@ -7,8 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
-
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 
@@ -24,21 +23,26 @@ public class EzModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        EzBlocksBuilder.blockMap.forEach((strings, block) -> {JsonGenerators.createEzBlock(strings);});
-        EzBlocksBuilder.stairMap.forEach((strings, block) -> {JsonGenerators.createEzStair(strings);});
-        EzBlocksBuilder.slabMap.forEach((strings, block) -> {JsonGenerators.createEzSlab(strings);});
-        EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> {JsonGenerators.createEzVerticalSlab(strings);});
-        EzBlocksBuilder.leavesMap.forEach((strings, block) -> {JsonGenerators.createEzBlock(strings);});
-        EzBlocksBuilder.rotatedPillarMap.forEach((strings, block) -> {JsonGenerators.createEzColumn(strings);});
+        EzBlocksBuilder.blockMap.forEach((block, strings) -> {
+            blockStateModelGenerator.createTrivialCube(block);
+//            strings.family = blockStateModelGenerator.family(block);
+        });
+        EzBlocksBuilder.stairMap.forEach((strings, block) -> JsonGenerators.createEzStair(strings));
+        EzBlocksBuilder.slabMap.forEach((strings, block) -> JsonGenerators.createEzSlab(strings));
+        EzBlocksBuilder.verticalSlabMap.forEach((strings, block) -> JsonGenerators.createEzVerticalSlab(strings));
+        EzBlocksBuilder.leavesMap.forEach((strings, block) -> JsonGenerators.createEzBlock(strings));
+        EzBlocksBuilder.rotatedPillarMap.forEach((strings, block) -> JsonGenerators.createEzColumn(strings));
         EzBlocksBuilder.woodMap.forEach((strings, rotatedPillarBlock) -> JsonGenerators.createEzWood(strings));
-        EzBlocksBuilder.doorMap.forEach((strings, block) -> {JsonGenerators.createEzDoor(strings);});
-        EzBlocksBuilder.trapDoorMap.forEach((strings, block) -> {JsonGenerators.createEzTrapDoor(strings);});
-        EzBlocksBuilder.buttonMap.forEach((strings, block) -> {JsonGenerators.createEzButton(strings);});
-        EzBlocksBuilder.fenceMap.forEach((strings, block) -> {JsonGenerators.createEzFence(strings);});
-        EzBlocksBuilder.fenceGateMap.forEach((strings, block) -> {JsonGenerators.createEzFenceGate(strings);});
-        EzBlocksBuilder.wallMap.forEach((strings, block) -> {JsonGenerators.createEzWall(strings);});
-        EzBlocksBuilder.pressurePlateMap.forEach((strings, block) -> {JsonGenerators.createEzPressurePlate(strings);});
-        EzBlocksBuilder.carpetMap.forEach((strings, block) -> {JsonGenerators.createEzCarpet(strings);});
+        EzBlocksBuilder.doorMap.forEach((strings, block) -> JsonGenerators.createEzDoor(strings));
+        EzBlocksBuilder.trapDoorMap.forEach((strings, block) -> JsonGenerators.createEzTrapDoor(strings));
+        EzBlocksBuilder.buttonMap.forEach((strings, block) -> JsonGenerators.createEzButton(strings));
+        EzBlocksBuilder.fenceMap.forEach((strings, block) -> JsonGenerators.createEzFence(strings));
+        EzBlocksBuilder.fenceGateMap.forEach((strings, block) -> JsonGenerators.createEzFenceGate(strings));
+        EzBlocksBuilder.wallMap.forEach((strings, block) -> JsonGenerators.createEzWall(strings));
+        EzBlocksBuilder.pressurePlateMap.forEach((strings, block) -> JsonGenerators.createEzPressurePlate(strings));
+        EzBlocksBuilder.carpetMap.forEach((strings, block) -> JsonGenerators.createEzCarpet(strings));
+
+
     }
 
     @Override

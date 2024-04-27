@@ -10,10 +10,11 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -81,7 +82,8 @@ public class EzBlocksBuilder {
         public String MaterialType;
     }
 
-    public class Strings {
+    public class BlockMapData {
+        public Block block;
         public String blockname;
         public String fullblockname;
         public EzMaterial ezMaterial;
@@ -89,6 +91,7 @@ public class EzBlocksBuilder {
         public boolean burnable;
         public TagKey<Item> tagKey;
         public boolean hasWall;
+        public BlockModelGenerators.BlockFamilyProvider family;
     }
 
     public static class OreData {
@@ -136,22 +139,22 @@ public class EzBlocksBuilder {
     }
 
     public final static HashMap<String, BlockItem> inventoryMap = new HashMap<>();
-    public final static HashMap<Strings, Block> blockMap = new HashMap<>();
+    public final static HashMap<Block, BlockMapData> blockMap = new HashMap<>();
     public final static HashMap<String, OreData> oreMap = new HashMap<>();
-    public final static HashMap<Strings, StairBlock> stairMap = new HashMap<>();
-    public final static HashMap<Strings, SlabBlock> slabMap = new HashMap<>();
-    public final static HashMap<Strings, EzVerticalSlabBlock> verticalSlabMap = new HashMap<>();
-    public final static HashMap<Strings, WallBlock> wallMap = new HashMap<>();
-    public final static HashMap<Strings, DoorBlock> doorMap = new HashMap<>();
-    public final static HashMap<Strings, TrapDoorBlock> trapDoorMap = new HashMap<>();
-    public final static HashMap<Strings, FenceBlock> fenceMap = new HashMap<>();
-    public final static HashMap<Strings, FenceGateBlock> fenceGateMap = new HashMap<>();
-    public final static HashMap<Strings, PressurePlateBlock> pressurePlateMap = new HashMap<>();
-    public final static HashMap<Strings, ButtonBlock> buttonMap = new HashMap<>();
-    public final static HashMap<Strings, CarpetBlock> carpetMap = new HashMap<>();
-    public final static HashMap<Strings, RotatedPillarBlock> rotatedPillarMap = new HashMap<>();
-    public final static HashMap<Strings, LeavesBlock> leavesMap = new HashMap<>();
-    public final static HashMap<Strings, RotatedPillarBlock> woodMap = new HashMap<>();
+    public final static HashMap<BlockMapData, StairBlock> stairMap = new HashMap<>();
+    public final static HashMap<BlockMapData, SlabBlock> slabMap = new HashMap<>();
+    public final static HashMap<BlockMapData, EzVerticalSlabBlock> verticalSlabMap = new HashMap<>();
+    public final static HashMap<BlockMapData, WallBlock> wallMap = new HashMap<>();
+    public final static HashMap<BlockMapData, DoorBlock> doorMap = new HashMap<>();
+    public final static HashMap<BlockMapData, TrapDoorBlock> trapDoorMap = new HashMap<>();
+    public final static HashMap<BlockMapData, FenceBlock> fenceMap = new HashMap<>();
+    public final static HashMap<BlockMapData, FenceGateBlock> fenceGateMap = new HashMap<>();
+    public final static HashMap<BlockMapData, PressurePlateBlock> pressurePlateMap = new HashMap<>();
+    public final static HashMap<BlockMapData, ButtonBlock> buttonMap = new HashMap<>();
+    public final static HashMap<BlockMapData, CarpetBlock> carpetMap = new HashMap<>();
+    public final static HashMap<BlockMapData, RotatedPillarBlock> rotatedPillarMap = new HashMap<>();
+    public final static HashMap<BlockMapData, LeavesBlock> leavesMap = new HashMap<>();
+    public final static HashMap<BlockMapData, RotatedPillarBlock> woodMap = new HashMap<>();
 
     public final static ArrayList<Block> pickaxable = new ArrayList<>();
     public final static ArrayList<Block> axable = new ArrayList<>();
@@ -167,17 +170,17 @@ public class EzBlocksBuilder {
         this.blockProperties = blockProperties;
         this.data = new BlockData();
         this.ezMaterial = ezMaterial;
-        Strings strings = new Strings();
-        strings.ezMaterial = ezMaterial;
-        strings.blockname = name1;
-        strings.fullblockname = name1;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.ezMaterial = ezMaterial;
+        blockMapData.blockname = name1;
+        blockMapData.fullblockname = name1;
         if (ezMaterial == EzMaterial.ice) {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new IceBlock(FabricBlockSettings.copyOf(blockProperties)));} else
         {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));}
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
         if (ezMaterial == EzMaterial.wood) {this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));}
-        strings.tagKey = this.tagKey;
+        blockMapData.tagKey = this.tagKey;
         inventoryMap.put(name1, data.blockItem);
-        blockMap.put(strings, data.block);
+        blockMap.put(data.block, blockMapData);
     }
 
     public EzBlocksBuilder makeOre(RuleTest replaceTestType, int vienSize, int veinsPerChunk, HeightRangePlacement heightRangePlacement) {
@@ -209,241 +212,241 @@ public class EzBlocksBuilder {
 
     public EzBlocksBuilder stair() {
         String stairName = name + "_stair";
-        Strings strings = new Strings();
-        strings.blockname = stairName;
-        strings.fullblockname = name1;
-        strings.ezMaterial = this.ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = stairName;
+        blockMapData.fullblockname = name1;
+        blockMapData.ezMaterial = this.ezMaterial;
         this.data.stairBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), stairName), new StairBlock(data.block.defaultBlockState(), FabricBlockSettings.copyOf(blockProperties)));
         this.data.stairItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), stairName), new BlockItem(data.stairBlock, new FabricItemSettings()));
         inventoryMap.put(stairName, data.stairItem);
-        stairMap.put(strings, data.stairBlock);
+        stairMap.put(blockMapData, data.stairBlock);
         return this;
     }
 
     public EzBlocksBuilder slab() {
         String slabName = name + "_slab";
-        Strings strings = new Strings();
-        strings.blockname = slabName;
-        strings.fullblockname = name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = slabName;
+        blockMapData.fullblockname = name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.slabBlock = register(slabName, SlabBlock::new, FabricBlockSettings.copyOf(blockProperties));
         this.data.slabItem = registerItem(slabName, data.slabBlock);
         inventoryMap.put(slabName, data.slabItem);
-        slabMap.put(strings, data.slabBlock);
+        slabMap.put(blockMapData, data.slabBlock);
         return this;
     }
 
     public EzBlocksBuilder verticalSlab() {
         String verticalSlabName = "vertical_" + name + "_slab";
-        Strings strings = new Strings();
-        strings.blockname = verticalSlabName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = verticalSlabName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.verticalSlabBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), verticalSlabName), new EzVerticalSlabBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.verticalSlabItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), verticalSlabName), new BlockItem(data.verticalSlabBlock, new FabricItemSettings()));
         inventoryMap.put(verticalSlabName, data.verticalSlabItem);
-        verticalSlabMap.put(strings, data.verticalSlabBlock);
+        verticalSlabMap.put(blockMapData, data.verticalSlabBlock);
         return this;
     }
 
     public EzBlocksBuilder extraBlock(String prefix, String suffix, @Nullable Block extraBlockProperties) {
         Block extraProperies = extraBlockProperties;
-        Strings strings = new Strings();
-        strings.blockname = prefix + name + suffix;
-        strings.ezMaterial = ezMaterial;
-        strings.fullblockname = name1;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = prefix + name + suffix;
+        blockMapData.ezMaterial = ezMaterial;
+        blockMapData.fullblockname = name1;
         if (extraBlockProperties == null) {
             extraProperies = this.blockProperties;
         }
-        Block extraBlock = register(strings.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
-        BlockItem extraItem = registerItem(strings.blockname, extraBlock);
+        Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
+        BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
-        inventoryMap.put(strings.blockname, extraItem);
-        blockMap.put(strings, extraBlock);
+        inventoryMap.put(blockMapData.blockname, extraItem);
+        blockMap.put(extraBlock, blockMapData);
         return this;
     }
 
     public EzBlocksBuilder leaves(@Nullable String prefix, @Nullable String suffix, Block saplingBlock) {
-        Strings strings = new Strings();
-        strings.blockname = prefix + this.name + suffix + "_leaves";
-        strings.ezMaterial = ezMaterial;
-        strings.saplingBlock = saplingBlock;
-        this.data.leavesBlock = register(strings.blockname, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
-        this.data.leavesItem = registerItem(strings.blockname, data.leavesBlock);
-        inventoryMap.put(strings.blockname, data.leavesItem);
-        leavesMap.put(strings, data.leavesBlock);
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = prefix + this.name + suffix + "_leaves";
+        blockMapData.ezMaterial = ezMaterial;
+        blockMapData.saplingBlock = saplingBlock;
+        this.data.leavesBlock = register(blockMapData.blockname, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
+        this.data.leavesItem = registerItem(blockMapData.blockname, data.leavesBlock);
+        inventoryMap.put(blockMapData.blockname, data.leavesItem);
+        leavesMap.put(blockMapData, data.leavesBlock);
         hoeable.add(data.leavesBlock);
         return this;
     }
 
     public EzBlocksBuilder pillar(String prefix, String suffix, @Nullable Block extraBlockProperties) {
         Block extraProperties = extraBlockProperties;
-        Strings strings = new Strings();
-        strings.blockname = prefix + name + suffix;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = prefix + name + suffix;
+        blockMapData.ezMaterial = ezMaterial;
         if (extraBlockProperties == null) {
             extraProperties = this.blockProperties;
         }
-        RotatedPillarBlock pillar = register(strings.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
-        BlockItem pillarItem = registerItem(strings.blockname, pillar);
+        RotatedPillarBlock pillar = register(blockMapData.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
+        BlockItem pillarItem = registerItem(blockMapData.blockname, pillar);
         this.data.extraColumns.put(pillar, pillarItem);
-        inventoryMap.put(strings.blockname, pillarItem);
-        rotatedPillarMap.put(strings, pillar);
+        inventoryMap.put(blockMapData.blockname, pillarItem);
+        rotatedPillarMap.put(blockMapData, pillar);
         return this;
     }
 
     public EzBlocksBuilder logs(String prefix, String suffix, @Nullable Block extraBlockProperties, boolean burnable) {
         Block extraProperties = extraBlockProperties;
-        Strings strings1 = new Strings();
-        Strings strings2 = new Strings();
-        strings1.blockname = prefix + name + suffix;
-        strings1.ezMaterial = ezMaterial;
-        strings2.blockname = "stripped_" + prefix + name + suffix;
-        strings2.ezMaterial = ezMaterial;
-        strings1.burnable = burnable;
-        strings2.burnable = burnable;
+        BlockMapData blockMapData1 = new BlockMapData();
+        BlockMapData blockMapData2 = new BlockMapData();
+        blockMapData1.blockname = prefix + name + suffix;
+        blockMapData1.ezMaterial = ezMaterial;
+        blockMapData2.blockname = "stripped_" + prefix + name + suffix;
+        blockMapData2.ezMaterial = ezMaterial;
+        blockMapData1.burnable = burnable;
+        blockMapData2.burnable = burnable;
         if (extraBlockProperties == null) {
             extraProperties = this.blockProperties;
         }
-        RotatedPillarBlock log = register(strings1.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
-        RotatedPillarBlock strippedlog = register(strings2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
-        BlockItem logItem = registerItem(strings1.blockname, log);
-        BlockItem strippedlogItem = registerItem(strings2.blockname, strippedlog);
+        RotatedPillarBlock log = register(blockMapData1.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
+        RotatedPillarBlock strippedlog = register(blockMapData2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
+        BlockItem logItem = registerItem(blockMapData1.blockname, log);
+        BlockItem strippedlogItem = registerItem(blockMapData2.blockname, strippedlog);
         this.data.extraColumns.put(log, logItem);
         this.data.extraColumns.put(strippedlog, strippedlogItem);
         StrippableBlockRegistry.register(log, strippedlog);
-        inventoryMap.put(strings1.blockname, logItem);
-        inventoryMap.put(strings2.blockname, strippedlogItem);
-        rotatedPillarMap.put(strings1, log);
-        rotatedPillarMap.put(strings2, strippedlog);
+        inventoryMap.put(blockMapData1.blockname, logItem);
+        inventoryMap.put(blockMapData2.blockname, strippedlogItem);
+        rotatedPillarMap.put(blockMapData1, log);
+        rotatedPillarMap.put(blockMapData2, strippedlog);
         return this;
     }
 
     public EzBlocksBuilder wood(String pillarname, String strippedName, Boolean burnable) {
-        Strings strings1 = new Strings();
-        Strings strings2 = new Strings();
-        strings1.blockname = name + "_wood";
-        strings2.blockname = "stripped_" + name + "_wood";
-        strings1.fullblockname = pillarname;
-        strings2.fullblockname = strippedName;
-        strings1.ezMaterial = ezMaterial;
-        strings2.ezMaterial = ezMaterial;
-        strings1.burnable = burnable;
-        strings2.burnable = burnable;
-        RotatedPillarBlock woodBlock = register(strings1.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_WOOD));
-        RotatedPillarBlock strippedwoodBlock = register(strings2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD));
-        BlockItem woodItem = registerItem(strings1.blockname, woodBlock);
-        BlockItem strippedwoodItem = registerItem(strings2.blockname, strippedwoodBlock);
+        BlockMapData blockMapData1 = new BlockMapData();
+        BlockMapData blockMapData2 = new BlockMapData();
+        blockMapData1.blockname = name + "_wood";
+        blockMapData2.blockname = "stripped_" + name + "_wood";
+        blockMapData1.fullblockname = pillarname;
+        blockMapData2.fullblockname = strippedName;
+        blockMapData1.ezMaterial = ezMaterial;
+        blockMapData2.ezMaterial = ezMaterial;
+        blockMapData1.burnable = burnable;
+        blockMapData2.burnable = burnable;
+        RotatedPillarBlock woodBlock = register(blockMapData1.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_WOOD));
+        RotatedPillarBlock strippedwoodBlock = register(blockMapData2.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD));
+        BlockItem woodItem = registerItem(blockMapData1.blockname, woodBlock);
+        BlockItem strippedwoodItem = registerItem(blockMapData2.blockname, strippedwoodBlock);
         StrippableBlockRegistry.register(woodBlock, strippedwoodBlock);
-        strings1.tagKey = this.tagKey;
-        inventoryMap.put(strings1.blockname, woodItem);
-        inventoryMap.put(strings2.blockname, strippedwoodItem);
-        woodMap.put(strings1, woodBlock);
-        woodMap.put(strings2, strippedwoodBlock);
+        blockMapData1.tagKey = this.tagKey;
+        inventoryMap.put(blockMapData1.blockname, woodItem);
+        inventoryMap.put(blockMapData2.blockname, strippedwoodItem);
+        woodMap.put(blockMapData1, woodBlock);
+        woodMap.put(blockMapData2, strippedwoodBlock);
         return this;
     }
 
     public EzBlocksBuilder wall() {
         String wallName = name + "_wall";
-        Strings strings = new Strings();
-        strings.blockname = wallName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = wallName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.wallBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), wallName), new WallBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.wallItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), wallName), new BlockItem(this.data.wallBlock, new FabricItemSettings()));
         inventoryMap.put(wallName, data.wallItem);
-        wallMap.put(strings, data.wallBlock);
+        wallMap.put(blockMapData, data.wallBlock);
         this.hasWall = true;
         return this;
     }
 
     public EzBlocksBuilder door(BlockSetType blockSetType, Block blockProperties) {
-        Strings strings = new Strings();
-        strings.blockname = name + "_door";
-        strings.ezMaterial = ezMaterial;
-        strings.fullblockname = this.name1;
-        this.data.doorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), strings.blockname), new DoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
-        this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), strings.blockname), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
-        inventoryMap.put(strings.blockname, data.doorItem);
-        doorMap.put(strings, data.doorBlock);
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = name + "_door";
+        blockMapData.ezMaterial = ezMaterial;
+        blockMapData.fullblockname = this.name1;
+        this.data.doorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new DoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
+        this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
+        inventoryMap.put(blockMapData.blockname, data.doorItem);
+        doorMap.put(blockMapData, data.doorBlock);
         return this;
     }
 
     public EzBlocksBuilder trapdoor(BlockSetType blockSetType, Block blockProperties) {
-        Strings strings = new Strings();
-        strings.blockname = name + "_trapdoor";
-        strings.ezMaterial = ezMaterial;
-        strings.fullblockname = this.name1;
-        strings.hasWall = this.hasWall;
-        this.data.trapdoorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), strings.blockname), new TrapDoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
-        this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), strings.blockname), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
-        inventoryMap.put(strings.blockname, data.trapdoorItem);
-        trapDoorMap.put(strings, data.trapdoorBlock);
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = name + "_trapdoor";
+        blockMapData.ezMaterial = ezMaterial;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.hasWall = this.hasWall;
+        this.data.trapdoorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new TrapDoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
+        this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
+        inventoryMap.put(blockMapData.blockname, data.trapdoorItem);
+        trapDoorMap.put(blockMapData, data.trapdoorBlock);
         return this;
     }
 
     public EzBlocksBuilder button(BlockSetType blockSetType, Integer ticksPressed, Boolean arrowHits) {
         String buttonName = name + "_button";
-        Strings strings = new Strings();
-        strings.blockname = buttonName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = buttonName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.buttonBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), buttonName), new ButtonBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType, ticksPressed, arrowHits));
         this.data.buttonItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), buttonName), new BlockItem(this.data.buttonBlock, new FabricItemSettings()));
         inventoryMap.put(buttonName, data.buttonItem);
-        buttonMap.put(strings, data.buttonBlock);
+        buttonMap.put(blockMapData, data.buttonBlock);
         return this;
     }
 
     public EzBlocksBuilder fence() {
         String fenceName = name + "_fence";
-        Strings strings = new Strings();
-        strings.blockname = fenceName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = fenceName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.fenceBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), fenceName), new FenceBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.fenceItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceName), new BlockItem(this.data.fenceBlock, new FabricItemSettings()));
         inventoryMap.put(fenceName, data.fenceItem);
-        fenceMap.put(strings, data.fenceBlock);
+        fenceMap.put(blockMapData, data.fenceBlock);
         return this;
     }
 
     public EzBlocksBuilder fenceGate() {
         String fenceGateName = name + "_fence_gate";
-        Strings strings = new Strings();
-        strings.blockname = fenceGateName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = fenceGateName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.fenceGateBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), fenceGateName), new FenceGateBlock(FabricBlockSettings.copyOf(blockProperties), WoodType.OAK));
         this.data.fenceGateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceGateName), new BlockItem(this.data.fenceGateBlock, new FabricItemSettings()));
         inventoryMap.put(fenceGateName, data.fenceGateItem);
-        fenceGateMap.put(strings, data.fenceGateBlock);
+        fenceGateMap.put(blockMapData, data.fenceGateBlock);
         return this;
     }
 
     public EzBlocksBuilder pressurePlate(BlockSetType type, PressurePlateBlock.Sensitivity sensitivity) {
         String pressurePlateName = name + "_pressure_plate";
-        Strings strings = new Strings();
-        strings.blockname = pressurePlateName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = pressurePlateName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.pressurePlateBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), pressurePlateName), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(blockProperties), type));
         this.data.pressurePlateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), pressurePlateName), new BlockItem(this.data.pressurePlateBlock, new FabricItemSettings()));
         inventoryMap.put(pressurePlateName, data.pressurePlateItem);
-        pressurePlateMap.put(strings, data.pressurePlateBlock);
+        pressurePlateMap.put(blockMapData, data.pressurePlateBlock);
         return this;
     }
 
     public EzBlocksBuilder carpet(Block blockProperties) {
         String carpetName = name + "_carpet";
-        Strings strings = new Strings();
-        strings.blockname = carpetName;
-        strings.fullblockname = this.name1;
-        strings.ezMaterial = ezMaterial;
+        BlockMapData blockMapData = new BlockMapData();
+        blockMapData.blockname = carpetName;
+        blockMapData.fullblockname = this.name1;
+        blockMapData.ezMaterial = ezMaterial;
         this.data.carpetBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), carpetName), new CarpetBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.carpetItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), carpetName), new BlockItem(this.data.carpetBlock, new FabricItemSettings()));
         inventoryMap.put(carpetName, data.carpetItem);
-        carpetMap.put(strings, data.carpetBlock);
+        carpetMap.put(blockMapData, data.carpetBlock);
         return this;
     }
 
