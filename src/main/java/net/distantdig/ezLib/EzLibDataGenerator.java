@@ -39,10 +39,10 @@ public class EzLibDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 	}
 
-	@Override
-	public @Nullable String getEffectiveModId() {
-		return EzUtils.checkModContainerId();
-	}
+//	@Override
+//	public @Nullable String getEffectiveModId() {
+//		return EzUtils.checkModContainerId();
+//	}
 
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
