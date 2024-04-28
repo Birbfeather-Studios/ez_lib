@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -44,11 +43,23 @@ public class EzBlocksBuilder {
     private TagKey<Item> tagKey = null;
     private boolean hasWall;
     private BlockData data;
-
     public static RuleTest stoneReplacables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
     public static RuleTest deepslateReplacables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
     public static RuleTest netherReplacables = new TagMatchTest(BlockTags.BASE_STONE_NETHER);
     public static RuleTest endReplacables = new BlockMatchTest(Blocks.END_STONE);
+
+    public static class FamilyData {
+        public Block parentBlock;
+        public Block stair;
+        public Block slab;
+        public Block button;
+        public Block pressurePlate;
+        public Block fence;
+        public Block fenceGate;
+        public Block wall;
+        public Block door;
+        public Block trapdoor;
+    }
 
     public static class BlockData {
         public Block block;
@@ -91,7 +102,7 @@ public class EzBlocksBuilder {
         public boolean burnable;
         public TagKey<Item> tagKey;
         public boolean hasWall;
-        public BlockModelGenerators.BlockFamilyProvider family;
+        public FamilyData familyData;
     }
 
     public static class OreData {
@@ -179,6 +190,8 @@ public class EzBlocksBuilder {
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
         if (ezMaterial == EzMaterial.wood) {this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));}
         blockMapData.tagKey = this.tagKey;
+        blockMapData.familyData = new FamilyData();
+        blockMapData.familyData.parentBlock = data.block;
         inventoryMap.put(name1, data.blockItem);
         blockMap.put(data.block, blockMapData);
     }
@@ -220,6 +233,7 @@ public class EzBlocksBuilder {
         this.data.stairItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), stairName), new BlockItem(data.stairBlock, new FabricItemSettings()));
         inventoryMap.put(stairName, data.stairItem);
         stairMap.put(blockMapData, data.stairBlock);
+        blockMapData.familyData.stair = data.stairBlock;
         return this;
     }
 
@@ -233,6 +247,7 @@ public class EzBlocksBuilder {
         this.data.slabItem = registerItem(slabName, data.slabBlock);
         inventoryMap.put(slabName, data.slabItem);
         slabMap.put(blockMapData, data.slabBlock);
+        blockMapData.familyData.slab = data.slabBlock;
         return this;
     }
 
@@ -246,6 +261,7 @@ public class EzBlocksBuilder {
         this.data.verticalSlabItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), verticalSlabName), new BlockItem(data.verticalSlabBlock, new FabricItemSettings()));
         inventoryMap.put(verticalSlabName, data.verticalSlabItem);
         verticalSlabMap.put(blockMapData, data.verticalSlabBlock);
+//        blockMapData.familyData.slab = data.slabBlock;
         return this;
     }
 
@@ -357,6 +373,7 @@ public class EzBlocksBuilder {
         inventoryMap.put(wallName, data.wallItem);
         wallMap.put(blockMapData, data.wallBlock);
         this.hasWall = true;
+        blockMapData.familyData.wall = data.wallBlock;
         return this;
     }
 
@@ -369,6 +386,7 @@ public class EzBlocksBuilder {
         this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
         inventoryMap.put(blockMapData.blockname, data.doorItem);
         doorMap.put(blockMapData, data.doorBlock);
+        blockMapData.familyData.door = data.doorBlock;
         return this;
     }
 
@@ -382,6 +400,7 @@ public class EzBlocksBuilder {
         this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
         inventoryMap.put(blockMapData.blockname, data.trapdoorItem);
         trapDoorMap.put(blockMapData, data.trapdoorBlock);
+        blockMapData.familyData.trapdoor = data.trapdoorBlock;
         return this;
     }
 
@@ -395,6 +414,7 @@ public class EzBlocksBuilder {
         this.data.buttonItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), buttonName), new BlockItem(this.data.buttonBlock, new FabricItemSettings()));
         inventoryMap.put(buttonName, data.buttonItem);
         buttonMap.put(blockMapData, data.buttonBlock);
+        blockMapData.familyData.button = data.buttonBlock;
         return this;
     }
 
@@ -408,6 +428,7 @@ public class EzBlocksBuilder {
         this.data.fenceItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceName), new BlockItem(this.data.fenceBlock, new FabricItemSettings()));
         inventoryMap.put(fenceName, data.fenceItem);
         fenceMap.put(blockMapData, data.fenceBlock);
+        blockMapData.familyData.fence = data.fenceBlock;
         return this;
     }
 
@@ -421,6 +442,7 @@ public class EzBlocksBuilder {
         this.data.fenceGateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceGateName), new BlockItem(this.data.fenceGateBlock, new FabricItemSettings()));
         inventoryMap.put(fenceGateName, data.fenceGateItem);
         fenceGateMap.put(blockMapData, data.fenceGateBlock);
+        blockMapData.familyData.fenceGate = data.fenceGateBlock;
         return this;
     }
 
@@ -434,6 +456,7 @@ public class EzBlocksBuilder {
         this.data.pressurePlateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), pressurePlateName), new BlockItem(this.data.pressurePlateBlock, new FabricItemSettings()));
         inventoryMap.put(pressurePlateName, data.pressurePlateItem);
         pressurePlateMap.put(blockMapData, data.pressurePlateBlock);
+        blockMapData.familyData.pressurePlate = data.pressurePlateBlock;
         return this;
     }
 
