@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class JsonGenerators {
 
     static Path resourcePath = Paths.get(System.getProperty("user.dir")).getParent().getParent()
-            .resolve(Paths.get("src" + File.separator + "main" + File.separator + "generated" + File.separator + "assets" + File.separator));
+            .resolve(Paths.get("src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator));
 
 
     //full generators -> use these outside this class!!
