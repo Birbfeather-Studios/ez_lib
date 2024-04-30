@@ -21,6 +21,8 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 //    private static final List<ItemLike> GOLD_SMELTABLES = List.of(Items.DEEPSLATE_GOLD_ORE);
 
     // Item Recipe Lists
+    public static ArrayList<EzBlocksBuilder.BlockData> extraBlockRecipeList = new ArrayList<>();
+
     public static ArrayList<EzItems.ToolData<SwordItem>> swordRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<PickaxeItem>> pickaxeRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<AxeItem>> axeRecipeList = new ArrayList<>();
@@ -43,6 +45,13 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
 //        oreSmelting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
 //        oreBlasting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
+
+        // Stone Cutter Recipes
+        extraBlockRecipeList.forEach((data -> {
+            data.extraBlocks.forEach((extraBlock, extraItem) -> {
+                stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, data.blockItem, extraItem, 1);
+            });
+        }));
 
         // Tool Crafting Recipes
         swordRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, data.toolItem, 1)
