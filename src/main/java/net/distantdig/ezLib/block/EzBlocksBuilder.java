@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
+import static net.distantdig.ezLib.datagen.EzRecipeProvider.extraBlockRecipeList;
+
 public class EzBlocksBuilder {
 
     private final String name;
@@ -277,6 +279,7 @@ public class EzBlocksBuilder {
         Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
+        extraBlockRecipeList.add(data);
         inventoryMap.put(blockMapData.blockname, extraItem);
         blockMap.put(extraBlock, blockMapData);
         return this;
