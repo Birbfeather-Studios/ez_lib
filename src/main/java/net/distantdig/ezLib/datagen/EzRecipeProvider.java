@@ -53,12 +53,10 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 //        oreBlasting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
 
         // Stone Cutter Recipes
-        extraBlockRecipeList.forEach((set -> {
-            stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, set.parent, set.block, 1);
-        }));
-        EzBlocksBuilder.stairMap.forEach(((blockMapData, stairBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, stairBlock, blockMapData.block)));
-        EzBlocksBuilder.slabMap.forEach(((blockMapData, slabBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock, blockMapData.block)));
-        EzBlocksBuilder.wallMap.forEach(((blockMapData, wallBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock, blockMapData.block)));
+        extraBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.parent.asItem(), blockPair.block.asItem(), 1)));
+        EzBlocksBuilder.stairMap.forEach(((blockMapData, stairBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, stairBlock.asItem(), blockMapData.block.asItem())));
+        EzBlocksBuilder.slabMap.forEach(((blockMapData, slabBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock.asItem(), blockMapData.block.asItem())));
+        EzBlocksBuilder.wallMap.forEach(((blockMapData, wallBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock.asItem(), blockMapData.block.asItem())));
 
         // Tool Crafting Recipes
         swordRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, data.toolItem, 1)
