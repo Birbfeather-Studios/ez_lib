@@ -286,7 +286,7 @@ public class EzBlocksBuilder {
         set.parent = data.block;
         set.block = data.slabBlock;
         if (this.ezMaterial.equals(EzMaterial.stone)) {
-            slabStoneRecipeList.add(set);
+            verticleSlabStoneRecipeList.add(set);
         }
 
         return this;

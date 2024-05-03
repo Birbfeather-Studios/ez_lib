@@ -30,6 +30,7 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     public static ArrayList<BlockPair> stoneBlockRecipeList = new ArrayList<>();
     public static ArrayList<BlockPair> stairStoneRecipeList = new ArrayList<>();
     public static ArrayList<BlockPair> slabStoneRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> verticleSlabStoneRecipeList = new ArrayList<>();
     public static ArrayList<BlockPair> wallRecipeList = new ArrayList<>();
 
     public static ArrayList<EzItems.ToolData<SwordItem>> swordRecipeList = new ArrayList<>();
@@ -59,6 +60,7 @@ public class EzRecipeProvider extends FabricRecipeProvider {
         stoneBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
         stairStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
         slabStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
+        verticleSlabStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
         wallRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
 
         // Tool Crafting Recipes
