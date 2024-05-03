@@ -27,9 +27,9 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     }
 
     // Item Recipe Lists
-    public static ArrayList<BlockPair> extraBlockRecipeList = new ArrayList<>();
-    public static ArrayList<BlockPair> stairRecipeList = new ArrayList<>();
-    public static ArrayList<BlockPair> slabRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> stoneBlockRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> stairStoneRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> slabStoneRecipeList = new ArrayList<>();
     public static ArrayList<BlockPair> wallRecipeList = new ArrayList<>();
 
     public static ArrayList<EzItems.ToolData<SwordItem>> swordRecipeList = new ArrayList<>();
@@ -56,9 +56,9 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 //        oreBlasting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
 
         // Stone Cutter Recipes
-        extraBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
-        stairRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
-        slabRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
+        stoneBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
+        stairStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
+        slabStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
         wallRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
 
         // Tool Crafting Recipes

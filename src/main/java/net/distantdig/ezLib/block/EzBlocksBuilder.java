@@ -241,7 +241,9 @@ public class EzBlocksBuilder {
         EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
         set.parent = data.block;
         set.block = data.stairBlock;
-        stairRecipeList.add(set);
+        if (this.ezMaterial.equals(EzMaterial.stone)) {
+            stairStoneRecipeList.add(set);
+        }
 
         return this;
     }
@@ -261,7 +263,9 @@ public class EzBlocksBuilder {
         EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
         set.parent = data.block;
         set.block = data.slabBlock;
-        slabRecipeList.add(set);
+        if (this.ezMaterial.equals(EzMaterial.stone)) {
+            slabStoneRecipeList.add(set);
+        }
 
         return this;
     }
@@ -276,7 +280,15 @@ public class EzBlocksBuilder {
         this.data.verticalSlabItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), verticalSlabName), new BlockItem(data.verticalSlabBlock, new FabricItemSettings()));
         inventoryMap.put(verticalSlabName, data.verticalSlabItem);
         verticalSlabMap.put(blockMapData, data.verticalSlabBlock);
-//        blockMapData.familyData.slab = data.slabBlock;
+
+        // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = data.slabBlock;
+        if (this.ezMaterial.equals(EzMaterial.stone)) {
+            slabStoneRecipeList.add(set);
+        }
+
         return this;
     }
 
@@ -292,14 +304,16 @@ public class EzBlocksBuilder {
         Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
-        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
         inventoryMap.put(blockMapData.blockname, extraItem);
         blockMap.put(extraBlock, blockMapData);
 
         // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
         set.parent = data.block;
         set.block = extraBlock;
-        extraBlockRecipeList.add(set);
+        if (this.ezMaterial.equals(EzMaterial.stone)) {
+            stoneBlockRecipeList.add(set);
+        }
 
         return this;
     }
@@ -330,6 +344,15 @@ public class EzBlocksBuilder {
         this.data.extraColumns.put(pillar, pillarItem);
         inventoryMap.put(blockMapData.blockname, pillarItem);
         rotatedPillarMap.put(blockMapData, pillar);
+
+        // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = pillar;
+        if (this.ezMaterial.equals(EzMaterial.stone)) {
+            stoneBlockRecipeList.add(set);
+        }
+
         return this;
     }
 
