@@ -52,6 +52,9 @@ public class EzRecipeProvider extends FabricRecipeProvider {
                 stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, data.blockItem, extraItem, 1);
             });
         }));
+        EzBlocksBuilder.stairMap.forEach(((blockMapData, stairBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockMapData.block, stairBlock)));
+        EzBlocksBuilder.slabMap.forEach(((blockMapData, slabBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockMapData.block, slabBlock)));
+        EzBlocksBuilder.wallMap.forEach(((blockMapData, wallBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockMapData.block, wallBlock)));
 
         // Tool Crafting Recipes
         swordRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, data.toolItem, 1)
