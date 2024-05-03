@@ -12,6 +12,7 @@ import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -20,7 +21,18 @@ import java.util.function.Consumer;
 public class EzRecipeProvider extends FabricRecipeProvider {
 //    private static final List<ItemLike> GOLD_SMELTABLES = List.of(Items.DEEPSLATE_GOLD_ORE);
 
+    public static class BlockPair {
+        public Block parent;
+        public Block block;
+    }
+
     // Item Recipe Lists
+    public static ArrayList<BlockPair> stoneBlockRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> stairStoneRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> slabStoneRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> verticleSlabStoneRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> wallRecipeList = new ArrayList<>();
+
     public static ArrayList<EzItems.ToolData<SwordItem>> swordRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<PickaxeItem>> pickaxeRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<AxeItem>> axeRecipeList = new ArrayList<>();
@@ -43,6 +55,13 @@ public class EzRecipeProvider extends FabricRecipeProvider {
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
 //        oreSmelting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
 //        oreBlasting(exporter, GOLD_SMELTABLES, RecipeCategory.MISC, Items.RAW_GOLD, 0.7f, 200, "gold2");
+
+        // Stone Cutter Recipes
+        stoneBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
+        stairStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
+        slabStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
+        verticleSlabStoneRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 2)));
+        wallRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.block.asItem(), blockPair.parent.asItem(), 1)));
 
         // Tool Crafting Recipes
         swordRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, data.toolItem, 1)
