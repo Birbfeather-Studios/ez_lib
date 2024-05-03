@@ -1,7 +1,6 @@
 package net.distantdig.ezLib.item;
 
 import net.distantdig.ezLib.EzLib;
-import net.distantdig.ezLib.block.EzBlocksBuilder;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,7 +21,6 @@ public class EzItemGroups {
     public static void registerItemGroup(Item icon) {
 
         String modId = EzLib.getModId();
-        BlockGroupList.addAll(EzBlocksBuilder.inventoryMap.values());
 
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
                 new ResourceLocation(modId, modId + "group"),

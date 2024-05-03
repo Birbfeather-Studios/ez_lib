@@ -36,6 +36,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static net.distantdig.ezLib.datagen.EzRecipeProvider.*;
+import static net.distantdig.ezLib.item.EzItemGroups.BlockGroupList;
 
 public class EzBlocksBuilder {
 
@@ -152,7 +153,7 @@ public class EzBlocksBuilder {
         wood, stone, metal, wool, ice, sand, dirt, netherStone
     }
 
-    public final static HashMap<String, BlockItem> inventoryMap = new HashMap<>();
+    public final static HashMap<String, BlockItem> itemMap = new HashMap<>();
     public final static HashMap<Block, BlockMapData> blockMap = new HashMap<>();
     public final static HashMap<String, OreData> oreMap = new HashMap<>();
     public final static HashMap<BlockMapData, StairBlock> stairMap = new HashMap<>();
@@ -193,9 +194,8 @@ public class EzBlocksBuilder {
         data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
         if (ezMaterial == EzMaterial.wood) {this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));}
         blockMapData.tagKey = this.tagKey;
-//        blockMapData.familyData = new FamilyData();
-//        blockMapData.familyData.parentBlock = data.block;
-        inventoryMap.put(name1, data.blockItem);
+        itemMap.put(name1, data.blockItem);
+        BlockGroupList.add(data.blockItem);
         blockMap.put(data.block, blockMapData);
     }
 
@@ -234,7 +234,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = this.ezMaterial;
         this.data.stairBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), stairName), new StairBlock(data.block.defaultBlockState(), FabricBlockSettings.copyOf(blockProperties)));
         this.data.stairItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), stairName), new BlockItem(data.stairBlock, new FabricItemSettings()));
-        inventoryMap.put(stairName, data.stairItem);
+        itemMap.put(stairName, data.stairItem);
+        BlockGroupList.add(data.stairItem);
         stairMap.put(blockMapData, data.stairBlock);
 
         // Recipe Generation
@@ -256,7 +257,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.slabBlock = register(slabName, SlabBlock::new, FabricBlockSettings.copyOf(blockProperties));
         this.data.slabItem = registerItem(slabName, data.slabBlock);
-        inventoryMap.put(slabName, data.slabItem);
+        itemMap.put(slabName, data.slabItem);
+        BlockGroupList.add(data.slabItem);
         slabMap.put(blockMapData, data.slabBlock);
 
         // Recipe Generation
@@ -278,7 +280,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.verticalSlabBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), verticalSlabName), new EzVerticalSlabBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.verticalSlabItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), verticalSlabName), new BlockItem(data.verticalSlabBlock, new FabricItemSettings()));
-        inventoryMap.put(verticalSlabName, data.verticalSlabItem);
+        itemMap.put(verticalSlabName, data.verticalSlabItem);
+        BlockGroupList.add(data.verticalSlabItem);
         verticalSlabMap.put(blockMapData, data.verticalSlabBlock);
 
         // Recipe Generation
@@ -304,7 +307,8 @@ public class EzBlocksBuilder {
         Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
-        inventoryMap.put(blockMapData.blockname, extraItem);
+        itemMap.put(blockMapData.blockname, extraItem);
+        BlockGroupList.add(extraItem);
         blockMap.put(extraBlock, blockMapData);
 
         // Recipe Generation
@@ -325,7 +329,8 @@ public class EzBlocksBuilder {
         blockMapData.saplingBlock = saplingBlock;
         this.data.leavesBlock = register(blockMapData.blockname, LeavesBlock::new, FabricBlockSettings.copyOf(Blocks.OAK_LEAVES));
         this.data.leavesItem = registerItem(blockMapData.blockname, data.leavesBlock);
-        inventoryMap.put(blockMapData.blockname, data.leavesItem);
+        itemMap.put(blockMapData.blockname, data.leavesItem);
+        BlockGroupList.add(data.leavesItem);
         leavesMap.put(blockMapData, data.leavesBlock);
         hoeable.add(data.leavesBlock);
         return this;
@@ -342,7 +347,8 @@ public class EzBlocksBuilder {
         RotatedPillarBlock pillar = register(blockMapData.blockname, RotatedPillarBlock::new, FabricBlockSettings.copyOf(extraProperties));
         BlockItem pillarItem = registerItem(blockMapData.blockname, pillar);
         this.data.extraColumns.put(pillar, pillarItem);
-        inventoryMap.put(blockMapData.blockname, pillarItem);
+        itemMap.put(blockMapData.blockname, pillarItem);
+        BlockGroupList.add(pillarItem);
         rotatedPillarMap.put(blockMapData, pillar);
 
         // Recipe Generation
@@ -376,8 +382,10 @@ public class EzBlocksBuilder {
         this.data.extraColumns.put(log, logItem);
         this.data.extraColumns.put(strippedlog, strippedlogItem);
         StrippableBlockRegistry.register(log, strippedlog);
-        inventoryMap.put(blockMapData1.blockname, logItem);
-        inventoryMap.put(blockMapData2.blockname, strippedlogItem);
+        itemMap.put(blockMapData1.blockname, logItem);
+        itemMap.put(blockMapData2.blockname, strippedlogItem);
+        BlockGroupList.add(logItem);
+        BlockGroupList.add(strippedlogItem);
         rotatedPillarMap.put(blockMapData1, log);
         rotatedPillarMap.put(blockMapData2, strippedlog);
         return this;
@@ -400,8 +408,10 @@ public class EzBlocksBuilder {
         BlockItem strippedwoodItem = registerItem(blockMapData2.blockname, strippedwoodBlock);
         StrippableBlockRegistry.register(woodBlock, strippedwoodBlock);
         blockMapData1.tagKey = this.tagKey;
-        inventoryMap.put(blockMapData1.blockname, woodItem);
-        inventoryMap.put(blockMapData2.blockname, strippedwoodItem);
+        itemMap.put(blockMapData1.blockname, woodItem);
+        itemMap.put(blockMapData2.blockname, strippedwoodItem);
+        BlockGroupList.add(woodItem);
+        BlockGroupList.add(strippedwoodItem);
         woodMap.put(blockMapData1, woodBlock);
         woodMap.put(blockMapData2, strippedwoodBlock);
         return this;
@@ -415,7 +425,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.wallBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), wallName), new WallBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.wallItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), wallName), new BlockItem(this.data.wallBlock, new FabricItemSettings()));
-        inventoryMap.put(wallName, data.wallItem);
+        itemMap.put(wallName, data.wallItem);
+        BlockGroupList.add(data.wallItem);
         wallMap.put(blockMapData, data.wallBlock);
         this.hasWall = true;
 
@@ -435,7 +446,8 @@ public class EzBlocksBuilder {
         blockMapData.fullblockname = this.name1;
         this.data.doorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new DoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.doorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.doorBlock, new FabricItemSettings()));
-        inventoryMap.put(blockMapData.blockname, data.doorItem);
+        itemMap.put(blockMapData.blockname, data.doorItem);
+        BlockGroupList.add(data.doorItem);
         doorMap.put(blockMapData, data.doorBlock);
 //        blockMapData.familyData.door = data.doorBlock;
         return this;
@@ -449,7 +461,8 @@ public class EzBlocksBuilder {
         blockMapData.hasWall = this.hasWall;
         this.data.trapdoorBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new TrapDoorBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType));
         this.data.trapdoorItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), blockMapData.blockname), new BlockItem(this.data.trapdoorBlock, new FabricItemSettings()));
-        inventoryMap.put(blockMapData.blockname, data.trapdoorItem);
+        itemMap.put(blockMapData.blockname, data.trapdoorItem);
+        BlockGroupList.add(data.trapdoorItem);
         trapDoorMap.put(blockMapData, data.trapdoorBlock);
 //        blockMapData.familyData.trapdoor = data.trapdoorBlock;
         return this;
@@ -463,7 +476,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.buttonBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), buttonName), new ButtonBlock(FabricBlockSettings.copyOf(blockProperties), blockSetType, ticksPressed, arrowHits));
         this.data.buttonItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), buttonName), new BlockItem(this.data.buttonBlock, new FabricItemSettings()));
-        inventoryMap.put(buttonName, data.buttonItem);
+        itemMap.put(buttonName, data.buttonItem);
+        BlockGroupList.add(data.buttonItem);
         buttonMap.put(blockMapData, data.buttonBlock);
 //        blockMapData.familyData.button = data.buttonBlock;
         return this;
@@ -477,7 +491,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.fenceBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), fenceName), new FenceBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.fenceItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceName), new BlockItem(this.data.fenceBlock, new FabricItemSettings()));
-        inventoryMap.put(fenceName, data.fenceItem);
+        itemMap.put(fenceName, data.fenceItem);
+        BlockGroupList.add(data.fenceItem);
         fenceMap.put(blockMapData, data.fenceBlock);
 //        blockMapData.familyData.fence = data.fenceBlock;
         return this;
@@ -491,7 +506,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.fenceGateBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), fenceGateName), new FenceGateBlock(FabricBlockSettings.copyOf(blockProperties), WoodType.OAK));
         this.data.fenceGateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), fenceGateName), new BlockItem(this.data.fenceGateBlock, new FabricItemSettings()));
-        inventoryMap.put(fenceGateName, data.fenceGateItem);
+        itemMap.put(fenceGateName, data.fenceGateItem);
+        BlockGroupList.add(data.fenceGateItem);
         fenceGateMap.put(blockMapData, data.fenceGateBlock);
 //        blockMapData.familyData.fenceGate = data.fenceGateBlock;
         return this;
@@ -505,7 +521,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.pressurePlateBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), pressurePlateName), new PressurePlateBlock(sensitivity, FabricBlockSettings.copyOf(blockProperties), type));
         this.data.pressurePlateItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), pressurePlateName), new BlockItem(this.data.pressurePlateBlock, new FabricItemSettings()));
-        inventoryMap.put(pressurePlateName, data.pressurePlateItem);
+        itemMap.put(pressurePlateName, data.pressurePlateItem);
+        BlockGroupList.add(data.pressurePlateItem);
         pressurePlateMap.put(blockMapData, data.pressurePlateBlock);
 //        blockMapData.familyData.pressurePlate = data.pressurePlateBlock;
         return this;
@@ -519,7 +536,8 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         this.data.carpetBlock = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), carpetName), new CarpetBlock(FabricBlockSettings.copyOf(blockProperties)));
         this.data.carpetItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), carpetName), new BlockItem(this.data.carpetBlock, new FabricItemSettings()));
-        inventoryMap.put(carpetName, data.carpetItem);
+        itemMap.put(carpetName, data.carpetItem);
+        BlockGroupList.add(data.carpetItem);
         carpetMap.put(blockMapData, data.carpetBlock);
         return this;
     }
