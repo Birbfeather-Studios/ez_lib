@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static net.distantdig.ezLib.datagen.EzRecipeProvider.extraBlockRecipeList;
+import static net.distantdig.ezLib.datagen.EzRecipeProvider.*;
 
 public class EzBlocksBuilder {
 
@@ -236,7 +236,13 @@ public class EzBlocksBuilder {
         this.data.stairItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), stairName), new BlockItem(data.stairBlock, new FabricItemSettings()));
         inventoryMap.put(stairName, data.stairItem);
         stairMap.put(blockMapData, data.stairBlock);
-//        blockMapData.familyData.stair = data.stairBlock;
+
+        // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = data.stairBlock;
+        stairRecipeList.add(set);
+
         return this;
     }
 
@@ -250,7 +256,13 @@ public class EzBlocksBuilder {
         this.data.slabItem = registerItem(slabName, data.slabBlock);
         inventoryMap.put(slabName, data.slabItem);
         slabMap.put(blockMapData, data.slabBlock);
-//        blockMapData.familyData.slab = data.slabBlock;
+
+        // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = data.slabBlock;
+        slabRecipeList.add(set);
+
         return this;
     }
 
@@ -281,11 +293,14 @@ public class EzBlocksBuilder {
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
         EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        inventoryMap.put(blockMapData.blockname, extraItem);
+        blockMap.put(extraBlock, blockMapData);
+
+        // Recipe Generation
         set.parent = data.block;
         set.block = extraBlock;
         extraBlockRecipeList.add(set);
-        inventoryMap.put(blockMapData.blockname, extraItem);
-        blockMap.put(extraBlock, blockMapData);
+
         return this;
     }
 
@@ -380,7 +395,13 @@ public class EzBlocksBuilder {
         inventoryMap.put(wallName, data.wallItem);
         wallMap.put(blockMapData, data.wallBlock);
         this.hasWall = true;
-//        blockMapData.familyData.wall = data.wallBlock;
+
+        // Recipe Generation
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = data.wallBlock;
+        wallRecipeList.add(set);
+
         return this;
     }
 

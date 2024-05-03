@@ -28,6 +28,9 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 
     // Item Recipe Lists
     public static ArrayList<BlockPair> extraBlockRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> stairRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> slabRecipeList = new ArrayList<>();
+    public static ArrayList<BlockPair> wallRecipeList = new ArrayList<>();
 
     public static ArrayList<EzItems.ToolData<SwordItem>> swordRecipeList = new ArrayList<>();
     public static ArrayList<EzItems.ToolData<PickaxeItem>> pickaxeRecipeList = new ArrayList<>();
@@ -54,9 +57,9 @@ public class EzRecipeProvider extends FabricRecipeProvider {
 
         // Stone Cutter Recipes
         extraBlockRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.parent.asItem(), blockPair.block.asItem(), 1)));
-        EzBlocksBuilder.stairMap.forEach(((blockMapData, stairBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, stairBlock.asItem(), blockMapData.block.asItem())));
-        EzBlocksBuilder.slabMap.forEach(((blockMapData, slabBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, slabBlock.asItem(), blockMapData.block.asItem())));
-        EzBlocksBuilder.wallMap.forEach(((blockMapData, wallBlock) -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, wallBlock.asItem(), blockMapData.block.asItem())));
+        stairRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.parent.asItem(), blockPair.block.asItem(), 1)));
+        slabRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.parent.asItem(), blockPair.block.asItem(), 2)));
+        wallRecipeList.forEach((blockPair -> stonecutterResultFromBase(exporter, RecipeCategory.BUILDING_BLOCKS, blockPair.parent.asItem(), blockPair.block.asItem(), 1)));
 
         // Tool Crafting Recipes
         swordRecipeList.forEach((data) -> ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, data.toolItem, 1)
