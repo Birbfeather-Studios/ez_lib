@@ -284,7 +284,7 @@ public class EzBlocksBuilder {
         // Recipe Generation
         EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
         set.parent = data.block;
-        set.block = data.slabBlock;
+        set.block = data.verticalSlabBlock;
         if (this.ezMaterial.equals(EzMaterial.stone)) {
             verticleSlabStoneRecipeList.add(set);
         }
