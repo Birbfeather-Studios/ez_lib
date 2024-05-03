@@ -2,6 +2,7 @@ package net.distantdig.ezLib.block;
 
 
 import net.distantdig.ezLib.EzLib;
+import net.distantdig.ezLib.datagen.EzRecipeProvider;
 import net.distantdig.ezLib.world.EzConfiguredFeatures;
 import net.distantdig.ezLib.world.EzPlacedFeatures;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -279,7 +280,10 @@ public class EzBlocksBuilder {
         Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
-        extraBlockRecipeList.add(data);
+        EzRecipeProvider.BlockPair set = new EzRecipeProvider.BlockPair();
+        set.parent = data.block;
+        set.block = extraBlock;
+        extraBlockRecipeList.add(set);
         inventoryMap.put(blockMapData.blockname, extraItem);
         blockMap.put(extraBlock, blockMapData);
         return this;
