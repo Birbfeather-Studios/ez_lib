@@ -21,7 +21,7 @@ public class EzLangProvider extends FabricLanguageProvider {
 
             translationBuilder.add(item, string);
         });
-        EzBlocksBuilder.inventoryMap.forEach((key, data) -> {
+        EzBlocksBuilder.itemMap.forEach((key, data) -> {
             BlockItem blockItem = data;
             String string = WordUtils.capitalizeFully(key.replace("_", " "));
 

@@ -168,79 +168,79 @@ public class EzRecipeProvider extends FabricRecipeProvider {
         //planks
         EzBlocksBuilder.blockMap.forEach((block, strings) -> {
             if (strings.ezMaterial == EzBlocksBuilder.EzMaterial.wood & Objects.equals(strings.blockname, strings.fullblockname)) {
-                VanillaRecipeProvider.planksFromLogs(exporter, EzBlocksBuilder.inventoryMap.get(strings.blockname), strings.tagKey, 4);
+                VanillaRecipeProvider.planksFromLogs(exporter, EzBlocksBuilder.itemMap.get(strings.blockname), strings.tagKey, 4);
             }
         });
 
         EzBlocksBuilder.stairMap.forEach((strings, stairBlock) -> VanillaRecipeProvider
-                .stairBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .stairBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.slabMap.forEach((strings, slabBlock) -> VanillaRecipeProvider
-                .slabBuilder(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .slabBuilder(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.verticalSlabMap.forEach((strings, ezVerticalSlabBlock) -> ShapedRecipeBuilder
-                .shaped(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.inventoryMap.get(strings.blockname), 6)
-                .define('#', EzBlocksBuilder.inventoryMap.get(strings.fullblockname))
-                .pattern("#  ").pattern("#  ").pattern("#  ").unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname))).save(exporter));
+                .shaped(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.itemMap.get(strings.blockname), 6)
+                .define('#', EzBlocksBuilder.itemMap.get(strings.fullblockname))
+                .pattern("#  ").pattern("#  ").pattern("#  ").unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname))).save(exporter));
 
         EzBlocksBuilder.wallMap.forEach((strings, wallBlock) -> VanillaRecipeProvider
-                .wallBuilder(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .wallBuilder(RecipeCategory.BUILDING_BLOCKS, EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.doorMap.forEach((strings, doorBlock) -> VanillaRecipeProvider
-                .doorBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .doorBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.trapDoorMap.forEach((strings, trapDoorBlock) -> {
             if (strings.hasWall) {
                 VanillaRecipeProvider
-                        .trapdoorBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname + "_slab")))
-                        .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                        .trapdoorBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname + "_slab")))
+                        .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                         .save(exporter);
             } else {
                 VanillaRecipeProvider
-                        .trapdoorBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                        .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                        .trapdoorBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                        .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                         .save(exporter);
             }
         });
 
 
         EzBlocksBuilder.fenceMap.forEach((strings, fenceBlock) -> VanillaRecipeProvider
-                .fenceBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .fenceBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.fenceGateMap.forEach((strings, fenceGateBlock) -> VanillaRecipeProvider
-                .fenceGateBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .fenceGateBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.pressurePlateMap.forEach((strings, pressurePlateBlock) -> VanillaRecipeProvider
-                .pressurePlateBuilder(RecipeCategory.REDSTONE, EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .pressurePlateBuilder(RecipeCategory.REDSTONE, EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.buttonMap.forEach((strings, buttonBlock) -> VanillaRecipeProvider
-                .buttonBuilder(EzBlocksBuilder.inventoryMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
-                .unlockedBy("has_item", has(EzBlocksBuilder.inventoryMap.get(strings.fullblockname)))
+                .buttonBuilder(EzBlocksBuilder.itemMap.get(strings.blockname), Ingredient.of(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
+                .unlockedBy("has_item", has(EzBlocksBuilder.itemMap.get(strings.fullblockname)))
                 .save(exporter));
 
         EzBlocksBuilder.carpetMap.forEach((strings, carpetBlock) -> VanillaRecipeProvider
-                .carpet(exporter, EzBlocksBuilder.inventoryMap.get(strings.blockname), EzBlocksBuilder.inventoryMap.get(strings.fullblockname)));
+                .carpet(exporter, EzBlocksBuilder.itemMap.get(strings.blockname), EzBlocksBuilder.itemMap.get(strings.fullblockname)));
 
         //rotated pillar -> because there can be mulitple blocks of this, the player should probably make a recipe themselves
 
 
         //wood
         EzBlocksBuilder.woodMap.forEach((strings, woodblock) -> VanillaRecipeProvider
-                .woodFromLogs(exporter, EzBlocksBuilder.inventoryMap.get(strings.blockname), EzBlocksBuilder.inventoryMap.get(strings.fullblockname)));
+                .woodFromLogs(exporter, EzBlocksBuilder.itemMap.get(strings.blockname), EzBlocksBuilder.itemMap.get(strings.fullblockname)));
 
     }
 }

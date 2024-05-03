@@ -25,9 +25,9 @@ public class EzItemTagProvider extends FabricTagProvider.ItemTagProvider {
         EzBlocksBuilder.woodMap.forEach((strings, block) -> {
             if(strings.tagKey != null) {
                 getOrCreateTagBuilder(strings.tagKey)
-                        .add(EzBlocksBuilder.inventoryMap.get(strings.blockname))
-                        .add(EzBlocksBuilder.inventoryMap.get("stripped_" + strings.blockname))
-                        .add(EzBlocksBuilder.inventoryMap.get(strings.fullblockname))
-                        .add(EzBlocksBuilder.inventoryMap.get("stripped_" + strings.fullblockname));}});
+                        .add(EzBlocksBuilder.itemMap.get(strings.blockname))
+                        .add(EzBlocksBuilder.itemMap.get("stripped_" + strings.blockname))
+                        .add(EzBlocksBuilder.itemMap.get(strings.fullblockname))
+                        .add(EzBlocksBuilder.itemMap.get("stripped_" + strings.fullblockname));}});
     }
 }
