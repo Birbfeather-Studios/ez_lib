@@ -48,4 +48,10 @@ public class EzBlockSets {
                 .button(stone, 20, false)
                 .pickaxe();
     }
+
+    public void glassSet(String material) {
+        EzBlocksBuilder glassBuilder = new EzBlocksBuilder(material, Blocks.GLASS, null, EzBlocksBuilder.EzMaterial.glass)
+                // Register each color set here
+                ;
+    }
 }
