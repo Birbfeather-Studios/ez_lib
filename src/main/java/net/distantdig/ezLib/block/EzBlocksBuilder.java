@@ -314,10 +314,17 @@ public class EzBlocksBuilder {
         blockMapData.blockname = prefix + name + suffix;
         blockMapData.ezMaterial = ezMaterial;
         blockMapData.fullblockname = name1;
+        Block extraBlock;
         if (extraBlockProperties == null) {
             extraProperies = this.blockProperties;
         }
-        Block extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
+        if (ezMaterial == EzMaterial.glass) {
+            extraBlock = register(blockMapData.blockname, GlassBlock::new, FabricBlockSettings.copyOf(extraProperies));
+        } else if (ezMaterial == EzMaterial.ice) {
+            extraBlock = register(blockMapData.blockname, IceBlock::new, FabricBlockSettings.copyOf(extraProperies));
+        } else {
+            extraBlock = register(blockMapData.blockname, Block::new, FabricBlockSettings.copyOf(extraProperies));
+        }
         BlockItem extraItem = registerItem(blockMapData.blockname, extraBlock);
         this.data.extraBlocks.put(extraBlock, extraItem);
         itemMap.put(blockMapData.blockname, extraItem);
