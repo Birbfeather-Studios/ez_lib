@@ -150,7 +150,7 @@ public class EzBlocksBuilder {
     }
 
     public enum EzMaterial {
-        wood, stone, metal, wool, ice, sand, dirt, netherStone
+        wood, stone, metal, wool, ice, sand, dirt, glass, netherStone
     }
 
     public final static HashMap<String, BlockItem> itemMap = new HashMap<>();
@@ -169,6 +169,7 @@ public class EzBlocksBuilder {
     public final static HashMap<BlockMapData, CarpetBlock> carpetMap = new HashMap<>();
     public final static HashMap<BlockMapData, RotatedPillarBlock> rotatedPillarMap = new HashMap<>();
     public final static HashMap<BlockMapData, LeavesBlock> leavesMap = new HashMap<>();
+    public final static HashMap<BlockMapData, Block> glassMap = new HashMap<>();
     public final static HashMap<BlockMapData, RotatedPillarBlock> woodMap = new HashMap<>();
 
     public final static ArrayList<Block> pickaxable = new ArrayList<>();
@@ -189,10 +190,22 @@ public class EzBlocksBuilder {
         blockMapData.ezMaterial = ezMaterial;
         blockMapData.blockname = name1;
         blockMapData.fullblockname = name1;
-        if (ezMaterial == EzMaterial.ice) {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new IceBlock(FabricBlockSettings.copyOf(blockProperties)));} else
-        {data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1), new Block(FabricBlockSettings.copyOf(blockProperties)));}
-        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1), new BlockItem(data.block, new FabricItemSettings()));
-        if (ezMaterial == EzMaterial.wood) {this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));}
+        if (ezMaterial == EzMaterial.ice) {
+            data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1),
+                    new IceBlock(FabricBlockSettings.copyOf(blockProperties)));
+        } else if (ezMaterial == EzMaterial.glass){
+            data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1),
+                    new GlassBlock(FabricBlockSettings.copyOf(blockProperties).nonOpaque()));
+            glassMap.put(blockMapData, data.block);
+        } else {
+            data.block = Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(EzLib.getModId(), this.name1),
+                    new Block(FabricBlockSettings.copyOf(blockProperties)));
+        }
+        data.blockItem = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(EzLib.getModId(), this.name1),
+                new BlockItem(data.block, new FabricItemSettings()));
+        if (ezMaterial == EzMaterial.wood) {
+            this.tagKey = TagKey.create(Registries.ITEM, new ResourceLocation(EzLib.getModId() + ":" + name + "_logs"));
+        }
         blockMapData.tagKey = this.tagKey;
         itemMap.put(name1, data.blockItem);
         BlockGroupList.add(data.blockItem);
